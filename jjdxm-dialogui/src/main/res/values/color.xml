@@ -26,4 +26,5 @@
 
     <color name="dialogui_btn_normal">#ffffff</color>
     <color name="dialogui_btn_pressed">#eeeeee</color>
+    <color name="datepick_surance_blue">#3598da</color>
 </resources>

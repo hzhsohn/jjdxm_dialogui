@@ -9,6 +9,7 @@ import com.dou361.dialogui.config.CommonConfig;
 import com.dou361.dialogui.listener.Assignable;
 import com.dou361.dialogui.listener.DialogUIItemListener;
 import com.dou361.dialogui.listener.DialogUIListener;
+import com.dou361.dialogui.listener.DialogUIDateTimeSaveListener;
 
 import java.util.List;
 
@@ -32,7 +33,21 @@ public class DialogAssigner implements Assignable {
 
 
     @Override
-    public BuildBean assignToastTie(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable, boolean isWhiteBg) {
+    public BuildBean assignDatePick(Context context, int gravity, int dateType,int tag, DialogUIDateTimeSaveListener listener) {
+        BuildBean bean = new BuildBean();
+        bean.context = context;
+        bean.cancelable = true;
+        bean.gravity = gravity;
+        bean.outsideTouchable = true;
+        bean.type = CommonConfig.TYPE_DATEPICK;
+        bean.dateTimeListener = listener;
+        bean.dateType = dateType;
+        bean.tag = tag;
+        return bean;
+    }
+
+    @Override
+    public BuildBean assignDialogTie(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable, boolean isWhiteBg) {
         BuildBean bean = new BuildBean();
         bean.context = context;
         bean.msg = msg;
@@ -235,7 +250,7 @@ public class DialogAssigner implements Assignable {
     }
 
     @Override
-    public BuildBean assignBottomSheet(Activity context, List datas,boolean cancleable, boolean outsideTouchable, DialogUIItemListener listener) {
+    public BuildBean assignBottomSheet(Activity context, List datas, boolean cancleable, boolean outsideTouchable, DialogUIItemListener listener) {
         BuildBean bean = new BuildBean();
         bean.context = context;
         bean.lvDatas = datas;

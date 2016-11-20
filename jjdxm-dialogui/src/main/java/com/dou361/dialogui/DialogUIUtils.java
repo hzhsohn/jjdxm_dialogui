@@ -7,12 +7,14 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AppCompatDialog;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
 import com.dou361.dialogui.config.BuildBean;
 import com.dou361.dialogui.listener.DialogUIItemListener;
 import com.dou361.dialogui.listener.DialogUIListener;
+import com.dou361.dialogui.listener.DialogUIDateTimeSaveListener;
 
 import java.util.List;
 
@@ -67,13 +69,62 @@ public class DialogUIUtils {
     }
 
     /**
+     * 关闭弹出框
+     */
+    public static void dismiss(BuildBean buildBean) {
+        if (buildBean != null) {
+            if (buildBean.dialog != null && buildBean.dialog.isShowing()) {
+                buildBean.dialog.dismiss();
+            }
+            if (buildBean.alertDialog != null && buildBean.alertDialog.isShowing()) {
+                buildBean.alertDialog.dismiss();
+            }
+        }
+    }
+
+    /**
+     * 关闭弹出框
+     */
+    public static void dismiss(Dialog dialog) {
+        if (dialog != null && dialog.isShowing()) {
+            dialog.dismiss();
+        }
+    }
+
+    /***
+     * 弹出日期选择器
+     *
+     * @param context
+     * @param dateType
+     * @param listener
+     * @return
+     */
+    public static BuildBean showDatePick(Context context, int dateType, DialogUIDateTimeSaveListener listener) {
+        return showDatePick(context, Gravity.CENTER, dateType,0, listener);
+    }
+
+    /***
+     * 弹出日期选择器
+     *
+     * @param context
+     * @param gravity
+     * @param dateType
+     * @param listener
+     * @return
+     */
+    public static BuildBean showDatePick(Context context, int gravity, int dateType,int tag, DialogUIDateTimeSaveListener listener) {
+        return DialogAssigner.getInstance().assignDatePick(context, gravity, dateType, tag, listener);
+    }
+
+
+    /**
      * 弹出toast 默认白色背景可取消可点击
      *
      * @param context 上下文
      * @param msg     提示文本
      */
-    public static BuildBean showToastTie(Context context, CharSequence msg) {
-        return showToastTie(context, msg, true);
+    public static BuildBean showDialogTie(Context context, CharSequence msg) {
+        return showDialogTie(context, msg, true);
     }
 
     /**
@@ -83,8 +134,8 @@ public class DialogUIUtils {
      * @param msg       提示文本
      * @param isWhiteBg true为白色背景false为灰色背景
      */
-    public static BuildBean showToastTie(Context context, CharSequence msg, boolean isWhiteBg) {
-        return showToastTie(context, msg, true, true, isWhiteBg);
+    public static BuildBean showDialogTie(Context context, CharSequence msg, boolean isWhiteBg) {
+        return showDialogTie(context, msg, true, true, isWhiteBg);
     }
 
     /**
@@ -96,8 +147,8 @@ public class DialogUIUtils {
      * @param outsideTouchable true为可以点击空白区域false为不可点击
      * @param isWhiteBg        true为白色背景false为灰色背景
      */
-    public static BuildBean showToastTie(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable, boolean isWhiteBg) {
-        return DialogAssigner.getInstance().assignToastTie(context, msg, true, true, isWhiteBg);
+    public static BuildBean showDialogTie(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable, boolean isWhiteBg) {
+        return DialogAssigner.getInstance().assignDialogTie(context, msg, true, true, isWhiteBg);
     }
 
     /**
@@ -544,14 +595,12 @@ public class DialogUIUtils {
     /**
      * md风格横向底部弹出列表 默认可取消可点击
      *
-     * @param context          上下文
-     * @param title            标题
-     * @param datas            集合需要BottomSheetBean对象
-     * @param bottomTxt        底部item文本
-     * @param columnsNum       列数量
-     * @param cancleable       true为可以取消false为不可取消
-     * @param outsideTouchable true为可以点击空白区域false为不可点击
-     * @param listener         事件监听
+     * @param context    上下文
+     * @param title      标题
+     * @param datas      集合需要BottomSheetBean对象
+     * @param bottomTxt  底部item文本
+     * @param columnsNum 列数量
+     * @param listener   事件监听
      * @return
      */
     public static BuildBean showMdBottomSheetHorizontal(Context context, CharSequence title, List datas, CharSequence bottomTxt, int columnsNum, DialogUIItemListener listener) {
@@ -616,104 +665,142 @@ public class DialogUIUtils {
     /**
      * 短时间中下位置显示。线程安全，可以在非UI线程调用。
      */
-    public static void showToastShort(final int resId) {
-        showToastShort(getString(resId));
+    public static void showToast(final int resId) {
+        showToast(ToolUtils.getString(appContext, resId));
     }
 
     /**
      * 短时间中下位置显示。
      */
-    public static void showToastShort(final String str) {
-        showToast2Bottom(str, Toast.LENGTH_SHORT);
+    public static void showToast(final String str) {
+        showToast(str, Toast.LENGTH_SHORT, Gravity.BOTTOM);
     }
 
     /**
      * 长时间中下位置显示。
      */
     public static void showToastLong(final int resId) {
-        showToastLong(getString(resId));
+        showToastLong(ToolUtils.getString(appContext, resId));
     }
 
     /**
      * 长时间中下位置显示。
      */
     public static void showToastLong(final String str) {
-        showToast2Bottom(str, Toast.LENGTH_LONG);
+        showToast(str, Toast.LENGTH_LONG, Gravity.BOTTOM);
     }
 
-    /**
-     * 只定义一个Toast
-     */
-    private static Toast mToastBottom;
 
     /**
-     * 对toast的简易封装。线程不安全，不可以在非UI线程调用。
+     * 短时间居中位置显示。
      */
-    private static void showToast2Bottom(String str, int showTime) {
-        if (appContext == null) {
-            throw new RuntimeException("DialogUIUtils not initialized!");
-        }
-        if (mToastBottom == null) {
-            mToastBottom = Toast.makeText(appContext, str, showTime);
-        } else {
-            mToastBottom.setText(str);
-        }
-        mToastBottom.show();
+    public static void showToastCenter(final int resId) {
+        showToastCenter(ToolUtils.getString(appContext, resId));
     }
 
     /**
      * 短时间居中位置显示。
      */
-    public static void showToastCenterShort(final int resId) {
-        showToastCenterShort(getString(resId));
-    }
-
-    /**
-     * 短时间居中位置显示。
-     */
-    public static void showToastCenterShort(final String str) {
-        showToast2Center(str, Toast.LENGTH_SHORT);
+    public static void showToastCenter(final String str) {
+        showToast(str, Toast.LENGTH_SHORT, Gravity.CENTER);
     }
 
     /**
      * 长时间居中位置显示。
      */
     public static void showToastCenterLong(final int resId) {
-        showToastCenterLong(getString(resId));
+        showToastCenterLong(ToolUtils.getString(appContext, resId));
     }
 
     /**
      * 长时间居中位置显示。
      */
     public static void showToastCenterLong(final String str) {
-        showToast2Center(str, Toast.LENGTH_LONG);
+        showToast(str, Toast.LENGTH_LONG, Gravity.CENTER);
+    }
+
+    /**
+     * 短时间居中位置显示。
+     */
+    public static void showToastTop(final int resId) {
+        showToastTop(ToolUtils.getString(appContext, resId));
+    }
+
+    /**
+     * 短时间居中位置显示。
+     */
+    public static void showToastTop(final String str) {
+        showToast(str, Toast.LENGTH_SHORT, Gravity.TOP);
+    }
+
+    /**
+     * 长时间居中位置显示。
+     */
+    public static void showToastTopLong(final int resId) {
+        showToastTopLong(ToolUtils.getString(appContext, resId));
+    }
+
+    /**
+     * 长时间居中位置显示。
+     */
+    public static void showToastTopLong(final String str) {
+        showToast(str, Toast.LENGTH_LONG, Gravity.TOP);
     }
 
     /**
      * 只定义一个Toast
      */
+    private static Toast mToast;
+    private static Toast mToastTop;
     private static Toast mToastCenter;
+    private static Toast mToastBottom;
 
     /**
-     * 对toast的简易封装。
+     * 对toast的简易封装。线程不安全，不可以在非UI线程调用。
      */
-    private static void showToast2Center(String str, int showTime) {
+    private static void showToast(String str, int showTime, int gravity) {
         if (appContext == null) {
             throw new RuntimeException("DialogUIUtils not initialized!");
         }
-        if (mToastCenter == null) {
-            mToastCenter = Toast.makeText(appContext, str, showTime);
-            mToastCenter.setGravity(Gravity.CENTER, 0, 0);
-        } else {
-            mToastCenter.show();
+        if (gravity == Gravity.TOP) {
+            if (mToastTop == null) {
+                mToastTop = Toast.makeText(appContext, str, showTime);
+                LayoutInflater inflate = (LayoutInflater)
+                        appContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View view = inflate.inflate(R.layout.dialogui_toast, null);
+                mToastTop.setView(view);
+                mToastTop.setGravity(gravity, 0, appContext.getResources().getDimensionPixelSize(R.dimen.dialogui_toast_margin));
+            }
+            mToast = mToastTop;
+            mToast.setText(str);
+            mToast.show();
+        } else if (gravity == Gravity.CENTER) {
+            if (mToastCenter == null) {
+                mToastCenter = Toast.makeText(appContext, str, showTime);
+                LayoutInflater inflate = (LayoutInflater)
+                        appContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View view = inflate.inflate(R.layout.dialogui_toast, null);
+                mToastCenter.setView(view);
+                mToastCenter.setGravity(gravity, 0, 0);
+            }
+            mToast = mToastCenter;
+            mToast.setText(str);
+            mToast.show();
+        } else if (gravity == Gravity.BOTTOM) {
+            if (mToastBottom == null) {
+                mToastBottom = Toast.makeText(appContext, str, showTime);
+                LayoutInflater inflate = (LayoutInflater)
+                        appContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View view = inflate.inflate(R.layout.dialogui_toast, null);
+                mToastBottom.setView(view);
+                mToastBottom.setGravity(gravity, 0, appContext.getResources().getDimensionPixelSize(R.dimen.dialogui_toast_margin));
+            }
+            mToast = mToastBottom;
+            mToast.setText(str);
+            mToast.show();
         }
+
     }
 
-    /**
-     * 获取文字
-     */
-    public static String getString(int resId) {
-        return appContext.getResources().getString(resId);
-    }
 
 }

@@ -229,4 +229,29 @@ public class ToolUtils {
     }
 
 
+    /**
+     * 获取文字
+     */
+    public static String getString(Context context, int resId) {
+        return context.getResources().getString(resId);
+    }
+
+    /**
+     * dip转换px
+     */
+    public static int dip2px(Context context, int dip) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dip * scale + 0.5f);
+    }
+
+    /**
+     * 获取屏幕宽度(像素)
+     */
+    public static int getScreenWidth(Context context) {
+        WindowManager windowManager = (WindowManager) context
+                .getSystemService(Context.WINDOW_SERVICE);
+        return windowManager.getDefaultDisplay().getWidth();
+    }
+
+
 }

@@ -11,6 +11,7 @@ import com.dou361.dialogui.ToolUtils;
 import com.dou361.dialogui.adapter.SuperLvAdapter;
 import com.dou361.dialogui.bottomsheet.BottomSheetBean;
 import com.dou361.dialogui.listener.Buildable;
+import com.dou361.dialogui.listener.DialogUIDateTimeSaveListener;
 import com.dou361.dialogui.listener.DialogUIItemListener;
 import com.dou361.dialogui.listener.DialogUIListener;
 import com.dou361.dialogui.listener.Styleable;
@@ -48,6 +49,8 @@ public class BuildBean extends Buildable implements Styleable {
     public View customView;
 
     public int gravity;
+    public int dateType;
+    public int tag;
 
     public CharSequence title;
     public CharSequence msg;
@@ -61,13 +64,20 @@ public class BuildBean extends Buildable implements Styleable {
 
 
     public DialogUIListener listener;
+    public DialogUIDateTimeSaveListener dateTimeListener;
     public DialogUIItemListener itemListener;
 
-    /**是否是白色背景*/
+    /**
+     * 是否是白色背景
+     */
     public boolean isWhiteBg = true;
-    /**是否可以取消*/
+    /**
+     * 是否可以取消
+     */
     public boolean cancelable = true;
-    /**面板外是否可以点击*/
+    /**
+     * 面板外是否可以点击
+     */
     public boolean outsideTouchable = true;
 
     public Dialog dialog;

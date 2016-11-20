@@ -31,9 +31,14 @@ import java.util.List;
 public interface Assignable {
 
     /**
+     * 日期选择器
+     */
+    BuildBean assignDatePick(Context context, int gravity, int dateType,int tag, DialogUIDateTimeSaveListener listener);
+
+    /**
      * 弹出框
      */
-    BuildBean assignToastTie(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable,boolean isWhiteBg);
+    BuildBean assignDialogTie(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable,boolean isWhiteBg);
 
     /**
      * 横向加载框

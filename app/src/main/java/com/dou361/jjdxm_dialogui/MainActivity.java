@@ -93,9 +93,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
                 break;
-            case R.id.btn_dialog:
-                DialogUIUtils.showDialogTie(this, msg).show();
-                break;
             case R.id.btn_loading_vertical:
                 DialogUIUtils.showLoadingVertical(this, "加载中...").show();
                 break;
@@ -128,8 +125,11 @@ public class MainActivity extends AppCompatActivity {
 
                 }).show();
                 break;
+            case R.id.btn_dialog:
+                DialogUIUtils.showDialogTie(this, msg).show();
+                break;
             case R.id.btn_tie_alert:
-                DialogUIUtils.showAlert(mActivity, "标题", msg, new DialogUIListener() {
+                DialogUIUtils.showAlert(mActivity, "标题", msg, "", "", "确定", "", true, new DialogUIListener() {
                     @Override
                     public void onPositive() {
                         showToast("onPositive");
@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
                 }).show();
                 break;
             case R.id.btn_alert_horizontal:
-                DialogUIUtils.showAlertHorizontal(mActivity, "标题", msg, new DialogUIListener() {
+                DialogUIUtils.showAlert(mActivity, "标题", msg, "", "", "确定", "取消", false, new DialogUIListener() {
                     @Override
                     public void onPositive() {
                         showToast("onPositive");
@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
                 }).show();
                 break;
             case R.id.btn_alert_vertical:
-                DialogUIUtils.showAlertVertical(this, "标题", msg, new DialogUIListener() {
+                DialogUIUtils.showAlert(this, "标题", msg, "", "", "确定", "取消", true, new DialogUIListener() {
                     @Override
                     public void onPositive() {
                         showToast("onPositive");
@@ -168,6 +168,25 @@ public class MainActivity extends AppCompatActivity {
                         showToast("onNegative");
                     }
 
+                }).show();
+                break;
+            case R.id.btn_alert_input:
+                DialogUIUtils.showAlert(mActivity, "登录", "", "请输入用户名", "请输入密码", "登录", "取消", false, new DialogUIListener() {
+                    @Override
+                    public void onPositive() {
+
+                    }
+
+                    @Override
+                    public void onNegative() {
+
+                    }
+
+                    @Override
+                    public void onGetInput(CharSequence input1, CharSequence input2) {
+                        super.onGetInput(input1, input2);
+                        showToast("input1:" + input1 + "--input2:" + input2);
+                    }
                 }).show();
                 break;
             case R.id.btn_bottom_sheet_cancel: {
@@ -205,25 +224,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }).show();
 
-                break;
-            case R.id.btn_alert_input:
-                DialogUIUtils.showAlertInput(mActivity, "登录", "请输入用户名", "请输入密码", "登录", "取消", new DialogUIListener() {
-                    @Override
-                    public void onPositive() {
-
-                    }
-
-                    @Override
-                    public void onNegative() {
-
-                    }
-
-                    @Override
-                    public void onGetInput(CharSequence input1, CharSequence input2) {
-                        super.onGetInput(input1, input2);
-                        showToast("input1:" + input1 + "--input2:" + input2);
-                    }
-                }).show();
                 break;
             case R.id.btn_alert_multichoose:
                 String[] words = new String[]{"1", "2", "3"};

@@ -125,10 +125,6 @@ public class BuildBean extends Buildable implements Styleable {
 
     public Map<Integer, Integer> colorOfPosition;//listview 的item的特殊颜色:ColorRes
 
-    /*可能需要拓展的功能，支持当个item字体大小和颜色设置 (比如底部弹出 ，有的item是红色字这种，有的是蓝色)
-支持填充自定义布局
-支持gridview 或者recylerview*/
-
     //字体大小
     public int btnTxtSize = 17;// in sp
     public int titleTxtSize = 14;

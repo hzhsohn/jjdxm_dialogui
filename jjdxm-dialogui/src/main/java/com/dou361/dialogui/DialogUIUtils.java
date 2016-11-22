@@ -115,26 +115,14 @@ public class DialogUIUtils {
         return DialogAssigner.getInstance().assignDatePickCenter(context, date, dateType, tag, listener);
     }
 
-
     /**
-     * 弹出toast 默认白色背景可取消可点击
+     * 弹出toast 默认可取消可点击
      *
      * @param context 上下文
      * @param msg     提示文本
      */
     public static BuildBean showDialogTie(Context context, CharSequence msg) {
-        return showDialogTie(context, msg, true);
-    }
-
-    /**
-     * 弹出toast 默认可取消可点击
-     *
-     * @param context   上下文
-     * @param msg       提示文本
-     * @param isWhiteBg true为白色背景false为灰色背景
-     */
-    public static BuildBean showDialogTie(Context context, CharSequence msg, boolean isWhiteBg) {
-        return showDialogTie(context, msg, true, true, isWhiteBg);
+        return showDialogTie(context, msg, true, true);
     }
 
     /**
@@ -146,8 +134,8 @@ public class DialogUIUtils {
      * @param outsideTouchable true为可以点击空白区域false为不可点击
      * @param isWhiteBg        true为白色背景false为灰色背景
      */
-    public static BuildBean showDialogTie(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable, boolean isWhiteBg) {
-        return DialogAssigner.getInstance().assignDialogTie(context, msg, true, true, isWhiteBg);
+    public static BuildBean showDialogTie(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable) {
+        return DialogAssigner.getInstance().assignAlert(context, "", msg, "", "", "", "", true, cancleable, outsideTouchable, null);
     }
 
     /**
@@ -378,8 +366,9 @@ public class DialogUIUtils {
      * @param title    标题 不传则无标题
      * @param listener 事件监听
      */
-    public static BuildBean showAlert(Activity activity, CharSequence title, CharSequence msg, DialogUIListener listener) {
-        return showAlert(activity, title, msg, true, true, listener);
+    public static BuildBean showAlert(Activity activity, CharSequence title, CharSequence msg, CharSequence hint1, CharSequence hint2,
+                                      CharSequence firstTxt, CharSequence secondTxt, boolean isVertical, DialogUIListener listener) {
+        return showAlert(activity, title, msg, hint1, hint2, firstTxt, secondTxt, isVertical, true, true, listener);
     }
 
     /**
@@ -391,60 +380,9 @@ public class DialogUIUtils {
      * @param outsideTouchable true为可以点击空白区域false为不可点击
      * @param listener         事件监听
      */
-    public static BuildBean showAlert(Activity activity, CharSequence title, CharSequence msg, boolean cancleable, boolean outsideTouchable, DialogUIListener listener) {
-        return DialogAssigner.getInstance().assignAlert(activity, title, msg, cancleable, outsideTouchable, listener);
-    }
-
-    /**
-     * 横向弹出框  默认可取消可点击
-     *
-     * @param activity 所在activity
-     * @param title    标题 不传则无标题
-     * @param msg      消息
-     * @param listener 事件监听
-     */
-    public static BuildBean showAlertHorizontal(Context activity, CharSequence title, CharSequence msg, DialogUIListener listener) {
-        return showAlertHorizontal(activity, title, msg, true, true, listener);
-    }
-
-    /**
-     * 横向弹出框
-     *
-     * @param activity         所在activity
-     * @param title            标题 不传则无标题
-     * @param msg              消息
-     * @param cancleable       true为可以取消false为不可取消
-     * @param outsideTouchable true为可以点击空白区域false为不可点击
-     * @param listener         事件监听
-     */
-    public static BuildBean showAlertHorizontal(Context activity, CharSequence title, CharSequence msg, boolean cancleable, boolean outsideTouchable, DialogUIListener listener) {
-        return DialogAssigner.getInstance().assignAlertHorizontal(activity, title, msg, cancleable, outsideTouchable, listener);
-    }
-
-    /**
-     * 竖向弹出框  默认可取消可点击
-     *
-     * @param activity 所在activity
-     * @param title    标题 不传则无标题
-     * @param msg      消息
-     * @param listener 事件监听
-     */
-    public static BuildBean showAlertVertical(Context activity, CharSequence title, CharSequence msg, DialogUIListener listener) {
-        return showAlertVertical(activity, title, msg, true, true, listener);
-    }
-
-    /**
-     * 竖向弹出框
-     *
-     * @param activity         所在activity
-     * @param title            标题 不传则无标题
-     * @param msg              消息
-     * @param cancleable       true为可以取消false为不可取消
-     * @param outsideTouchable true为可以点击空白区域false为不可点击
-     * @param listener         事件监听
-     */
-    public static BuildBean showAlertVertical(Context activity, CharSequence title, CharSequence msg, boolean cancleable, boolean outsideTouchable, DialogUIListener listener) {
-        return DialogAssigner.getInstance().assignAlertVertical(activity, title, msg, cancleable, outsideTouchable, listener);
+    public static BuildBean showAlert(Activity activity, CharSequence title, CharSequence msg, CharSequence hint1, CharSequence hint2,
+                                      CharSequence firstTxt, CharSequence secondTxt, boolean isVertical, boolean cancleable, boolean outsideTouchable, DialogUIListener listener) {
+        return DialogAssigner.getInstance().assignAlert(activity, title, msg, hint1, hint2, firstTxt, secondTxt, isVertical, cancleable, outsideTouchable, listener);
     }
 
     /**
@@ -525,40 +463,6 @@ public class DialogUIUtils {
      */
     public static BuildBean showBottomSheet(Activity context, List datas, boolean cancleable, boolean outsideTouchable, DialogUIItemListener listener) {
         return DialogAssigner.getInstance().assignBottomSheet(context, datas, cancleable, outsideTouchable, listener);
-    }
-
-    /**
-     * 输入框 默认可取消可点击
-     *
-     * @param context   上下文
-     * @param title     标题
-     * @param hint1     第一个文本框提示语
-     * @param hint2     第二个文本框提示语
-     * @param firstTxt  第一个按钮文本
-     * @param secondTxt 第二个按钮文本
-     * @param listener  事件监听
-     * @return
-     */
-    public static BuildBean showAlertInput(Context context, CharSequence title, CharSequence hint1, CharSequence hint2, CharSequence firstTxt, CharSequence secondTxt, DialogUIListener listener) {
-        return showAlertInput(context, title, hint1, hint2, firstTxt, secondTxt, true, true, listener);
-    }
-
-    /***
-     * 输入框
-     *
-     * @param context          上下文
-     * @param title            标题
-     * @param hint1            第一个文本框提示语
-     * @param hint2            第二个文本框提示语
-     * @param firstTxt         第一个按钮文本
-     * @param secondTxt        第二个按钮文本
-     * @param cancleable       true为可以取消false为不可取消
-     * @param outsideTouchable true为可以点击空白区域false为不可点击
-     * @param listener         事件监听
-     * @return
-     */
-    public static BuildBean showAlertInput(Context context, CharSequence title, CharSequence hint1, CharSequence hint2, CharSequence firstTxt, CharSequence secondTxt, boolean cancleable, boolean outsideTouchable, DialogUIListener listener) {
-        return DialogAssigner.getInstance().assignAlertInput(context, title, hint1, hint2, firstTxt, secondTxt, cancleable, outsideTouchable, listener);
     }
 
     /**

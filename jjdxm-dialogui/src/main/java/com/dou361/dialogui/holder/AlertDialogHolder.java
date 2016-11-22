@@ -9,14 +9,31 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.dou361.dialogui.R;
 import com.dou361.dialogui.DialogUIUtils;
+import com.dou361.dialogui.R;
 import com.dou361.dialogui.ToolUtils;
 import com.dou361.dialogui.config.BuildBean;
 
 
 /**
- * Created by Administrator on 2016/10/9 0009.
+ * ========================================
+ * <p>
+ * 版 权：dou361.com 版权所有 （C） 2015
+ * <p>
+ * 作 者：陈冠明
+ * <p>
+ * 个人网站：http://www.dou361.com
+ * <p>
+ * 版 本：1.0
+ * <p>
+ * 创建日期：2016/11/22 23:05
+ * <p>
+ * 描 述：复用的一个holder
+ * <p>
+ * <p>
+ * 修订历史：
+ * <p>
+ * ========================================
  */
 public class AlertDialogHolder extends SuperHolder {
     protected TextView tvTitle;
@@ -72,10 +89,10 @@ public class AlertDialogHolder extends SuperHolder {
     public void assingDatasAndEvents(Context context, final BuildBean bean) {
 
         //style
-        tvMsg.setTextColor(ToolUtils.getColor(tvMsg.getContext(),bean.msgTxtColor));
+        tvMsg.setTextColor(ToolUtils.getColor(tvMsg.getContext(), bean.msgTxtColor));
         tvMsg.setTextSize(bean.msgTxtSize);
 
-        tvTitle.setTextColor(ToolUtils.getColor(tvTitle.getContext(),bean.titleTxtColor));
+        tvTitle.setTextColor(ToolUtils.getColor(tvTitle.getContext(), bean.titleTxtColor));
         tvTitle.setTextSize(bean.titleTxtSize);
 
         btn3Vertical.setTextSize(bean.btnTxtSize);
@@ -85,13 +102,13 @@ public class AlertDialogHolder extends SuperHolder {
         btn2.setTextSize(bean.btnTxtSize);
         btn1.setTextSize(bean.btnTxtSize);
 
-        btn1.setTextColor(ToolUtils.getColor(btn1.getContext(),bean.btn1Color));
-        btn2.setTextColor(ToolUtils.getColor(btn1.getContext(),bean.btn2Color));
-        btn3.setTextColor(ToolUtils.getColor(btn1.getContext(),bean.btn3Color));
+        btn1.setTextColor(ToolUtils.getColor(btn1.getContext(), bean.btn1Color));
+        btn2.setTextColor(ToolUtils.getColor(btn1.getContext(), bean.btn2Color));
+        btn3.setTextColor(ToolUtils.getColor(btn1.getContext(), bean.btn3Color));
 
-        btn1Vertical.setTextColor(ToolUtils.getColor(btn1.getContext(),bean.btn1Color));
-        btn2Vertical.setTextColor(ToolUtils.getColor(btn1.getContext(),bean.btn2Color));
-        btn3Vertical.setTextColor(ToolUtils.getColor(btn1.getContext(),bean.btn3Color));
+        btn1Vertical.setTextColor(ToolUtils.getColor(btn1.getContext(), bean.btn1Color));
+        btn2Vertical.setTextColor(ToolUtils.getColor(btn1.getContext(), bean.btn2Color));
+        btn3Vertical.setTextColor(ToolUtils.getColor(btn1.getContext(), bean.btn3Color));
 
         //隐藏view
         if (bean.isVertical) {
@@ -102,8 +119,12 @@ public class AlertDialogHolder extends SuperHolder {
             llContainerHorizontal.setVisibility(View.VISIBLE);
         }
 
-        tvTitle.setText(bean.title);
-
+        if (TextUtils.isEmpty(bean.title)) {
+            tvTitle.setVisibility(View.GONE);
+        } else {
+            tvTitle.setVisibility(View.VISIBLE);
+            tvTitle.setText(bean.title);
+        }
 
         if (TextUtils.isEmpty(bean.msg)) {
             tvMsg.setVisibility(View.GONE);
@@ -111,7 +132,7 @@ public class AlertDialogHolder extends SuperHolder {
             tvMsg.setVisibility(View.VISIBLE);
             tvMsg.setText(bean.msg);
 
-            tvMsg.setTextColor(ToolUtils.getColor(tvMsg.getContext(),bean.msgTxtColor));
+            tvMsg.setTextColor(ToolUtils.getColor(tvMsg.getContext(), bean.msgTxtColor));
             tvMsg.setTextSize(bean.msgTxtSize);
         }
 
@@ -121,7 +142,7 @@ public class AlertDialogHolder extends SuperHolder {
             et1.setVisibility(View.VISIBLE);
             et1.setHint(bean.hint1);
 
-            et1.setTextColor(ToolUtils.getColor(et1.getContext(),bean.inputTxtColor));
+            et1.setTextColor(ToolUtils.getColor(et1.getContext(), bean.inputTxtColor));
             et1.setTextSize(bean.inputTxtSize);
         }
 
@@ -130,12 +151,12 @@ public class AlertDialogHolder extends SuperHolder {
         } else {
             et2.setVisibility(View.VISIBLE);
             et2.setHint(bean.hint2);
-            et2.setTextColor(ToolUtils.getColor(et2.getContext(),bean.inputTxtColor));
+            et2.setTextColor(ToolUtils.getColor(et2.getContext(), bean.inputTxtColor));
             et2.setTextSize(bean.inputTxtSize);
         }
 
         //按钮数量
-        
+
         if (TextUtils.isEmpty(bean.text3)) {
             if (bean.isVertical) {
                 btn3Vertical.setVisibility(View.GONE);
@@ -182,12 +203,16 @@ public class AlertDialogHolder extends SuperHolder {
                 btn2.setText(bean.text2);
             }
         }
-
-        if (bean.isVertical) {
-            btn1Vertical.setText(bean.text1);
+        if (TextUtils.isEmpty(bean.text1)) {
+            line.setVisibility(View.GONE);
+            llContainerHorizontal.setVisibility(View.GONE);
+            llContainerVertical.setVisibility(View.GONE);
         } else {
-
-            btn1.setText(bean.text1);
+            if (bean.isVertical) {
+                btn1Vertical.setText(bean.text1);
+            } else {
+                btn1.setText(bean.text1);
+            }
         }
 
 
@@ -197,11 +222,10 @@ public class AlertDialogHolder extends SuperHolder {
             btn1Vertical.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    DialogUIUtils.dismiss(bean.dialog,bean.alertDialog);
+                    DialogUIUtils.dismiss(bean.dialog, bean.alertDialog);
                     bean.listener.onPositive();
 
-                    bean.listener.onGetInput(et1.getText().toString().trim(),et2.getText().toString().trim());
-
+                    bean.listener.onGetInput(et1.getText().toString().trim(), et2.getText().toString().trim());
 
 
                 }
@@ -210,7 +234,7 @@ public class AlertDialogHolder extends SuperHolder {
             btn2Vertical.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    DialogUIUtils.dismiss(bean.dialog,bean.alertDialog);
+                    DialogUIUtils.dismiss(bean.dialog, bean.alertDialog);
                     bean.listener.onNegative();
                 }
             });
@@ -218,7 +242,7 @@ public class AlertDialogHolder extends SuperHolder {
             btn3Vertical.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    DialogUIUtils.dismiss(bean.dialog,bean.alertDialog);
+                    DialogUIUtils.dismiss(bean.dialog, bean.alertDialog);
                     bean.listener.onNeutral();
                 }
             });
@@ -228,16 +252,16 @@ public class AlertDialogHolder extends SuperHolder {
             btn1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    DialogUIUtils.dismiss(bean.dialog,bean.alertDialog);
+                    DialogUIUtils.dismiss(bean.dialog, bean.alertDialog);
                     bean.listener.onPositive();
-                    bean.listener.onGetInput(et1.getText().toString().trim(),et2.getText().toString().trim());
+                    bean.listener.onGetInput(et1.getText().toString().trim(), et2.getText().toString().trim());
                 }
             });
 
             btn2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    DialogUIUtils.dismiss(bean.dialog,bean.alertDialog);
+                    DialogUIUtils.dismiss(bean.dialog, bean.alertDialog);
                     bean.listener.onNegative();
                 }
             });
@@ -245,7 +269,7 @@ public class AlertDialogHolder extends SuperHolder {
             btn3.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    DialogUIUtils.dismiss(bean.dialog,bean.alertDialog);
+                    DialogUIUtils.dismiss(bean.dialog, bean.alertDialog);
                     bean.listener.onNeutral();
                 }
             });

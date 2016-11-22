@@ -4,6 +4,8 @@
               android:layout_height="wrap_content"
               android:background="@android:color/transparent"
               android:orientation="vertical"
+              android:paddingLeft="@dimen/dialogui_margin_mid"
+              android:paddingRight="@dimen/dialogui_margin_mid"
               android:paddingTop="10dp">
 
 

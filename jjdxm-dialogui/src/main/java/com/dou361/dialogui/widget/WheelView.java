@@ -72,65 +72,74 @@ import java.util.List;
  */
 public class WheelView extends View {
     /**
+     * 滚动时长
      * Scrolling duration
      */
     private static final int SCROLLING_DURATION = 400;
 
     /**
+     * 用于滚动的最小增量
      * Minimum delta for scrolling
      */
     private static final int MIN_DELTA_FOR_SCROLLING = 1;
 
     /**
+     * 当前标签字体颜色值
      * Current value & label text color
      */
     private static final int VALUE_TEXT_COLOR = 0xFF000000;
 
     /**
+     * item中字体颜色值
      * Items text color
      */
     private static final int ITEMS_TEXT_COLOR = 0xFFE1E1E1;
 
     /**
+     * 顶部和底部阴影颜色值
      * Top and bottom shadows colors
      */
     private static final int[] SHADOWS_COLORS = new int[]{0xFFFFFFF,
             0x00AAAAAA, 0x00AAAAAA};
 
     /**
+     * item高度
      * Additional items height (is added to standard text item height)
      */
     private static final int ADDITIONAL_ITEM_HEIGHT = 40;
 
     /**
+     * 字体大小
      * Text size
      */
-    // private static final int TEXT_SIZE = 45;
     private int TEXT_SIZE = 14;
-    private int START_OFFSET = 4;
 
     /**
+     * item文本绘画上下的偏移量
      * Top and bottom items offset (to hide that)
      */
-    // private static final int ITEM_OFFSET = TEXT_SIZE / 10;
     private int ITEM_OFFSET = TEXT_SIZE / 10;
 
     /**
+     * 布局的附加宽度
      * Additional width for items layout
      */
-    private static final int ADDITIONAL_ITEMS_SPACE = 10;
+    private static final int ADDITIONAL_ITEMS_SPACE = /*10*/0;
 
     /**
+     * 标签偏移量
      * Label offset
      */
-    private static final int LABEL_OFFSET = 8;
+    private static final int LABEL_OFFSET = /*8*/0;
 
     /**
+     * 左右padding值
      * Left and right padding value
      */
     private static final int PADDING = 10;
 
     /**
+     * 可见item行数
      * Default count of visible items
      */
     private static final int DEF_VISIBLE_ITEMS = 5;
@@ -141,13 +150,15 @@ public class WheelView extends View {
 
     // Widths
     private int itemsWidth = 0;
+    // Item height
+    private int itemHeight = 0;
+    /**文字宽度*/
     private int labelWidth = 0;
 
     // Count of visible items
     private int visibleItems = DEF_VISIBLE_ITEMS;
 
-    // Item height
-    private int itemHeight = 0;
+
 
     // Text paints
     private TextPaint itemsPaint;
@@ -207,9 +218,8 @@ public class WheelView extends View {
         initData(context);
     }
 
-    public void setStyle(int textSize, int startOffset) {
+    public void setStyle(int textSize) {
         TEXT_SIZE = ToolUtils.dip2px(mContext, textSize);
-        START_OFFSET = startOffset;
     }
 
     /**
@@ -665,6 +675,7 @@ public class WheelView extends View {
                         / (itemsWidth + labelWidth);
                 itemsWidth = (int) newWidthItems;
                 labelWidth = pureWidth - itemsWidth;
+                itemsWidth = pureWidth;
             } else {
                 itemsWidth = pureWidth + LABEL_OFFSET; // no label
             }
@@ -673,7 +684,6 @@ public class WheelView extends View {
         if (itemsWidth > 0) {
             createLayouts(itemsWidth, labelWidth);
         }
-
         return width;
     }
 
@@ -759,7 +769,8 @@ public class WheelView extends View {
             canvas.save();
             // Skip padding space and hide a part of top and bottom items
             /** 位移  6等分时除以2,3等分是除以4 */
-            canvas.translate(this.getWidth() / START_OFFSET, -ITEM_OFFSET);
+//            canvas.translate(this.getWidth() / START_OFFSET, -ITEM_OFFSET);
+            canvas.translate((itemsWidth-labelWidth)/2, -ITEM_OFFSET);
             drawItems(canvas);
             drawValue(canvas);
             canvas.restore();
@@ -832,6 +843,19 @@ public class WheelView extends View {
     }
 
     /**
+     * Draws rect for current value
+     *
+     * @param canvas the canvas for drawing
+     */
+    private void drawCenterRect(Canvas canvas) {
+        int center = getHeight() / 2;
+        int offset = getItemHeight() / 2;
+        centerDrawable.setBounds(0, center - offset, getWidth(), center
+                + offset);
+        centerDrawable.draw(canvas);
+    }
+
+    /**
      * 获取当前选中条目的值
      *
      * @return
@@ -846,18 +870,7 @@ public class WheelView extends View {
         return getAdapter().getCurrentId(getCurrentItem());
     }
 
-    /**
-     * Draws rect for current value
-     *
-     * @param canvas the canvas for drawing
-     */
-    private void drawCenterRect(Canvas canvas) {
-        int center = getHeight() / 2;
-        int offset = getItemHeight() / 2;
-        centerDrawable.setBounds(0, center - offset, getWidth(), center
-                + offset);
-        centerDrawable.draw(canvas);
-    }
+
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {

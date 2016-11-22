@@ -33,7 +33,12 @@ public interface Assignable {
     /**
      * 日期选择器
      */
-    BuildBean assignDatePick(Context context, int gravity, int dateType,int tag, DialogUIDateTimeSaveListener listener);
+    BuildBean assignDatePickCenter(Context context, long date, int dateType, int tag, DialogUIDateTimeSaveListener listener);
+
+    /**
+     * 日期选择器
+     */
+    BuildBean assignDatePickBottom(Context context, long date, int dateType, int tag, DialogUIDateTimeSaveListener listener);
 
     /**
      * 弹出框

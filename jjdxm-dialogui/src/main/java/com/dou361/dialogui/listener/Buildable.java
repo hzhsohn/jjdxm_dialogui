@@ -62,8 +62,11 @@ public class Buildable {
     protected BuildBean buildByType(BuildBean bean) {
         ToolUtils.fixContext(bean);
         switch (bean.type) {
-            case CommonConfig.TYPE_DATEPICK:
-                buildDatePick(bean);
+            case CommonConfig.TYPE_DATEPICK_CENTER:
+                buildDatePickCenter(bean);
+                break;
+            case CommonConfig.TYPE_DATEPICK_BOTTOM:
+                buildDatePickBottom(bean);
                 break;
             case CommonConfig.TYPE_TOAST_TIE:
                 buildToastTie(bean);
@@ -132,7 +135,7 @@ public class Buildable {
         return bean;
     }
 
-    private BuildBean buildDatePick(final BuildBean bean) {
+    private BuildBean buildDatePickCenter(final BuildBean bean) {
         AlertDialog.Builder builder = new AlertDialog.Builder(bean.context);
         View root = View.inflate(bean.context, R.layout.dialogui_datepick_layout, null);
 
@@ -154,7 +157,7 @@ public class Buildable {
                 .findViewById(R.id.dwv_date);
         FrameLayout fl_bottom_customPanel = (FrameLayout) root
                 .findViewById(R.id.fl_bottom_customPanel);
-
+        dwvDate.setShowDate(bean.date);
         dwvDate.setShowDateType(bean.dateType);
         dwvDate.setTitleClick(new View.OnClickListener() {
             @Override
@@ -179,7 +182,8 @@ public class Buildable {
             public void onClick(View v) {
                 dialog.dismiss();
             }
-        });flNext.setOnClickListener(new View.OnClickListener() {
+        });
+        flNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (null != bean.dateTimeListener) {
@@ -188,8 +192,70 @@ public class Buildable {
                 dialog.dismiss();
             }
         });
+        Window window = bean.alertDialog.getWindow();
+        window.setGravity(bean.gravity);
         bean.alertDialog.setCancelable(bean.cancelable);
         bean.alertDialog.setCanceledOnTouchOutside(bean.outsideTouchable);
+        return bean;
+    }
+
+    private BuildBean buildDatePickBottom(final BuildBean bean) {
+        final BottomSheetDialog dialog = new BottomSheetDialog(bean.context);
+        View root = View.inflate(bean.context, R.layout.dialogui_datepick_layout, null);
+
+        RelativeLayout rl_title_panel = (RelativeLayout) root
+                .findViewById(R.id.rl_title_panel);
+        FrameLayout flFirst = (FrameLayout) root
+                .findViewById(R.id.fl_first);
+        FrameLayout flNext = (FrameLayout) root
+                .findViewById(R.id.fl_next);
+        TextView tv_title = (TextView) root
+                .findViewById(R.id.tv_title);
+        TextView tv_first = (TextView) root
+                .findViewById(R.id.tv_first);
+        TextView tv_next = (TextView) root
+                .findViewById(R.id.tv_next);
+        FrameLayout fl_top_customPanel = (FrameLayout) root
+                .findViewById(R.id.fl_top_customPanel);
+        final DateSelectorWheelView dwvDate = (DateSelectorWheelView) root
+                .findViewById(R.id.dwv_date);
+        FrameLayout fl_bottom_customPanel = (FrameLayout) root
+                .findViewById(R.id.fl_bottom_customPanel);
+        dwvDate.setShowDate(bean.date);
+        dwvDate.setShowDateType(bean.dateType);
+        dwvDate.setTitleClick(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int id = v.getId();
+                if (id == R.id.rl_date_time_title) {
+                    if (dwvDate.getDateSelectorVisibility() == View.VISIBLE) {
+                        dwvDate.setDateSelectorVisiblility(View.GONE);
+                    } else {
+                        dwvDate.setDateSelectorVisiblility(View.VISIBLE);
+                    }
+                }
+            }
+        });
+        dialog.setContentView(root);
+        bean.dialog = dialog;
+
+        flFirst.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        flNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (null != bean.dateTimeListener) {
+                    bean.dateTimeListener.onSaveSelectedDate(bean.tag, dwvDate.getSelectedDate());
+                }
+                dialog.dismiss();
+            }
+        });
+        bean.dialog.setCancelable(bean.cancelable);
+        bean.dialog.setCanceledOnTouchOutside(bean.outsideTouchable);
         return bean;
     }
 

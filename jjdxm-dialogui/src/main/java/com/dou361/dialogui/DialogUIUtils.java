@@ -12,9 +12,9 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.dou361.dialogui.config.BuildBean;
+import com.dou361.dialogui.listener.DialogUIDateTimeSaveListener;
 import com.dou361.dialogui.listener.DialogUIItemListener;
 import com.dou361.dialogui.listener.DialogUIListener;
-import com.dou361.dialogui.listener.DialogUIDateTimeSaveListener;
 
 import java.util.List;
 
@@ -99,21 +99,20 @@ public class DialogUIUtils {
      * @param listener
      * @return
      */
-    public static BuildBean showDatePick(Context context, int dateType, DialogUIDateTimeSaveListener listener) {
-        return showDatePick(context, Gravity.CENTER, dateType,0, listener);
+    public static BuildBean showDatePickBottom(Context context, long date, int dateType, int tag, DialogUIDateTimeSaveListener listener) {
+        return DialogAssigner.getInstance().assignDatePickBottom(context, date, dateType, tag, listener);
     }
 
     /***
      * 弹出日期选择器
      *
      * @param context
-     * @param gravity
      * @param dateType
      * @param listener
      * @return
      */
-    public static BuildBean showDatePick(Context context, int gravity, int dateType,int tag, DialogUIDateTimeSaveListener listener) {
-        return DialogAssigner.getInstance().assignDatePick(context, gravity, dateType, tag, listener);
+    public static BuildBean showDatePickCenter(Context context, long date, int dateType, int tag, DialogUIDateTimeSaveListener listener) {
+        return DialogAssigner.getInstance().assignDatePickCenter(context, date, dateType, tag, listener);
     }
 
 

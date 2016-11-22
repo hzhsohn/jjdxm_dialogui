@@ -68,6 +68,10 @@ public class DateSelectorWheelView extends RelativeLayout implements
     private WheelView wvMinute;
     private WheelView wvSecond;
     /**
+     * 设置显示的日期
+     */
+    private long mDate;
+    /**
      * 显示年份数
      */
     private String[] years = new String[141];
@@ -130,7 +134,7 @@ public class DateSelectorWheelView extends RelativeLayout implements
         LayoutInflater.from(context).inflate(R.layout.dialogui_datepick_date_selector_layout, this,
                 true);
         rlTitle = (RelativeLayout) findViewById(R.id.rl_date_time_title);
-        lineL =  findViewById(R.id.line_1);
+        lineL = findViewById(R.id.line_1);
         llWheelViews = (LinearLayout) findViewById(R.id.ll_wheel_views);
         tvSubTitle = (TextView) findViewById(R.id.tv_date_time_subtitle);
         tvYear = (TextView) findViewById(R.id.tv_date_time_year);
@@ -158,6 +162,7 @@ public class DateSelectorWheelView extends RelativeLayout implements
         wvMinute.addChangingListener(this);
         wvSecond.addChangingListener(this);
         setData();
+        setShowDate(0);
         setShowDateType(TYPE_YYYYMMDD);
     }
 
@@ -241,10 +246,8 @@ public class DateSelectorWheelView extends RelativeLayout implements
         secondsAdapter = new StrericWheelAdapter(seconds);
 
         wvYear.setAdapter(yearsAdapter);
-        wvYear.setCurrentItem(getTodayYear());
         wvYear.setCyclic(true);
         wvMonth.setAdapter(monthsAdapter);
-        wvMonth.setCurrentItem(getTodayMonth());
         wvMonth.setCyclic(true);
         if (isBigMonth(getTodayMonth() + 1)) {
             wvDay.setAdapter(bigDaysAdapter);
@@ -257,18 +260,25 @@ public class DateSelectorWheelView extends RelativeLayout implements
         } else {
             wvDay.setAdapter(normalDaysAdapter);
         }
-        wvDay.setCurrentItem(getTodayDay());
         wvDay.setCyclic(true);
 
         wvHour.setAdapter(hoursAdapter);
-        wvHour.setCurrentItem(getTodayHour());
         wvHour.setCyclic(true);
         wvMinute.setAdapter(minutesAdapter);
-        wvMinute.setCurrentItem(getTodayMinute());
         wvMinute.setCyclic(true);
         wvSecond.setAdapter(secondsAdapter);
-        wvSecond.setCurrentItem(getTodaySecond());
         wvSecond.setCyclic(true);
+    }
+
+
+    public void setShowDate(long date) {
+        mDate = date;
+        wvYear.setCurrentItem(getTodayYear());
+        wvMonth.setCurrentItem(getTodayMonth());
+        wvDay.setCurrentItem(getTodayDay());
+        wvHour.setCurrentItem(getTodayHour());
+        wvMinute.setCurrentItem(getTodayMinute());
+        wvSecond.setCurrentItem(getTodaySecond());
     }
 
     /**
@@ -289,12 +299,12 @@ public class DateSelectorWheelView extends RelativeLayout implements
                 wvHour.setVisibility(View.GONE);
                 wvMinute.setVisibility(View.GONE);
                 wvSecond.setVisibility(View.GONE);
-                wvYear.setStyle(18, 4);
-                wvMonth.setStyle(18, 4);
-                wvDay.setStyle(18, 4);
-                wvHour.setStyle(18, 4);
-                wvMinute.setStyle(18, 4);
-                wvSecond.setStyle(18, 4);
+                wvYear.setStyle(18);
+                wvMonth.setStyle(18);
+                wvDay.setStyle(18);
+                wvHour.setStyle(18);
+                wvMinute.setStyle(18);
+                wvSecond.setStyle(18);
                 break;
             case TYPE_YYYYMMDD:
                 line0.setVisibility(View.VISIBLE);
@@ -308,12 +318,12 @@ public class DateSelectorWheelView extends RelativeLayout implements
                 wvHour.setVisibility(View.GONE);
                 wvMinute.setVisibility(View.GONE);
                 wvSecond.setVisibility(View.GONE);
-                wvYear.setStyle(14, 2);
-                wvMonth.setStyle(14, 2);
-                wvDay.setStyle(14, 2);
-                wvHour.setStyle(14, 2);
-                wvMinute.setStyle(14, 2);
-                wvSecond.setStyle(14, 2);
+                wvYear.setStyle(14);
+                wvMonth.setStyle(14);
+                wvDay.setStyle(14);
+                wvHour.setStyle(14);
+                wvMinute.setStyle(14);
+                wvSecond.setStyle(14);
                 break;
             case TYPE_YYYYMMDDHHMM:
                 line0.setVisibility(View.VISIBLE);
@@ -327,12 +337,12 @@ public class DateSelectorWheelView extends RelativeLayout implements
                 tvSecond.setVisibility(View.GONE);
                 tv_line2.setVisibility(View.GONE);
                 wvSecond.setVisibility(View.GONE);
-                wvYear.setStyle(14, 2);
-                wvMonth.setStyle(14, 2);
-                wvDay.setStyle(14, 2);
-                wvHour.setStyle(14, 2);
-                wvMinute.setStyle(14, 2);
-                wvSecond.setStyle(14, 2);
+                wvYear.setStyle(14);
+                wvMonth.setStyle(14);
+                wvDay.setStyle(14);
+                wvHour.setStyle(14);
+                wvMinute.setStyle(14);
+                wvSecond.setStyle(14);
                 break;
             case TYPE_YYYYMMDDHHMMSS:
                 line0.setVisibility(View.VISIBLE);
@@ -346,12 +356,12 @@ public class DateSelectorWheelView extends RelativeLayout implements
                 wvHour.setVisibility(View.VISIBLE);
                 wvMinute.setVisibility(View.VISIBLE);
                 wvSecond.setVisibility(View.VISIBLE);
-                wvYear.setStyle(14, 2);
-                wvMonth.setStyle(14, 2);
-                wvDay.setStyle(14, 2);
-                wvHour.setStyle(14, 2);
-                wvMinute.setStyle(14, 2);
-                wvSecond.setStyle(14, 2);
+                wvYear.setStyle(14);
+                wvMonth.setStyle(14);
+                wvDay.setStyle(14);
+                wvHour.setStyle(14);
+                wvMinute.setStyle(14);
+                wvSecond.setStyle(14);
                 break;
         }
     }
@@ -586,7 +596,12 @@ public class DateSelectorWheelView extends RelativeLayout implements
     @SuppressLint("SimpleDateFormat")
     private String getToday() {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
-        Date curDate = new Date(System.currentTimeMillis());// 获取当前时间
+        Date curDate;
+        if (mDate > 0) {
+            curDate = new Date(mDate);
+        } else {
+            curDate = new Date(System.currentTimeMillis());// 获取当前时间
+        }
         String str = formatter.format(curDate);
         return str;
     }
@@ -596,6 +611,7 @@ public class DateSelectorWheelView extends RelativeLayout implements
      *
      * @return
      */
+
     private int getTodayYear() {
         int position = 0;
         String today = getToday();

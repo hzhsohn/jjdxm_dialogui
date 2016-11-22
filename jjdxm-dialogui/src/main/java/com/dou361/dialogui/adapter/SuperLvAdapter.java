@@ -5,6 +5,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import com.dou361.dialogui.listener.RefreshableListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +14,7 @@ import java.util.List;
  * 单一的item
  * Created by Administrator on 2016/4/15 0015.
  */
-public abstract class SuperLvAdapter extends BaseAdapter implements Refreshable {
+public abstract class SuperLvAdapter extends BaseAdapter implements RefreshableListener {
     List datas;
     Context context;
     boolean isListViewFling;

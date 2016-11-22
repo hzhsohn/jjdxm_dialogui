@@ -2,14 +2,15 @@ package com.dou361.dialogui;
 
 import android.app.Activity;
 import android.content.Context;
+import android.view.Gravity;
 import android.view.View;
 
 import com.dou361.dialogui.config.BuildBean;
 import com.dou361.dialogui.config.CommonConfig;
 import com.dou361.dialogui.listener.Assignable;
+import com.dou361.dialogui.listener.DialogUIDateTimeSaveListener;
 import com.dou361.dialogui.listener.DialogUIItemListener;
 import com.dou361.dialogui.listener.DialogUIListener;
-import com.dou361.dialogui.listener.DialogUIDateTimeSaveListener;
 
 import java.util.List;
 
@@ -33,15 +34,31 @@ public class DialogAssigner implements Assignable {
 
 
     @Override
-    public BuildBean assignDatePick(Context context, int gravity, int dateType,int tag, DialogUIDateTimeSaveListener listener) {
+    public BuildBean assignDatePickCenter(Context context, long date, int dateType, int tag, DialogUIDateTimeSaveListener listener) {
         BuildBean bean = new BuildBean();
         bean.context = context;
         bean.cancelable = true;
-        bean.gravity = gravity;
+        bean.gravity = Gravity.CENTER;
         bean.outsideTouchable = true;
-        bean.type = CommonConfig.TYPE_DATEPICK;
+        bean.type = CommonConfig.TYPE_DATEPICK_CENTER;
         bean.dateTimeListener = listener;
         bean.dateType = dateType;
+        bean.date = date;
+        bean.tag = tag;
+        return bean;
+    }
+
+    @Override
+    public BuildBean assignDatePickBottom(Context context, long date, int dateType, int tag, DialogUIDateTimeSaveListener listener) {
+        BuildBean bean = new BuildBean();
+        bean.context = context;
+        bean.cancelable = true;
+        bean.gravity = Gravity.BOTTOM;
+        bean.outsideTouchable = true;
+        bean.type = CommonConfig.TYPE_DATEPICK_BOTTOM;
+        bean.dateTimeListener = listener;
+        bean.dateType = dateType;
+        bean.date = date;
         bean.tag = tag;
         return bean;
     }

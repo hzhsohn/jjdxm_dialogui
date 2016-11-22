@@ -6,13 +6,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.dou361.dialogui.listener.RefreshableListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Administrator on 2016/8/22 0022.
  */
-public  abstract   class SuperRcvAdapter extends RecyclerView.Adapter<SuperRcvHolder> implements Refreshable {
+public  abstract   class SuperRcvAdapter extends RecyclerView.Adapter<SuperRcvHolder> implements RefreshableListener {
 
 
     private List datas;

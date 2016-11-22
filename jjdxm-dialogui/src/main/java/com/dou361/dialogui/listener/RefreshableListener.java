@@ -1,11 +1,11 @@
-package com.dou361.dialogui.adapter;
+package com.dou361.dialogui.listener;
 
 import java.util.List;
 
 /**
  * Created by Administrator on 2016/5/10 0010.
  */
-public interface Refreshable {
+public interface RefreshableListener {
     public void refresh(List newData);
 
     public void addAll(List newData);

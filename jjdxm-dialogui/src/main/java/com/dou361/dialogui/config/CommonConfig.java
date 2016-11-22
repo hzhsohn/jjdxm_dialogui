@@ -40,17 +40,6 @@ public class CommonConfig {
     @ColorRes
     public static int inputTxtColor = R.color.text_input_44;
 
-    @DimenRes
-    public static int titleTxtSize = R.dimen.dialogui_title_txt_size;
-    @DimenRes
-    public static int btnTxtSize = R.dimen.dialogui_btn_txt_size;
-    @DimenRes
-    public static int msgTxtSize = R.dimen.dialogui_msg_txt_size;
-    @DimenRes
-    public static int itemTxtSize = R.dimen.dialogui_item_txt_size;
-    @DimenRes
-    public static int inputTxtSize = R.dimen.dialogui_input_txt_size;
-
 
     public static CharSequence dialogui_btnTxt1 = "确定";
     public static CharSequence dialogui_btnTxt2 = "取消";
@@ -75,7 +64,8 @@ public class CommonConfig {
     public static final int TYPE_TOAST_TIE = 16;
     public static final int TYPE_MD_LOADING_HORIZONTAL = 17;
     public static final int TYPE_MD_LOADING_VERTICAL = 18;
-    public static final int TYPE_DATEPICK = 19;
+    public static final int TYPE_DATEPICK_CENTER = 19;
+    public static final int TYPE_DATEPICK_BOTTOM = 20;
 
 
 }

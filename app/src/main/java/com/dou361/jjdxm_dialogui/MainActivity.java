@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
                 break;
             case R.id.btn_select_ymd: {
-                DialogUIUtils.showDatePick(mActivity, Gravity.CENTER, DateSelectorWheelView.TYPE_YYYYMMDD, 0, new DialogUIDateTimeSaveListener() {
+                DialogUIUtils.showDatePickCenter(mActivity, System.currentTimeMillis() + 60000, DateSelectorWheelView.TYPE_YYYYMMDD, 0, new DialogUIDateTimeSaveListener() {
                     @Override
                     public void onSaveSelectedDate(int tag, String selectedDate) {
 
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
             }
             break;
             case R.id.btn_select_ymdhm: {
-                DialogUIUtils.showDatePick(mActivity, Gravity.CENTER, DateSelectorWheelView.TYPE_YYYYMMDDHHMM, 0, new DialogUIDateTimeSaveListener() {
+                DialogUIUtils.showDatePickBottom(mActivity, System.currentTimeMillis() + 60000, DateSelectorWheelView.TYPE_YYYYMMDDHHMM, 0, new DialogUIDateTimeSaveListener() {
                     @Override
                     public void onSaveSelectedDate(int tag, String selectedDate) {
 
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
             }
             break;
             case R.id.btn_select_ymdhms: {
-                DialogUIUtils.showDatePick(mActivity, Gravity.BOTTOM, DateSelectorWheelView.TYPE_YYYYMMDDHHMMSS, 0, new DialogUIDateTimeSaveListener() {
+                DialogUIUtils.showDatePickCenter(mActivity, System.currentTimeMillis() + 60000, DateSelectorWheelView.TYPE_YYYYMMDDHHMMSS, 0, new DialogUIDateTimeSaveListener() {
                     @Override
                     public void onSaveSelectedDate(int tag, String selectedDate) {
 

@@ -41,15 +41,18 @@ import java.util.Map;
  */
 public class BuildBean extends Buildable implements Styleable {
 
-    public int type;
 
+    /**上下文*/
     public Context context;
+    /**构建dialog的类型*/
+    public int type;
     public boolean isVertical;
 
     public View customView;
 
     public int gravity;
     public int dateType;
+    public long date;
     public int tag;
 
     public CharSequence title;

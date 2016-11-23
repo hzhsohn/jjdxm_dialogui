@@ -57,6 +57,7 @@ public class BuildBean extends Buildable implements Styleable {
     public int gravity;
     public int dateType;
     public long date;
+    public String dateTitle;
     public int tag;
 
     public CharSequence title;

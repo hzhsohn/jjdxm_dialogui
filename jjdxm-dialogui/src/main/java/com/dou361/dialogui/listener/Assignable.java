@@ -33,12 +33,12 @@ public interface Assignable {
     /**
      * 日期选择器
      */
-    BuildBean assignDatePickCenter(Context context, long date, int dateType, int tag, DialogUIDateTimeSaveListener listener);
+    BuildBean assignDatePickCenter(Context context,String dateTitle, long date, int dateType, int tag, DialogUIDateTimeSaveListener listener);
 
     /**
      * 日期选择器
      */
-    BuildBean assignDatePickBottom(Context context, long date, int dateType, int tag, DialogUIDateTimeSaveListener listener);
+    BuildBean assignDatePickBottom(Context context,String dateTitle, long date, int dateType, int tag, DialogUIDateTimeSaveListener listener);
 
     /**
      * 横向加载框
@@ -107,6 +107,11 @@ public interface Assignable {
      * 自定义弹出框
      */
     BuildBean assignCustomAlert(Context context, View contentView, int gravity, boolean cancleable, boolean outsideTouchable);
+
+    /**
+     * 自定义底部弹出框
+     */
+    BuildBean assignCustomBottomAlert(Context context, View contentView, boolean cancleable, boolean outsideTouchable);
 
 
 }

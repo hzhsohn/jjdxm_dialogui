@@ -30,9 +30,10 @@ public class DialogAssigner implements Assignable {
 
 
     @Override
-    public BuildBean assignDatePickCenter(Context context, long date, int dateType, int tag, DialogUIDateTimeSaveListener listener) {
+    public BuildBean assignDatePickCenter(Context context, String dateTitle, long date, int dateType, int tag, DialogUIDateTimeSaveListener listener) {
         BuildBean bean = new BuildBean();
         bean.context = context;
+        bean.dateTitle = dateTitle;
         bean.gravity = Gravity.CENTER;
         bean.cancelable = true;
         bean.outsideTouchable = true;
@@ -45,9 +46,10 @@ public class DialogAssigner implements Assignable {
     }
 
     @Override
-    public BuildBean assignDatePickBottom(Context context, long date, int dateType, int tag, DialogUIDateTimeSaveListener listener) {
+    public BuildBean assignDatePickBottom(Context context, String dateTitle, long date, int dateType, int tag, DialogUIDateTimeSaveListener listener) {
         BuildBean bean = new BuildBean();
         bean.context = context;
+        bean.dateTitle = dateTitle;
         bean.gravity = Gravity.BOTTOM;
         bean.cancelable = true;
         bean.outsideTouchable = true;
@@ -167,7 +169,7 @@ public class DialogAssigner implements Assignable {
 
     @Override
     public BuildBean assignAlert(Context activity, CharSequence title, CharSequence msg, CharSequence hint1, CharSequence hint2,
-                                 CharSequence firstTxt, CharSequence secondTxt, boolean isVertical,boolean cancleable, boolean outsideTouchable, DialogUIListener listener) {
+                                 CharSequence firstTxt, CharSequence secondTxt, boolean isVertical, boolean cancleable, boolean outsideTouchable, DialogUIListener listener) {
         BuildBean bean = new BuildBean();
         bean.context = activity;
         bean.msg = msg;
@@ -221,6 +223,18 @@ public class DialogAssigner implements Assignable {
         bean.cancelable = cancleable;
         bean.outsideTouchable = outsideTouchable;
         bean.type = CommonConfig.TYPE_CUSTOM_ALERT;
+        return bean;
+    }
+
+    @Override
+    public BuildBean assignCustomBottomAlert(Context context, View contentView, boolean cancleable, boolean outsideTouchable) {
+        BuildBean bean = new BuildBean();
+        bean.context = context;
+        bean.customView = contentView;
+        bean.gravity = Gravity.BOTTOM;
+        bean.cancelable = cancleable;
+        bean.outsideTouchable = outsideTouchable;
+        bean.type = CommonConfig.TYPE_CUSTOM_BOTTOM_ALERT;
         return bean;
     }
 

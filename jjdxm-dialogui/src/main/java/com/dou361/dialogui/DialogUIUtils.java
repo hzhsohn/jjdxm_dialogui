@@ -101,8 +101,8 @@ public class DialogUIUtils {
      * @param listener
      * @return
      */
-    public static BuildBean showDatePickBottom(Context context, long date, int dateType, int tag, DialogUIDateTimeSaveListener listener) {
-        return DialogAssigner.getInstance().assignDatePickBottom(context, date, dateType, tag, listener);
+    public static BuildBean showDatePickBottom(Context context, String dateTitle, long date, int dateType, int tag, DialogUIDateTimeSaveListener listener) {
+        return DialogAssigner.getInstance().assignDatePickBottom(context, dateTitle, date, dateType, tag, listener);
     }
 
     /***
@@ -113,8 +113,8 @@ public class DialogUIUtils {
      * @param listener
      * @return
      */
-    public static BuildBean showDatePickCenter(Context context, long date, int dateType, int tag, DialogUIDateTimeSaveListener listener) {
-        return DialogAssigner.getInstance().assignDatePickCenter(context, date, dateType, tag, listener);
+    public static BuildBean showDatePickCenter(Context context, String dateTitle, long date, int dateType, int tag, DialogUIDateTimeSaveListener listener) {
+        return DialogAssigner.getInstance().assignDatePickCenter(context, dateTitle, date, dateType, tag, listener);
     }
 
     /**
@@ -537,6 +537,30 @@ public class DialogUIUtils {
      */
     public static BuildBean showCustomAlert(Context context, View contentView, int gravity, boolean cancleable, boolean outsideTouchable) {
         return DialogAssigner.getInstance().assignCustomAlert(context, contentView, gravity, cancleable, outsideTouchable);
+    }
+
+    /**
+     * 自定义底部弹出框 默认居中可取消可点击
+     *
+     * @param context     上下问
+     * @param contentView 自定义view
+     * @return
+     */
+    public static BuildBean showCustomBottomAlert(Context context, View contentView) {
+        return showCustomBottomAlert(context, contentView, true, true);
+    }
+
+    /***
+     * 自定义底部弹出框
+     *
+     * @param context          上下文
+     * @param contentView      自定义view
+     * @param cancleable       true为可以取消false为不可取消
+     * @param outsideTouchable true为可以点击空白区域false为不可点击
+     * @return
+     */
+    public static BuildBean showCustomBottomAlert(Context context, View contentView, boolean cancleable, boolean outsideTouchable) {
+        return DialogAssigner.getInstance().assignCustomBottomAlert(context, contentView, cancleable, outsideTouchable);
     }
 
 

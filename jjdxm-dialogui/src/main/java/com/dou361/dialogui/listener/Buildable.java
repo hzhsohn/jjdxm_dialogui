@@ -99,6 +99,9 @@ public class Buildable {
             case CommonConfig.TYPE_CUSTOM_ALERT:
                 buildCustomAlert(bean);
                 break;
+            case CommonConfig.TYPE_CUSTOM_BOTTOM_ALERT:
+                buildCustomBottomAlert(bean);
+                break;
             case CommonConfig.TYPE_BOTTOM_SHEET_VERTICAL:
                 buildBottomSheetVertical(bean);
                 break;
@@ -212,12 +215,16 @@ public class Buildable {
                 }
             }
         });
+        tv_title.setText(bean.dateTitle);
         dialog.setContentView(root);
         bean.dialog = dialog;
 
         flFirst.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (null != bean.dateTimeListener) {
+                    bean.dateTimeListener.onCancelClick();
+                }
                 dialog.dismiss();
             }
         });
@@ -228,6 +235,14 @@ public class Buildable {
                     bean.dateTimeListener.onSaveSelectedDate(bean.tag, dwvDate.getSelectedDate());
                 }
                 dialog.dismiss();
+            }
+        });
+        tv_title.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (null != bean.dateTimeListener) {
+                    bean.dateTimeListener.onTitleClick();
+                }
             }
         });
         return bean;
@@ -508,6 +523,12 @@ public class Buildable {
         builder.setView(bean.customView);
         AlertDialog dialog = builder.create();
         bean.alertDialog = dialog;
+    }
+
+    private void buildCustomBottomAlert(BuildBean bean) {
+        BottomSheetDialog dialog = new BottomSheetDialog(bean.context);
+        dialog.setContentView(bean.customView);
+        bean.dialog = dialog;
     }
 
     protected BuildBean buildCenterSheet(BuildBean bean) {

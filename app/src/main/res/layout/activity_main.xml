@@ -163,12 +163,6 @@
                 android:text="中间列表"/>
 
             <Button
-                android:id="@+id/btn_bottom_sheet"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="底部列表"/>
-
-            <Button
                 android:id="@+id/btn_md_bottom_vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

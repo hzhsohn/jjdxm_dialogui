@@ -1,8 +1,10 @@
-package com.dou361.dialogui.adapter;
+package com.dou361.dialogui.holder;
 
 import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+
+import com.dou361.dialogui.adapter.SuperRcvAdapter;
 
 import java.util.List;
 

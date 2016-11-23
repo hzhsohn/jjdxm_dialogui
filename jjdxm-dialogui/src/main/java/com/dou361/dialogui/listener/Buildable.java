@@ -22,18 +22,15 @@ import android.widget.TextView;
 
 import com.dou361.dialogui.DialogUIUtils;
 import com.dou361.dialogui.R;
-import com.dou361.dialogui.ToolUtils;
 import com.dou361.dialogui.adapter.SuperLvAdapter;
-import com.dou361.dialogui.adapter.SuperLvHolder;
-import com.dou361.dialogui.bottomsheet.BottomCenterVerticalHolder;
-import com.dou361.dialogui.bottomsheet.BottomHorizontalHolder;
-import com.dou361.dialogui.bottomsheet.BottomSheetBean;
-import com.dou361.dialogui.bottomsheet.BottomVerticalHolder;
-import com.dou361.dialogui.config.BuildBean;
+import com.dou361.dialogui.bean.BuildBean;
 import com.dou361.dialogui.config.CommonConfig;
 import com.dou361.dialogui.holder.AlertDialogHolder;
-import com.dou361.dialogui.holder.BottomSheetCancelHolder;
-import com.dou361.dialogui.holder.CenterSheetHolder;
+import com.dou361.dialogui.holder.SheetCancelHolder;
+import com.dou361.dialogui.holder.SheetHolder;
+import com.dou361.dialogui.holder.SheetItemHolder;
+import com.dou361.dialogui.holder.SuperLvHolder;
+import com.dou361.dialogui.utils.ToolUtils;
 import com.dou361.dialogui.widget.DateSelectorWheelView;
 
 /**
@@ -101,9 +98,6 @@ public class Buildable {
                 break;
             case CommonConfig.TYPE_CUSTOM_ALERT:
                 buildCustomAlert(bean);
-                break;
-            case CommonConfig.TYPE_BOTTOM_SHEET:
-                buildBottomSheet(bean);
                 break;
             case CommonConfig.TYPE_BOTTOM_SHEET_VERTICAL:
                 buildBottomSheetVertical(bean);
@@ -239,47 +233,9 @@ public class Buildable {
         return bean;
     }
 
-    private void buildBottomSheet(final BuildBean bean) {
-        final BottomSheetDialog dialog = new BottomSheetDialog(bean.context);
-        LinearLayout root = (LinearLayout) View.inflate(bean.context, R.layout.dialogui_holder_bottomsheet, null);
-        TextView tvTitle = (TextView) root.findViewById(R.id.dialogui_tv_title);
-        if (TextUtils.isEmpty(bean.title)) {
-            tvTitle.setVisibility(View.GONE);
-        } else {
-            tvTitle.setText(bean.title);
-        }
-        ListView listView = new ListView(bean.context);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        listView.setLayoutParams(params);
-        listView.setDividerHeight(0);
-        // ListView listView = (ListView) root.findViewById(R.id.lv);
-        root.addView(listView, 1);
-        if (bean.mAdapter == null) {
-            SuperLvAdapter adapter = new SuperLvAdapter(bean.context) {
-                @Override
-                protected SuperLvHolder generateNewHolder(Context context, int itemViewType) {
-                    return new BottomCenterVerticalHolder(context);
-                }
-            };
-            bean.mAdapter = adapter;
-        }
-        listView.setAdapter(bean.mAdapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                BottomSheetBean sheetBean = (BottomSheetBean) bean.lvDatas.get(position);
-                dialog.dismiss();
-                bean.itemListener.onItemClick(sheetBean.text, position);
-            }
-        });
-        bean.mAdapter.addAll(bean.lvDatas);
-        dialog.setContentView(root);
-        bean.dialog = dialog;
-    }
-
     private void buildBottomSheetHorizontal(final BuildBean bean) {
         final BottomSheetDialog dialog = new BottomSheetDialog(bean.context);
-        LinearLayout root = (LinearLayout) View.inflate(bean.context, R.layout.dialogui_holder_bottomsheet, null);
+        LinearLayout root = (LinearLayout) View.inflate(bean.context, R.layout.dialogui_holder_sheet_title, null);
         TextView tvTitle = (TextView) root.findViewById(R.id.dialogui_tv_title);
         if (TextUtils.isEmpty(bean.title)) {
             tvTitle.setVisibility(View.GONE);
@@ -296,7 +252,7 @@ public class Buildable {
             SuperLvAdapter adapter = new SuperLvAdapter(bean.context) {
                 @Override
                 protected SuperLvHolder generateNewHolder(Context context, int itemViewType) {
-                    return new BottomHorizontalHolder(context);
+                    return new SheetItemHolder(context);
                 }
             };
             bean.mAdapter = adapter;
@@ -305,9 +261,8 @@ public class Buildable {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                BottomSheetBean sheetBean = (BottomSheetBean) bean.lvDatas.get(position);
                 dialog.dismiss();
-                bean.itemListener.onItemClick(sheetBean.text, position);
+                bean.itemListener.onItemClick(bean.lvDatas.get(position), position);
             }
         });
         bean.mAdapter.addAll(bean.lvDatas);
@@ -317,7 +272,7 @@ public class Buildable {
 
     private void buildBottomSheetVertical(final BuildBean bean) {
         final BottomSheetDialog dialog = new BottomSheetDialog(bean.context);
-        LinearLayout root = (LinearLayout) View.inflate(bean.context, R.layout.dialogui_holder_bottomsheet, null);
+        LinearLayout root = (LinearLayout) View.inflate(bean.context, R.layout.dialogui_holder_sheet_title, null);
         TextView tvTitle = (TextView) root.findViewById(R.id.dialogui_tv_title);
         if (TextUtils.isEmpty(bean.title)) {
             tvTitle.setVisibility(View.GONE);
@@ -334,7 +289,7 @@ public class Buildable {
             SuperLvAdapter adapter = new SuperLvAdapter(bean.context) {
                 @Override
                 protected SuperLvHolder generateNewHolder(Context context, int itemViewType) {
-                    return new BottomVerticalHolder(context);
+                    return new SheetItemHolder(context);
                 }
             };
             bean.mAdapter = adapter;
@@ -343,9 +298,8 @@ public class Buildable {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                BottomSheetBean sheetBean = (BottomSheetBean) bean.lvDatas.get(position);
                 dialog.dismiss();
-                bean.itemListener.onItemClick(sheetBean.text, position);
+                bean.itemListener.onItemClick(bean.lvDatas.get(position), position);
             }
         });
         bean.mAdapter.addAll(bean.lvDatas);
@@ -558,7 +512,7 @@ public class Buildable {
 
     protected BuildBean buildCenterSheet(BuildBean bean) {
         AlertDialog.Builder builder = new AlertDialog.Builder(bean.context);
-        CenterSheetHolder holder = new CenterSheetHolder(bean.context);
+        SheetHolder holder = new SheetHolder(bean.context);
         builder.setView(holder.rootView);
         AlertDialog dialog = builder.create();
         bean.alertDialog = dialog;
@@ -568,7 +522,7 @@ public class Buildable {
 
     protected BuildBean buildBottomSheetCancel(BuildBean bean) {
         AlertDialog.Builder builder = new AlertDialog.Builder(bean.context);
-        BottomSheetCancelHolder holder = new BottomSheetCancelHolder(bean.context);
+        SheetCancelHolder holder = new SheetCancelHolder(bean.context);
         builder.setView(holder.rootView);
         AlertDialog dialog = builder.create();
         bean.alertDialog = dialog;

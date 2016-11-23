@@ -42,7 +42,7 @@ import android.view.animation.Interpolator;
 import android.widget.Scroller;
 
 import com.dou361.dialogui.R;
-import com.dou361.dialogui.ToolUtils;
+import com.dou361.dialogui.utils.ToolUtils;
 import com.dou361.dialogui.adapter.WheelAdapter;
 import com.dou361.dialogui.listener.OnWheelChangedListener;
 import com.dou361.dialogui.listener.OnWheelScrollListener;

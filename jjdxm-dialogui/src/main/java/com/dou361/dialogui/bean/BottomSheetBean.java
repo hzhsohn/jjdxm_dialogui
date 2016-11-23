@@ -1,4 +1,4 @@
-package com.dou361.dialogui.bottomsheet;
+package com.dou361.dialogui.bean;
 
 import android.support.annotation.DrawableRes;
 

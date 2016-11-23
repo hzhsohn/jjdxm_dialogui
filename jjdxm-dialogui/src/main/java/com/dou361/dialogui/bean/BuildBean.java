@@ -1,4 +1,4 @@
-package com.dou361.dialogui.config;
+package com.dou361.dialogui.bean;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -7,14 +7,14 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 
-import com.dou361.dialogui.ToolUtils;
 import com.dou361.dialogui.adapter.SuperLvAdapter;
-import com.dou361.dialogui.bottomsheet.BottomSheetBean;
+import com.dou361.dialogui.config.CommonConfig;
 import com.dou361.dialogui.listener.Buildable;
 import com.dou361.dialogui.listener.DialogUIDateTimeSaveListener;
 import com.dou361.dialogui.listener.DialogUIItemListener;
 import com.dou361.dialogui.listener.DialogUIListener;
 import com.dou361.dialogui.listener.Styleable;
+import com.dou361.dialogui.utils.ToolUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -42,9 +42,13 @@ import java.util.Map;
 public class BuildBean extends Buildable implements Styleable {
 
 
-    /**上下文*/
+    /**
+     * 上下文
+     */
     public Context context;
-    /**构建dialog的类型*/
+    /**
+     * 构建dialog的类型
+     */
     public int type;
     public boolean isVertical;
 
@@ -95,11 +99,9 @@ public class BuildBean extends Buildable implements Styleable {
     public int defaultChosen;//
     public boolean[] checkedItems;
 
-    public List<? extends CharSequence> wordsIos;
-
     //bottomsheet
     public SuperLvAdapter mAdapter;
-    public List<BottomSheetBean> lvDatas;
+    public List<String> lvDatas;
     public int gridColumns = 4;
 
 

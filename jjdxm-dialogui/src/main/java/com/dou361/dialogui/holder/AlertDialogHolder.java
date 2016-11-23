@@ -11,8 +11,8 @@ import android.widget.TextView;
 
 import com.dou361.dialogui.DialogUIUtils;
 import com.dou361.dialogui.R;
-import com.dou361.dialogui.ToolUtils;
-import com.dou361.dialogui.config.BuildBean;
+import com.dou361.dialogui.utils.ToolUtils;
+import com.dou361.dialogui.bean.BuildBean;
 
 
 /**
@@ -28,7 +28,7 @@ import com.dou361.dialogui.config.BuildBean;
  * <p>
  * 创建日期：2016/11/22 23:05
  * <p>
- * 描 述：复用的一个holder
+ * 描 述：复用的一个holder，alert弹出框
  * <p>
  * <p>
  * 修订历史：

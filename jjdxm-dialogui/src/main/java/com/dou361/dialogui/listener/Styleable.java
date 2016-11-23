@@ -4,7 +4,7 @@ import android.app.Dialog;
 import android.support.annotation.ColorRes;
 import android.support.annotation.Nullable;
 
-import com.dou361.dialogui.config.BuildBean;
+import com.dou361.dialogui.bean.BuildBean;
 
 import java.util.Map;
 

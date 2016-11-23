@@ -1,4 +1,4 @@
-package com.dou361.dialogui;
+package com.dou361.dialogui.utils;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -13,7 +13,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 
-import com.dou361.dialogui.config.BuildBean;
+import com.dou361.dialogui.DialogUIUtils;
+import com.dou361.dialogui.bean.BuildBean;
 import com.dou361.dialogui.config.CommonConfig;
 
 /**

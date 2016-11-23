@@ -54,7 +54,6 @@ public class CommonConfig {
     public static final int TYPE_ALERT = 6;
     public static final int TYPE_BOTTOM_SHEET_CANCEL = 9;
     public static final int TYPE_CENTER_SHEET = 10;
-    public static final int TYPE_BOTTOM_SHEET = 12;
     public static final int TYPE_BOTTOM_SHEET_VERTICAL = 13;
     public static final int TYPE_BOTTOM_SHEET_HORIZONTAL = 14;
     public static final int TYPE_CUSTOM_ALERT = 15;

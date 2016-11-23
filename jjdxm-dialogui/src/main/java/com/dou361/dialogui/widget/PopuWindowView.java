@@ -11,7 +11,7 @@ import android.widget.PopupWindow;
 
 import com.dou361.dialogui.R;
 import com.dou361.dialogui.adapter.PopuWindowAdapter;
-import com.dou361.dialogui.bean.Popu;
+import com.dou361.dialogui.bean.PopuBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +41,7 @@ public class PopuWindowView {
     View viewItem = null;
     ListView pupoListView;
     PopupWindow pullDownView;// 弹出窗口
-    private List<Popu> popuLists = new ArrayList<Popu>();
+    private List<PopuBean> popuLists = new ArrayList<PopuBean>();
     private PopuWindowAdapter mPopuWindowAdapter;
     private Context mContext;
     private TdataListener mTdataListener;
@@ -104,7 +104,7 @@ public class PopuWindowView {
         /**
          * 初始化数据
          */
-        void initPupoData(List<Popu> lists);
+        void initPupoData(List<PopuBean> lists);
     }
 
     /**

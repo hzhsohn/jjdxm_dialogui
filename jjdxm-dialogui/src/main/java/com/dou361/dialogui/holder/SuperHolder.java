@@ -4,7 +4,7 @@ import android.content.Context;
 import android.support.annotation.LayoutRes;
 import android.view.View;
 
-import com.dou361.dialogui.config.BuildBean;
+import com.dou361.dialogui.bean.BuildBean;
 
 
 /**

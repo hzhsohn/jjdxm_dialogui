@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 
-import com.dou361.dialogui.config.BuildBean;
+import com.dou361.dialogui.bean.BuildBean;
 
 import java.util.List;
 
@@ -86,27 +86,22 @@ public interface Assignable {
     /**
      * 中间弹出列表
      */
-    BuildBean assignCenterSheet(Context context, List<? extends CharSequence> words, boolean cancleable, boolean outsideTouchable, final DialogUIItemListener listener);
+    BuildBean assignCenterSheet(Context context, List<String> datas, boolean cancleable, boolean outsideTouchable, final DialogUIItemListener listener);
 
     /**
      * 带取消的底部弹出列表
      */
-    BuildBean assignBottomSheetAndCancel(Context context, List<? extends CharSequence> words, CharSequence bottomTxt, boolean cancleable, boolean outsideTouchable, final DialogUIItemListener listener);
-
-    /**
-     * 底部弹出列表
-     */
-    BuildBean assignBottomSheet(Activity context, List<? extends CharSequence> words, boolean cancleable, boolean outsideTouchable, final DialogUIItemListener listener);
+    BuildBean assignBottomSheetAndCancel(Context context, List<String> datas, CharSequence bottomTxt, boolean cancleable, boolean outsideTouchable, final DialogUIItemListener listener);
 
     /**
      * md风格竖向底部弹出列表
      */
-    BuildBean assignMdBottomSheetVertical(Context context, CharSequence title, List datas, CharSequence bottomTxt, boolean cancleable, boolean outsideTouchable, DialogUIItemListener listener);
+    BuildBean assignMdBottomSheetVertical(Context context, CharSequence title, List<String> datas, CharSequence bottomTxt, boolean cancleable, boolean outsideTouchable, DialogUIItemListener listener);
 
     /**
      * md风格横向底部弹出列表
      */
-    BuildBean assignMdBottomSheetHorizontal(Context context, CharSequence title, List datas, CharSequence bottomTxt, int columnsNum, boolean cancleable, boolean outsideTouchable, DialogUIItemListener listener);
+    BuildBean assignMdBottomSheetHorizontal(Context context, CharSequence title, List<String> datas, CharSequence bottomTxt, int columnsNum, boolean cancleable, boolean outsideTouchable, DialogUIItemListener listener);
 
     /**
      * 自定义弹出框

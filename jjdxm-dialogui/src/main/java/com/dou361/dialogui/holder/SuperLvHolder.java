@@ -1,8 +1,10 @@
-package com.dou361.dialogui.adapter;
+package com.dou361.dialogui.holder;
 
 import android.content.Context;
 import android.support.annotation.LayoutRes;
 import android.view.View;
+
+import com.dou361.dialogui.adapter.SuperLvAdapter;
 
 import java.util.List;
 

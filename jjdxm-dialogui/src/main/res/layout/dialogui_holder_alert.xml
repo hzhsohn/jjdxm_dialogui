@@ -2,8 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:layout_marginLeft="@dimen/dialogui_margin_mid"
-              android:layout_marginRight="@dimen/dialogui_margin_mid"
               android:background="@drawable/dialogui_shape_wihte_round_corner"
               android:gravity="center_horizontal"
               android:orientation="vertical">

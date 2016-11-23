@@ -22,7 +22,7 @@ import java.io.Serializable;
  * <p>
  * ========================================
  */
-public class Popu implements Serializable {
+public class PopuBean implements Serializable {
 
     /**
      * 序列化id

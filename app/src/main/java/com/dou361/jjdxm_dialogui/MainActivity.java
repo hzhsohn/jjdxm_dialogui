@@ -9,7 +9,6 @@ import android.view.Gravity;
 import android.view.View;
 
 import com.dou361.dialogui.DialogUIUtils;
-import com.dou361.dialogui.bottomsheet.BottomSheetBean;
 import com.dou361.dialogui.listener.DialogUIDateTimeSaveListener;
 import com.dou361.dialogui.listener.DialogUIItemListener;
 import com.dou361.dialogui.listener.DialogUIListener;
@@ -41,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick({R.id.btn_toast_top, R.id.btn_toast_center, R.id.btn_toast, R.id.btn_popu, R.id.btn_select_ymd, R.id.btn_select_ymdhm, R.id.btn_select_ymdhms, R.id.btn_dialog, R.id.btn_loading_vertical, R.id.btn_loading_horizontal, R.id.btn_loading_vertical_gray, R.id.btn_loading_horizontal_gray, R.id.btn_md_loading_vertical, R.id.btn_md_loading_horizontal, R.id.btn_md_alert, R.id.btn_tie_alert, R.id.btn_alert_horizontal,
             R.id.btn_alert_vertical, R.id.btn_bottom_sheet_cancel, R.id.btn_center_sheet, R.id.btn_alert_input,
-            R.id.btn_alert_multichoose, R.id.btn_alert_singlechoose, R.id.btn_bottom_sheet, R.id.btn_md_bottom_vertical, R.id.btn_md_bottom_horizontal, R.id.btn_custom_alert})
+            R.id.btn_alert_multichoose, R.id.btn_alert_singlechoose, R.id.btn_md_bottom_vertical, R.id.btn_md_bottom_horizontal, R.id.btn_custom_alert})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_toast_top:
@@ -249,27 +248,15 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }).show();
                 break;
-            case R.id.btn_bottom_sheet:
-                List<BottomSheetBean> datass = new ArrayList<>();
-                datass.add(new BottomSheetBean(0, "1"));
-                datass.add(new BottomSheetBean(0, "2"));
-                datass.add(new BottomSheetBean(0, "3"));
-                DialogUIUtils.showBottomSheet(this, datass, new DialogUIItemListener() {
-                    @Override
-                    public void onItemClick(CharSequence text, int position) {
-
-                    }
-                }).show();
-                break;
             case R.id.btn_md_bottom_vertical:
-                List<BottomSheetBean> datas2 = new ArrayList<>();
-                datas2.add(new BottomSheetBean(0, "1"));
-                datas2.add(new BottomSheetBean(0, "2"));
-                datas2.add(new BottomSheetBean(0, "3"));
-                datas2.add(new BottomSheetBean(0, "4"));
-                datas2.add(new BottomSheetBean(0, "5"));
-                datas2.add(new BottomSheetBean(0, "6"));
-                DialogUIUtils.showMdBottomSheetVertical(mActivity, "标题", datas2, "this is cancle button", new DialogUIItemListener() {
+                List<String> datas2 = new ArrayList<String>();
+                datas2.add("1");
+                datas2.add("2");
+                datas2.add("3");
+                datas2.add("4");
+                datas2.add("5");
+                datas2.add("6");
+                DialogUIUtils.showMdBottomSheetVertical(mActivity, "", datas2, "this is cancle button", new DialogUIItemListener() {
                     @Override
                     public void onItemClick(CharSequence text, int position) {
                         showToast(text + "---" + position);
@@ -277,13 +264,13 @@ public class MainActivity extends AppCompatActivity {
                 }).show();
                 break;
             case R.id.btn_md_bottom_horizontal:
-                List<BottomSheetBean> datas3 = new ArrayList<>();
-                datas3.add(new BottomSheetBean(0, "1"));
-                datas3.add(new BottomSheetBean(0, "2"));
-                datas3.add(new BottomSheetBean(0, "3"));
-                datas3.add(new BottomSheetBean(0, "4"));
-                datas3.add(new BottomSheetBean(0, "5"));
-                datas3.add(new BottomSheetBean(0, "6"));
+                List<String> datas3 = new ArrayList<String>();
+                datas3.add("1");
+                datas3.add("2");
+                datas3.add("3");
+                datas3.add("4");
+                datas3.add("5");
+                datas3.add("6");
                 DialogUIUtils.showMdBottomSheetHorizontal(mActivity, "标题", datas3, "this is cancle button", 3, new DialogUIItemListener() {
                     @Override
                     public void onItemClick(CharSequence text, int position) {

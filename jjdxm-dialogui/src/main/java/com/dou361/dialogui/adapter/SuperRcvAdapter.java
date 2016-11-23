@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.dou361.dialogui.holder.SuperRcvHolder;
 import com.dou361.dialogui.listener.RefreshableListener;
 
 import java.util.ArrayList;

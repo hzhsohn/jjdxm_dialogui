@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 
 import com.dou361.dialogui.R;
-import com.dou361.dialogui.bean.Popu;
+import com.dou361.dialogui.bean.PopuBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,14 +44,14 @@ public class PopuWindowAdapter extends BaseAdapter {
     /**
      * 供下拉的集合包括id
      */
-    List<Popu> list;
+    List<PopuBean> list;
     private LayoutInflater inflater;
 
-    public PopuWindowAdapter(Context mContext, List<Popu> lists) {
+    public PopuWindowAdapter(Context mContext, List<PopuBean> lists) {
         this.mContext = mContext;
         this.list = lists;
         if (list == null) {
-            list = new ArrayList<Popu>();
+            list = new ArrayList<PopuBean>();
         }
         inflater = LayoutInflater.from(mContext);
     }

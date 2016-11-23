@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import com.dou361.dialogui.holder.SuperLvHolder;
 import com.dou361.dialogui.listener.RefreshableListener;
 
 import java.util.ArrayList;

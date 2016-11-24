@@ -20,15 +20,11 @@ package com.dou361.dialogui.listener;
  * <p>
  * ========================================
  */
-public abstract class DialogUIDateTimeSaveListener {
+public interface DialogUIDateTimeSaveListener {
 
-    public abstract void onSaveSelectedDate(int tag, String selectedDate);
+    /**
+     * 点击保存返回的日期
+     */
+    void onSaveSelectedDate(int tag, String selectedDate);
 
-    public void onTitleClick() {
-
-    }
-
-    public void onCancelClick() {
-
-    }
 }

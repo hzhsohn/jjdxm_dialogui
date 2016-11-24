@@ -42,8 +42,10 @@ import java.util.List;
  */
 public class DialogUIUtils {
 
+    /**全局上下文*/
     public static Context appContext;
 
+    /**如果有使用到showTost...相关的方法使用之前需要初始化该方法*/
     public static void init(Context appContext) {
         DialogUIUtils.appContext = appContext;
     }
@@ -95,26 +97,17 @@ public class DialogUIUtils {
 
     /***
      * 弹出日期选择器
-     *
-     * @param context
-     * @param dateType
+     * @param context 上下文
+     * @param gravity 显示位置
+     * @param dateTitle 显示标题
+     * @param date 当前选择日志
+     * @param dateType 显示日期样式DateSelectorWheelView.TYPE_YYYYMMDD TYPE_YYYYMMDDHHMM TYPE_YYYYMMDDHHMMSS
+     * @param tag view标记tag 一个页面多个日期选择器是可以加标记区分
      * @param listener
      * @return
      */
-    public static BuildBean showDatePickBottom(Context context, String dateTitle, long date, int dateType, int tag, DialogUIDateTimeSaveListener listener) {
-        return DialogAssigner.getInstance().assignDatePickBottom(context, dateTitle, date, dateType, tag, listener);
-    }
-
-    /***
-     * 弹出日期选择器
-     *
-     * @param context
-     * @param dateType
-     * @param listener
-     * @return
-     */
-    public static BuildBean showDatePickCenter(Context context, String dateTitle, long date, int dateType, int tag, DialogUIDateTimeSaveListener listener) {
-        return DialogAssigner.getInstance().assignDatePickCenter(context, dateTitle, date, dateType, tag, listener);
+    public static BuildBean showDatePick(Context context, int gravity, String dateTitle, long date, int dateType, int tag, DialogUIDateTimeSaveListener listener) {
+        return DialogAssigner.getInstance().assignDatePick(context, gravity, dateTitle, date, dateType, tag, listener);
     }
 
     /**

@@ -60,8 +60,7 @@ public class CommonConfig {
     public static final int TYPE_CUSTOM_BOTTOM_ALERT = 16;
     public static final int TYPE_MD_LOADING_HORIZONTAL = 17;
     public static final int TYPE_MD_LOADING_VERTICAL = 18;
-    public static final int TYPE_DATEPICK_CENTER = 19;
-    public static final int TYPE_DATEPICK_BOTTOM = 20;
+    public static final int TYPE_DATEPICK = 19;
 
 
 }

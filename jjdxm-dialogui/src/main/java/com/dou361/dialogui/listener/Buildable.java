@@ -8,6 +8,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -60,11 +61,8 @@ public class Buildable {
     protected BuildBean buildByType(BuildBean bean) {
         ToolUtils.fixContext(bean);
         switch (bean.type) {
-            case CommonConfig.TYPE_DATEPICK_CENTER:
+            case CommonConfig.TYPE_DATEPICK:
                 buildDatePickCenter(bean);
-                break;
-            case CommonConfig.TYPE_DATEPICK_BOTTOM:
-                buildDatePickBottom(bean);
                 break;
             case CommonConfig.TYPE_LOADING_HORIZONTAL:
                 buildLoadingHorizontal(bean);
@@ -159,6 +157,9 @@ public class Buildable {
         builder.setView(root);
         final AlertDialog dialog = builder.create();
         bean.alertDialog = dialog;
+        if(bean.gravity == Gravity.BOTTOM){
+        Window window = dialog.getWindow();
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));}
 
         flFirst.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -173,76 +174,6 @@ public class Buildable {
                     bean.dateTimeListener.onSaveSelectedDate(bean.tag, dwvDate.getSelectedDate());
                 }
                 dialog.dismiss();
-            }
-        });
-        return bean;
-    }
-
-    private BuildBean buildDatePickBottom(final BuildBean bean) {
-        final BottomSheetDialog dialog = new BottomSheetDialog(bean.context);
-        View root = View.inflate(bean.context, R.layout.dialogui_datepick_layout, null);
-
-        RelativeLayout rl_title_panel = (RelativeLayout) root
-                .findViewById(R.id.rl_title_panel);
-        FrameLayout flFirst = (FrameLayout) root
-                .findViewById(R.id.fl_first);
-        FrameLayout flNext = (FrameLayout) root
-                .findViewById(R.id.fl_next);
-        TextView tv_title = (TextView) root
-                .findViewById(R.id.tv_title);
-        TextView tv_first = (TextView) root
-                .findViewById(R.id.tv_first);
-        TextView tv_next = (TextView) root
-                .findViewById(R.id.tv_next);
-        FrameLayout fl_top_customPanel = (FrameLayout) root
-                .findViewById(R.id.fl_top_customPanel);
-        final DateSelectorWheelView dwvDate = (DateSelectorWheelView) root
-                .findViewById(R.id.dwv_date);
-        FrameLayout fl_bottom_customPanel = (FrameLayout) root
-                .findViewById(R.id.fl_bottom_customPanel);
-        dwvDate.setShowDate(bean.date);
-        dwvDate.setShowDateType(bean.dateType);
-        dwvDate.setTitleClick(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int id = v.getId();
-                if (id == R.id.rl_date_time_title) {
-                    if (dwvDate.getDateSelectorVisibility() == View.VISIBLE) {
-                        dwvDate.setDateSelectorVisiblility(View.GONE);
-                    } else {
-                        dwvDate.setDateSelectorVisiblility(View.VISIBLE);
-                    }
-                }
-            }
-        });
-        tv_title.setText(bean.dateTitle);
-        dialog.setContentView(root);
-        bean.dialog = dialog;
-
-        flFirst.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (null != bean.dateTimeListener) {
-                    bean.dateTimeListener.onCancelClick();
-                }
-                dialog.dismiss();
-            }
-        });
-        flNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (null != bean.dateTimeListener) {
-                    bean.dateTimeListener.onSaveSelectedDate(bean.tag, dwvDate.getSelectedDate());
-                }
-                dialog.dismiss();
-            }
-        });
-        tv_title.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (null != bean.dateTimeListener) {
-                    bean.dateTimeListener.onTitleClick();
-                }
             }
         });
         return bean;

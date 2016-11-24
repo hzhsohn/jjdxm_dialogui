@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
     String msg = "别总是来日方长，这世上挥手之间的都是人走茶凉。";
 
-    @OnClick({R.id.btn_toast_top, R.id.btn_toast_center, R.id.btn_toast,R.id.btn_custom_bottom_alert, R.id.btn_popu, R.id.btn_select_ymd, R.id.btn_select_ymdhm, R.id.btn_select_ymdhms, R.id.btn_dialog, R.id.btn_loading_vertical, R.id.btn_loading_horizontal, R.id.btn_loading_vertical_gray, R.id.btn_loading_horizontal_gray, R.id.btn_md_loading_vertical, R.id.btn_md_loading_horizontal, R.id.btn_md_alert, R.id.btn_tie_alert, R.id.btn_alert_horizontal,
+    @OnClick({R.id.btn_toast_top, R.id.btn_toast_center, R.id.btn_toast, R.id.btn_custom_bottom_alert, R.id.btn_popu, R.id.btn_select_ymd, R.id.btn_select_ymdhm, R.id.btn_select_ymdhms, R.id.btn_dialog, R.id.btn_loading_vertical, R.id.btn_loading_horizontal, R.id.btn_loading_vertical_gray, R.id.btn_loading_horizontal_gray, R.id.btn_md_loading_vertical, R.id.btn_md_loading_horizontal, R.id.btn_md_alert, R.id.btn_tie_alert, R.id.btn_alert_horizontal,
             R.id.btn_alert_vertical, R.id.btn_bottom_sheet_cancel, R.id.btn_center_sheet, R.id.btn_alert_input,
             R.id.btn_alert_multichoose, R.id.btn_alert_singlechoose, R.id.btn_md_bottom_vertical, R.id.btn_md_bottom_horizontal, R.id.btn_custom_alert})
     public void onClick(View view) {
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
                 break;
             case R.id.btn_select_ymd: {
-                DialogUIUtils.showDatePickCenter(mActivity,"选择日期", System.currentTimeMillis() + 60000, DateSelectorWheelView.TYPE_YYYYMMDD, 0, new DialogUIDateTimeSaveListener() {
+                DialogUIUtils.showDatePick(mActivity, Gravity.CENTER, "选择日期", System.currentTimeMillis() + 60000, DateSelectorWheelView.TYPE_YYYYMMDD, 0, new DialogUIDateTimeSaveListener() {
                     @Override
                     public void onSaveSelectedDate(int tag, String selectedDate) {
 
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
             }
             break;
             case R.id.btn_select_ymdhm: {
-                DialogUIUtils.showDatePickBottom(mActivity,"选择当前日期", System.currentTimeMillis() + 60000, DateSelectorWheelView.TYPE_YYYYMMDDHHMM, 0, new DialogUIDateTimeSaveListener() {
+                DialogUIUtils.showDatePick(mActivity, Gravity.CENTER, "选择日期", System.currentTimeMillis() + 60000, DateSelectorWheelView.TYPE_YYYYMMDDHHMM, 0, new DialogUIDateTimeSaveListener() {
                     @Override
                     public void onSaveSelectedDate(int tag, String selectedDate) {
 
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
             }
             break;
             case R.id.btn_select_ymdhms: {
-                DialogUIUtils.showDatePickCenter(mActivity,"选择日期", System.currentTimeMillis() + 60000, DateSelectorWheelView.TYPE_YYYYMMDDHHMMSS, 0, new DialogUIDateTimeSaveListener() {
+                DialogUIUtils.showDatePick(mActivity, Gravity.BOTTOM, "选择日期", System.currentTimeMillis() + 60000, DateSelectorWheelView.TYPE_YYYYMMDDHHMMSS, 0, new DialogUIDateTimeSaveListener() {
                     @Override
                     public void onSaveSelectedDate(int tag, String selectedDate) {
 

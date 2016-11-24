@@ -30,30 +30,14 @@ public class DialogAssigner implements Assignable {
 
 
     @Override
-    public BuildBean assignDatePickCenter(Context context, String dateTitle, long date, int dateType, int tag, DialogUIDateTimeSaveListener listener) {
+    public BuildBean assignDatePick(Context context,int gravity, String dateTitle, long date, int dateType, int tag, DialogUIDateTimeSaveListener listener) {
         BuildBean bean = new BuildBean();
         bean.context = context;
         bean.dateTitle = dateTitle;
-        bean.gravity = Gravity.CENTER;
+        bean.gravity = gravity;
         bean.cancelable = true;
         bean.outsideTouchable = true;
-        bean.type = CommonConfig.TYPE_DATEPICK_CENTER;
-        bean.dateTimeListener = listener;
-        bean.dateType = dateType;
-        bean.date = date;
-        bean.tag = tag;
-        return bean;
-    }
-
-    @Override
-    public BuildBean assignDatePickBottom(Context context, String dateTitle, long date, int dateType, int tag, DialogUIDateTimeSaveListener listener) {
-        BuildBean bean = new BuildBean();
-        bean.context = context;
-        bean.dateTitle = dateTitle;
-        bean.gravity = Gravity.BOTTOM;
-        bean.cancelable = true;
-        bean.outsideTouchable = true;
-        bean.type = CommonConfig.TYPE_DATEPICK_BOTTOM;
+        bean.type = CommonConfig.TYPE_DATEPICK;
         bean.dateTimeListener = listener;
         bean.dateType = dateType;
         bean.date = date;

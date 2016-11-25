@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.dou361.dialogui.bean.BuildBean;
+import com.dou361.dialogui.bean.TieBean;
 import com.dou361.dialogui.listener.DialogAssigner;
 import com.dou361.dialogui.listener.DialogUIDateTimeSaveListener;
 import com.dou361.dialogui.listener.DialogUIItemListener;
@@ -42,10 +43,14 @@ import java.util.List;
  */
 public class DialogUIUtils {
 
-    /**全局上下文*/
+    /**
+     * 全局上下文
+     */
     public static Context appContext;
 
-    /**如果有使用到showTost...相关的方法使用之前需要初始化该方法*/
+    /**
+     * 如果有使用到showTost...相关的方法使用之前需要初始化该方法
+     */
     public static void init(Context appContext) {
         DialogUIUtils.appContext = appContext;
     }
@@ -97,12 +102,13 @@ public class DialogUIUtils {
 
     /***
      * 弹出日期选择器
-     * @param context 上下文
-     * @param gravity 显示位置
+     *
+     * @param context   上下文
+     * @param gravity   显示位置
      * @param dateTitle 显示标题
-     * @param date 当前选择日志
-     * @param dateType 显示日期样式DateSelectorWheelView.TYPE_YYYYMMDD TYPE_YYYYMMDDHHMM TYPE_YYYYMMDDHHMMSS
-     * @param tag view标记tag 一个页面多个日期选择器是可以加标记区分
+     * @param date      当前选择日志
+     * @param dateType  显示日期样式DateSelectorWheelView.TYPE_YYYYMMDD TYPE_YYYYMMDDHHMM TYPE_YYYYMMDDHHMMSS
+     * @param tag       view标记tag 一个页面多个日期选择器是可以加标记区分
      * @param listener
      * @return
      */
@@ -387,7 +393,7 @@ public class DialogUIUtils {
      * @param listener 事件监听
      * @return
      */
-    public static BuildBean showCenterSheet(Context context, List<String> datas, DialogUIItemListener listener) {
+    public static BuildBean showCenterSheet(Context context, List<TieBean> datas, DialogUIItemListener listener) {
         return showCenterSheet(context, datas, true, true, listener);
     }
 
@@ -401,36 +407,8 @@ public class DialogUIUtils {
      * @param listener         事件监听
      * @return
      */
-    public static BuildBean showCenterSheet(Context context, List<String> datas, boolean cancleable, boolean outsideTouchable, DialogUIItemListener listener) {
+    public static BuildBean showCenterSheet(Context context, List<TieBean> datas, boolean cancleable, boolean outsideTouchable, DialogUIItemListener listener) {
         return DialogAssigner.getInstance().assignCenterSheet(context, datas, cancleable, outsideTouchable, listener);
-    }
-
-    /**
-     * 带取消的底部弹出列表 默认可取消可点击
-     *
-     * @param context   上下文
-     * @param datas     素组集合
-     * @param bottomTxt 底部按钮文本
-     * @param listener  事件监听
-     * @return
-     */
-    public static BuildBean showBottomSheetAndCancel(Context context, List<String> datas, CharSequence bottomTxt, DialogUIItemListener listener) {
-        return showBottomSheetAndCancel(context, datas, bottomTxt, true, true, listener);
-    }
-
-    /***
-     * 带取消的底部弹出列表
-     *
-     * @param context          上下文
-     * @param datas            素组集合
-     * @param bottomTxt        底部按钮文本
-     * @param cancleable       true为可以取消false为不可取消
-     * @param outsideTouchable true为可以点击空白区域false为不可点击
-     * @param listener         事件监听
-     * @return
-     */
-    public static BuildBean showBottomSheetAndCancel(Context context, List<String> datas, CharSequence bottomTxt, boolean cancleable, boolean outsideTouchable, DialogUIItemListener listener) {
-        return DialogAssigner.getInstance().assignBottomSheetAndCancel(context, datas, bottomTxt, cancleable, outsideTouchable, listener);
     }
 
     /**
@@ -443,12 +421,12 @@ public class DialogUIUtils {
      * @param listener  事件监听
      * @return
      */
-    public static BuildBean showMdBottomSheetVertical(Context context, CharSequence title, List<String> datas, CharSequence bottomTxt, DialogUIItemListener listener) {
-        return showMdBottomSheetVertical(context, title, datas, bottomTxt, true, true, listener);
+    public static BuildBean showMdBottomSheet(Context context, boolean isVertical, CharSequence title, List<TieBean> datas, CharSequence bottomTxt, int columnsNum, DialogUIItemListener listener) {
+        return showMdBottomSheet(context, isVertical, title, datas, bottomTxt, columnsNum, true, true, listener);
     }
 
     /***
-     * md风格竖向底部弹出列表
+     * md风格弹出列表
      *
      * @param context          上下文
      * @param title            标题
@@ -459,40 +437,8 @@ public class DialogUIUtils {
      * @param listener         事件监听
      * @return
      */
-    public static BuildBean showMdBottomSheetVertical(Context context, CharSequence title, List<String> datas, CharSequence bottomTxt, boolean cancleable, boolean outsideTouchable, DialogUIItemListener listener) {
-        return DialogAssigner.getInstance().assignMdBottomSheetVertical(context, title, datas, bottomTxt, cancleable, outsideTouchable, listener);
-    }
-
-    /**
-     * md风格横向底部弹出列表 默认可取消可点击
-     *
-     * @param context    上下文
-     * @param title      标题
-     * @param datas      集合需要BottomSheetBean对象
-     * @param bottomTxt  底部item文本
-     * @param columnsNum 列数量
-     * @param listener   事件监听
-     * @return
-     */
-    public static BuildBean showMdBottomSheetHorizontal(Context context, CharSequence title, List<String> datas, CharSequence bottomTxt, int columnsNum, DialogUIItemListener listener) {
-        return showMdBottomSheetHorizontal(context, title, datas, bottomTxt, columnsNum, true, true, listener);
-    }
-
-    /***
-     * md风格横向底部弹出列表
-     *
-     * @param context          上下文
-     * @param title            标题
-     * @param datas            集合需要BottomSheetBean对象
-     * @param bottomTxt        底部item文本
-     * @param columnsNum       列数量
-     * @param cancleable       true为可以取消false为不可取消
-     * @param outsideTouchable true为可以点击空白区域false为不可点击
-     * @param listener         事件监听
-     * @return
-     */
-    public static BuildBean showMdBottomSheetHorizontal(Context context, CharSequence title, List<String> datas, CharSequence bottomTxt, int columnsNum, boolean cancleable, boolean outsideTouchable, DialogUIItemListener listener) {
-        return DialogAssigner.getInstance().assignMdBottomSheetHorizontal(context, title, datas, bottomTxt, columnsNum, cancleable, outsideTouchable, listener);
+    public static BuildBean showMdBottomSheet(Context context, boolean isVertical, CharSequence title, List<TieBean> datas, CharSequence bottomTxt, int columnsNum, boolean cancleable, boolean outsideTouchable, DialogUIItemListener listener) {
+        return DialogAssigner.getInstance().assignMdBottomSheet(context, isVertical, title, datas, bottomTxt, columnsNum, cancleable, outsideTouchable, listener);
     }
 
     /**

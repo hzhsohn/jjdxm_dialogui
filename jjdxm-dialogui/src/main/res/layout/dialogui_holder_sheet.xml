@@ -1,19 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:background="@android:color/transparent"
               android:orientation="vertical">
 
-    <ListView
-        android:id="@+id/lv"
+    <TextView
+        android:id="@+id/dialogui_tv_title"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@drawable/dialogui_shape_wihte_round_corner"
-        android:overScrollFooter="@android:color/transparent"
-        android:overScrollHeader="@android:color/transparent"
-        android:overScrollMode="never"
-        android:scrollbars="none"/>
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="10dp"
+        android:text="标题"
+        android:textColor="@color/text_black"
+        android:textSize="15sp"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rlv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/dialogui_tv_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/dialogui_selector_tie_bg"
+        android:gravity="center"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:text="取消"
+        android:textColor="@color/dialogui_text_color_tie"
+        android:textSize="@dimen/dialogui_btn_txt_size"
+        android:visibility="visible"/>
+
+
 </LinearLayout>

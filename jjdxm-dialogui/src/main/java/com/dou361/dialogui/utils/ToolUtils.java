@@ -40,13 +40,13 @@ public class ToolUtils {
      * 混合上下文
      */
     public static BuildBean fixContext(BuildBean bean) {
-        if (bean.context == null) {
-            bean.context = DialogUIUtils.appContext;
-        } else if (bean.context instanceof Activity) {
-            Activity activity = (Activity) bean.context;
+        if (bean.mContext == null) {
+            bean.mContext = DialogUIUtils.appContext;
+        } else if (bean.mContext instanceof Activity) {
+            Activity activity = (Activity) bean.mContext;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
                 if (activity.isDestroyed()) {
-                    bean.context = DialogUIUtils.appContext;
+                    bean.mContext = DialogUIUtils.appContext;
                 }
             }
         }
@@ -69,7 +69,7 @@ public class ToolUtils {
         if (bean.alertDialog != null) {
             setMdBtnStytle(bean);
         } else {
-            setDialogStyle(bean.context, bean.dialog, bean.viewHeight, bean);
+            setDialogStyle(bean.mContext, bean.dialog, bean.viewHeight, bean);
         }
 
     }

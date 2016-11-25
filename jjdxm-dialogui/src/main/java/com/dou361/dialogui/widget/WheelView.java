@@ -225,7 +225,7 @@ public class WheelView extends View {
     /**
      * Initializes class data
      *
-     * @param context the context
+     * @param context the mContext
      */
     private void initData(Context context) {
         mContext = context;

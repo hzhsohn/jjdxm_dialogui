@@ -1,7 +1,6 @@
 package com.dou361.dialogui.listener;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -10,27 +9,18 @@ import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.AdapterView;
 import android.widget.FrameLayout;
-import android.widget.GridView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.dou361.dialogui.DialogUIUtils;
 import com.dou361.dialogui.R;
-import com.dou361.dialogui.adapter.SuperLvAdapter;
 import com.dou361.dialogui.bean.BuildBean;
 import com.dou361.dialogui.config.CommonConfig;
 import com.dou361.dialogui.holder.AlertDialogHolder;
-import com.dou361.dialogui.holder.SheetCancelHolder;
 import com.dou361.dialogui.holder.SheetHolder;
-import com.dou361.dialogui.holder.SheetItemHolder;
-import com.dou361.dialogui.holder.SuperLvHolder;
 import com.dou361.dialogui.utils.ToolUtils;
 import com.dou361.dialogui.widget.DateSelectorWheelView;
 
@@ -62,7 +52,7 @@ public class Buildable {
         ToolUtils.fixContext(bean);
         switch (bean.type) {
             case CommonConfig.TYPE_DATEPICK:
-                buildDatePickCenter(bean);
+                buildDatePick(bean);
                 break;
             case CommonConfig.TYPE_LOADING_HORIZONTAL:
                 buildLoadingHorizontal(bean);
@@ -88,9 +78,6 @@ public class Buildable {
             case CommonConfig.TYPE_ALERT:
                 buildAlert(bean);
                 break;
-            case CommonConfig.TYPE_BOTTOM_SHEET_CANCEL:
-                buildBottomSheetCancel(bean);
-                break;
             case CommonConfig.TYPE_CENTER_SHEET:
                 buildCenterSheet(bean);
                 break;
@@ -100,11 +87,8 @@ public class Buildable {
             case CommonConfig.TYPE_CUSTOM_BOTTOM_ALERT:
                 buildCustomBottomAlert(bean);
                 break;
-            case CommonConfig.TYPE_BOTTOM_SHEET_VERTICAL:
-                buildBottomSheetVertical(bean);
-                break;
-            case CommonConfig.TYPE_BOTTOM_SHEET_HORIZONTAL:
-                buildBottomSheetHorizontal(bean);
+            case CommonConfig.TYPE_BOTTOM_SHEET:
+                buildBottomSheet(bean);
                 break;
             default:
                 break;
@@ -116,9 +100,9 @@ public class Buildable {
         return bean;
     }
 
-    private BuildBean buildDatePickCenter(final BuildBean bean) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(bean.context);
-        View root = View.inflate(bean.context, R.layout.dialogui_datepick_layout, null);
+    private BuildBean buildDatePick(final BuildBean bean) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(bean.mContext);
+        View root = View.inflate(bean.mContext, R.layout.dialogui_datepick_layout, null);
 
         RelativeLayout rl_title_panel = (RelativeLayout) root
                 .findViewById(R.id.rl_title_panel);
@@ -157,9 +141,10 @@ public class Buildable {
         builder.setView(root);
         final AlertDialog dialog = builder.create();
         bean.alertDialog = dialog;
-        if(bean.gravity == Gravity.BOTTOM){
-        Window window = dialog.getWindow();
-        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));}
+        if (bean.gravity == Gravity.BOTTOM) {
+            Window window = dialog.getWindow();
+            window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        }
 
         flFirst.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -179,94 +164,21 @@ public class Buildable {
         return bean;
     }
 
-    private void buildBottomSheetHorizontal(final BuildBean bean) {
-        final BottomSheetDialog dialog = new BottomSheetDialog(bean.context);
-        LinearLayout root = (LinearLayout) View.inflate(bean.context, R.layout.dialogui_holder_sheet_title, null);
-        TextView tvTitle = (TextView) root.findViewById(R.id.dialogui_tv_title);
-        if (TextUtils.isEmpty(bean.title)) {
-            tvTitle.setVisibility(View.GONE);
-        } else {
-            tvTitle.setText(bean.title);
-        }
-        GridView listView = new GridView(bean.context);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        listView.setLayoutParams(params);
-        // ListView listView = (ListView) root.findViewById(R.id.lv);
-        listView.setNumColumns(bean.gridColumns);
-        root.addView(listView, 1);
-        if (bean.mAdapter == null) {
-            SuperLvAdapter adapter = new SuperLvAdapter(bean.context) {
-                @Override
-                protected SuperLvHolder generateNewHolder(Context context, int itemViewType) {
-                    return new SheetItemHolder(context);
-                }
-            };
-            bean.mAdapter = adapter;
-        }
-        listView.setAdapter(bean.mAdapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                dialog.dismiss();
-                bean.itemListener.onItemClick(bean.lvDatas.get(position), position);
-            }
-        });
-        bean.mAdapter.addAll(bean.lvDatas);
-        dialog.setContentView(root);
-        bean.dialog = dialog;
-    }
-
-    private void buildBottomSheetVertical(final BuildBean bean) {
-        final BottomSheetDialog dialog = new BottomSheetDialog(bean.context);
-        LinearLayout root = (LinearLayout) View.inflate(bean.context, R.layout.dialogui_holder_sheet_title, null);
-        TextView tvTitle = (TextView) root.findViewById(R.id.dialogui_tv_title);
-        if (TextUtils.isEmpty(bean.title)) {
-            tvTitle.setVisibility(View.GONE);
-        } else {
-            tvTitle.setText(bean.title);
-        }
-        ListView listView = new ListView(bean.context);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        listView.setLayoutParams(params);
-        listView.setDividerHeight(0);
-        // ListView listView = (ListView) root.findViewById(R.id.lv);
-        root.addView(listView, 1);
-        if (bean.mAdapter == null) {
-            SuperLvAdapter adapter = new SuperLvAdapter(bean.context) {
-                @Override
-                protected SuperLvHolder generateNewHolder(Context context, int itemViewType) {
-                    return new SheetItemHolder(context);
-                }
-            };
-            bean.mAdapter = adapter;
-        }
-        listView.setAdapter(bean.mAdapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                dialog.dismiss();
-                bean.itemListener.onItemClick(bean.lvDatas.get(position), position);
-            }
-        });
-        bean.mAdapter.addAll(bean.lvDatas);
-        dialog.setContentView(root);
-        bean.dialog = dialog;
-    }
 
     protected BuildBean buildMdLoadingVertical(BuildBean bean) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(bean.context);
-        View root = View.inflate(bean.context, R.layout.dialogui_loading_vertical, null);
+        AlertDialog.Builder builder = new AlertDialog.Builder(bean.mContext);
+        View root = View.inflate(bean.mContext, R.layout.dialogui_loading_vertical, null);
         View llBg = (View) root.findViewById(R.id.dialogui_ll_bg);
         ProgressBar pbBg = (ProgressBar) root.findViewById(R.id.pb_bg);
         TextView tvMsg = (TextView) root.findViewById(R.id.dialogui_tv_msg);
         tvMsg.setText(bean.msg);
         if (bean.isWhiteBg) {
             llBg.setBackgroundResource(R.drawable.dialogui_shape_wihte_round_corner);
-            pbBg.setIndeterminateDrawable(bean.context.getResources().getDrawable(R.drawable.dialogui_rotate_mum));
-            tvMsg.setTextColor(bean.context.getResources().getColor(R.color.text_black));
+            pbBg.setIndeterminateDrawable(bean.mContext.getResources().getDrawable(R.drawable.dialogui_rotate_mum));
+            tvMsg.setTextColor(bean.mContext.getResources().getColor(R.color.text_black));
         } else {
             llBg.setBackgroundResource(R.drawable.dialogui_shape_gray_round_corner);
-            pbBg.setIndeterminateDrawable(bean.context.getResources().getDrawable(R.drawable.dialogui_rotate_mum_light));
+            pbBg.setIndeterminateDrawable(bean.mContext.getResources().getDrawable(R.drawable.dialogui_rotate_mum_light));
             tvMsg.setTextColor(Color.WHITE);
         }
         builder.setView(root);
@@ -277,19 +189,19 @@ public class Buildable {
 
 
     protected BuildBean buildMdLoadingHorizontal(BuildBean bean) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(bean.context);
-        View root = View.inflate(bean.context, R.layout.dialogui_loading_horizontal, null);
+        AlertDialog.Builder builder = new AlertDialog.Builder(bean.mContext);
+        View root = View.inflate(bean.mContext, R.layout.dialogui_loading_horizontal, null);
         View llBg = (View) root.findViewById(R.id.dialogui_ll_bg);
         ProgressBar pbBg = (ProgressBar) root.findViewById(R.id.pb_bg);
         TextView tvMsg = (TextView) root.findViewById(R.id.dialogui_tv_msg);
         tvMsg.setText(bean.msg);
         if (bean.isWhiteBg) {
             llBg.setBackgroundResource(R.drawable.dialogui_shape_wihte_round_corner);
-            pbBg.setIndeterminateDrawable(bean.context.getResources().getDrawable(R.drawable.dialogui_shape_progress));
-            tvMsg.setTextColor(bean.context.getResources().getColor(R.color.text_black));
+            pbBg.setIndeterminateDrawable(bean.mContext.getResources().getDrawable(R.drawable.dialogui_shape_progress));
+            tvMsg.setTextColor(bean.mContext.getResources().getColor(R.color.text_black));
         } else {
             llBg.setBackgroundResource(R.drawable.dialogui_shape_gray_round_corner);
-            pbBg.setIndeterminateDrawable(bean.context.getResources().getDrawable(R.drawable.dialogui_shape_progress_light));
+            pbBg.setIndeterminateDrawable(bean.mContext.getResources().getDrawable(R.drawable.dialogui_shape_progress_light));
             tvMsg.setTextColor(Color.WHITE);
         }
         builder.setView(root);
@@ -299,22 +211,22 @@ public class Buildable {
     }
 
     protected BuildBean buildLoadingVertical(BuildBean bean) {
-        Dialog dialog = new Dialog(bean.context);
+        Dialog dialog = new Dialog(bean.mContext);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         bean.dialog = dialog;
 
-        View root = View.inflate(bean.context, R.layout.dialogui_loading_vertical, null);
+        View root = View.inflate(bean.mContext, R.layout.dialogui_loading_vertical, null);
         View llBg = (View) root.findViewById(R.id.dialogui_ll_bg);
         ProgressBar pbBg = (ProgressBar) root.findViewById(R.id.pb_bg);
         TextView tvMsg = (TextView) root.findViewById(R.id.dialogui_tv_msg);
         tvMsg.setText(bean.msg);
         if (bean.isWhiteBg) {
             llBg.setBackgroundResource(R.drawable.dialogui_shape_wihte_round_corner);
-            pbBg.setIndeterminateDrawable(bean.context.getResources().getDrawable(R.drawable.dialogui_rotate_mum));
-            tvMsg.setTextColor(bean.context.getResources().getColor(R.color.text_black));
+            pbBg.setIndeterminateDrawable(bean.mContext.getResources().getDrawable(R.drawable.dialogui_rotate_mum));
+            tvMsg.setTextColor(bean.mContext.getResources().getColor(R.color.text_black));
         } else {
             llBg.setBackgroundResource(R.drawable.dialogui_shape_gray_round_corner);
-            pbBg.setIndeterminateDrawable(bean.context.getResources().getDrawable(R.drawable.dialogui_rotate_mum_light));
+            pbBg.setIndeterminateDrawable(bean.mContext.getResources().getDrawable(R.drawable.dialogui_rotate_mum_light));
             tvMsg.setTextColor(Color.WHITE);
         }
         bean.dialog.setContentView(root);
@@ -322,22 +234,22 @@ public class Buildable {
     }
 
     protected BuildBean buildLoadingHorizontal(BuildBean bean) {
-        Dialog dialog = new Dialog(bean.context);
+        Dialog dialog = new Dialog(bean.mContext);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         bean.dialog = dialog;
 
-        View root = View.inflate(bean.context, R.layout.dialogui_loading_horizontal, null);
+        View root = View.inflate(bean.mContext, R.layout.dialogui_loading_horizontal, null);
         View llBg = (View) root.findViewById(R.id.dialogui_ll_bg);
         ProgressBar pbBg = (ProgressBar) root.findViewById(R.id.pb_bg);
         TextView tvMsg = (TextView) root.findViewById(R.id.dialogui_tv_msg);
         tvMsg.setText(bean.msg);
         if (bean.isWhiteBg) {
             llBg.setBackgroundResource(R.drawable.dialogui_shape_wihte_round_corner);
-            pbBg.setIndeterminateDrawable(bean.context.getResources().getDrawable(R.drawable.dialogui_shape_progress));
-            tvMsg.setTextColor(bean.context.getResources().getColor(R.color.text_black));
+            pbBg.setIndeterminateDrawable(bean.mContext.getResources().getDrawable(R.drawable.dialogui_shape_progress));
+            tvMsg.setTextColor(bean.mContext.getResources().getColor(R.color.text_black));
         } else {
             llBg.setBackgroundResource(R.drawable.dialogui_shape_gray_round_corner);
-            pbBg.setIndeterminateDrawable(bean.context.getResources().getDrawable(R.drawable.dialogui_shape_progress_light));
+            pbBg.setIndeterminateDrawable(bean.mContext.getResources().getDrawable(R.drawable.dialogui_shape_progress_light));
             tvMsg.setTextColor(Color.WHITE);
         }
         bean.dialog.setContentView(root);
@@ -345,7 +257,7 @@ public class Buildable {
     }
 
     protected BuildBean buildMdAlert(final BuildBean bean) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(bean.context);
+        AlertDialog.Builder builder = new AlertDialog.Builder(bean.mContext);
         builder.setTitle(bean.title)
                 .setMessage(bean.msg)
                 .setPositiveButton(bean.text1, new DialogInterface.OnClickListener() {
@@ -380,7 +292,7 @@ public class Buildable {
     }
 
     protected BuildBean buildSingleChoose(final BuildBean bean) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(bean.context);
+        AlertDialog.Builder builder = new AlertDialog.Builder(bean.mContext);
         singleChosen = bean.defaultChosen;
         builder.setTitle(bean.title)
                 .setSingleChoiceItems(bean.wordsMd, bean.defaultChosen, new DialogInterface.OnClickListener() {
@@ -404,7 +316,7 @@ public class Buildable {
     }
 
     protected BuildBean buildMdMultiChoose(final BuildBean bean) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(bean.context);
+        AlertDialog.Builder builder = new AlertDialog.Builder(bean.mContext);
         builder.setTitle(bean.title)
                 .setCancelable(true)
                 .setPositiveButton(bean.text1, new DialogInterface.OnClickListener() {
@@ -440,50 +352,48 @@ public class Buildable {
     }
 
     protected BuildBean buildAlert(BuildBean bean) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(bean.context);
-        AlertDialogHolder holder = new AlertDialogHolder(bean.context);
+        AlertDialog.Builder builder = new AlertDialog.Builder(bean.mContext);
+        AlertDialogHolder holder = new AlertDialogHolder(bean.mContext);
         builder.setView(holder.rootView);
         AlertDialog dialog = builder.create();
         bean.alertDialog = dialog;
-        holder.assingDatasAndEvents(bean.context, bean);
+        holder.assingDatasAndEvents(bean.mContext, bean);
         return bean;
     }
 
     private void buildCustomAlert(BuildBean bean) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(bean.context);
+        AlertDialog.Builder builder = new AlertDialog.Builder(bean.mContext);
         builder.setView(bean.customView);
         AlertDialog dialog = builder.create();
         bean.alertDialog = dialog;
     }
 
     private void buildCustomBottomAlert(BuildBean bean) {
-        BottomSheetDialog dialog = new BottomSheetDialog(bean.context);
+        BottomSheetDialog dialog = new BottomSheetDialog(bean.mContext);
         dialog.setContentView(bean.customView);
         bean.dialog = dialog;
     }
 
     protected BuildBean buildCenterSheet(BuildBean bean) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(bean.context);
-        SheetHolder holder = new SheetHolder(bean.context);
+        AlertDialog.Builder builder = new AlertDialog.Builder(bean.mContext);
+        SheetHolder holder = new SheetHolder(bean.mContext);
         builder.setView(holder.rootView);
         AlertDialog dialog = builder.create();
         bean.alertDialog = dialog;
-        holder.assingDatasAndEvents(bean.context, bean);
+        holder.assingDatasAndEvents(bean.mContext, bean);
         return bean;
     }
 
-    protected BuildBean buildBottomSheetCancel(BuildBean bean) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(bean.context);
-        SheetCancelHolder holder = new SheetCancelHolder(bean.context);
-        builder.setView(holder.rootView);
-        AlertDialog dialog = builder.create();
-        bean.alertDialog = dialog;
-        holder.assingDatasAndEvents(bean.context, bean);
-        bean.viewHeight = ToolUtils.mesureHeight(holder.rootView, holder.lv);
-        Window window = bean.alertDialog.getWindow();
-        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        window.setWindowAnimations(R.style.dialogui_bottom_style);
-        return bean;
+    private void buildBottomSheet(final BuildBean bean) {
+        final BottomSheetDialog dialog = new BottomSheetDialog(bean.mContext);
+        SheetHolder sheetHolder = new SheetHolder(bean.mContext);
+        dialog.setContentView(sheetHolder.rootView);
+        sheetHolder.assingDatasAndEvents(bean.mContext, bean);
+        bean.dialog = dialog;
+        if (bean.isVertical && !TextUtils.isEmpty(bean.bottomTxt)) {
+            Window window = dialog.getWindow();
+            window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        }
     }
 
 

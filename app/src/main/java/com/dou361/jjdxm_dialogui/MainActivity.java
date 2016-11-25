@@ -9,6 +9,9 @@ import android.view.Gravity;
 import android.view.View;
 
 import com.dou361.dialogui.DialogUIUtils;
+import com.dou361.dialogui.adapter.TieAdapter;
+import com.dou361.dialogui.bean.BuildBean;
+import com.dou361.dialogui.bean.TieBean;
 import com.dou361.dialogui.listener.DialogUIDateTimeSaveListener;
 import com.dou361.dialogui.listener.DialogUIItemListener;
 import com.dou361.dialogui.listener.DialogUIListener;
@@ -192,42 +195,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }).show();
                 break;
-            case R.id.btn_bottom_sheet_cancel: {
-                List<String> strings = new ArrayList<>();
-                strings.add("1");
-                strings.add("2");
-                strings.add("3");
-                DialogUIUtils.showBottomSheetAndCancel(mActivity, strings, "取消", new DialogUIItemListener() {
-                    @Override
-                    public void onItemClick(CharSequence text, int position) {
-                        showToast(text);
-                    }
-
-                    @Override
-                    public void onBottomBtnClick() {
-                        showToast("onItemClick");
-                    }
-                }).show();
-            }
-            break;
-            case R.id.btn_center_sheet:
-                List<String> strings = new ArrayList<>();
-                strings.add("1");
-                strings.add("2");
-                strings.add("3");
-                DialogUIUtils.showCenterSheet(mActivity, strings, new DialogUIItemListener() {
-                    @Override
-                    public void onItemClick(CharSequence text, int position) {
-                        showToast(text);
-                    }
-
-                    @Override
-                    public void onBottomBtnClick() {
-                        showToast("onItemClick");
-                    }
-                }).show();
-
-                break;
             case R.id.btn_alert_multichoose:
                 String[] words = new String[]{"1", "2", "3"};
                 boolean[] choseDefault = new boolean[]{false, false, false};
@@ -252,30 +219,64 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }).show();
                 break;
-            case R.id.btn_md_bottom_vertical:
-                List<String> datas2 = new ArrayList<String>();
-                datas2.add("1");
-                datas2.add("2");
-                datas2.add("3");
-                datas2.add("4");
-                datas2.add("5");
-                datas2.add("6");
-                DialogUIUtils.showMdBottomSheetVertical(mActivity, "", datas2, "this is cancle button", new DialogUIItemListener() {
+            case R.id.btn_center_sheet: {
+                List<TieBean> strings = new ArrayList<TieBean>();
+                strings.add(new TieBean("1"));
+                strings.add(new TieBean("2"));
+                strings.add(new TieBean("3"));
+                DialogUIUtils.showCenterSheet(mActivity, strings, new DialogUIItemListener() {
+                    @Override
+                    public void onItemClick(CharSequence text, int position) {
+                        showToast(text);
+                    }
+
+                    @Override
+                    public void onBottomBtnClick() {
+                        showToast("onItemClick");
+                    }
+                }).show();
+            }
+            break;
+            case R.id.btn_bottom_sheet_cancel: {
+                List<TieBean> strings = new ArrayList<TieBean>();
+                strings.add(new TieBean("1"));
+                strings.add(new TieBean("2"));
+                strings.add(new TieBean("3"));
+                DialogUIUtils.showMdBottomSheet(mActivity, true, "", strings, "取消", 0, new DialogUIItemListener() {
                     @Override
                     public void onItemClick(CharSequence text, int position) {
                         showToast(text + "---" + position);
                     }
                 }).show();
+            }
+            break;
+            case R.id.btn_md_bottom_vertical:
+                List<TieBean> datas2 = new ArrayList<TieBean>();
+                datas2.add(new TieBean("1"));
+                datas2.add(new TieBean("2"));
+                datas2.add(new TieBean("3"));
+                datas2.add(new TieBean("4"));
+                datas2.add(new TieBean("5"));
+                datas2.add(new TieBean("6"));
+                TieAdapter adapter = new TieAdapter(mContext, datas2);
+                BuildBean buildBean = DialogUIUtils.showMdBottomSheet(mActivity, true, "", datas2, "", 0, new DialogUIItemListener() {
+                    @Override
+                    public void onItemClick(CharSequence text, int position) {
+                        showToast(text + "---" + position);
+                    }
+                });
+                buildBean.mAdapter = adapter;
+                buildBean.show();
                 break;
             case R.id.btn_md_bottom_horizontal:
-                List<String> datas3 = new ArrayList<String>();
-                datas3.add("1");
-                datas3.add("2");
-                datas3.add("3");
-                datas3.add("4");
-                datas3.add("5");
-                datas3.add("6");
-                DialogUIUtils.showMdBottomSheetHorizontal(mActivity, "标题", datas3, "this is cancle button", 3, new DialogUIItemListener() {
+                List<TieBean> datas3 = new ArrayList<TieBean>();
+                datas3.add(new TieBean("1"));
+                datas3.add(new TieBean("2"));
+                datas3.add(new TieBean("3"));
+                datas3.add(new TieBean("4"));
+                datas3.add(new TieBean("5"));
+                datas3.add(new TieBean("6"));
+                DialogUIUtils.showMdBottomSheet(mActivity, false, "标题", datas3, "", 4, new DialogUIItemListener() {
                     @Override
                     public void onItemClick(CharSequence text, int position) {
                         showToast(text + "---" + position);

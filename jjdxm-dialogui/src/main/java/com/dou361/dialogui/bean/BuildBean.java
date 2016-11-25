@@ -7,7 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 
-import com.dou361.dialogui.adapter.SuperLvAdapter;
+import com.dou361.dialogui.adapter.SuperAdapter;
 import com.dou361.dialogui.config.CommonConfig;
 import com.dou361.dialogui.listener.Buildable;
 import com.dou361.dialogui.listener.DialogUIDateTimeSaveListener;
@@ -45,7 +45,7 @@ public class BuildBean extends Buildable implements Styleable {
     /**
      * 上下文
      */
-    public Context context;
+    public Context mContext;
     /**
      * 构建dialog的类型
      */
@@ -101,8 +101,8 @@ public class BuildBean extends Buildable implements Styleable {
     public boolean[] checkedItems;
 
     //bottomsheet
-    public SuperLvAdapter mAdapter;
-    public List<String> lvDatas;
+    public SuperAdapter mAdapter;
+    public List<TieBean> mLists;
     public int gridColumns = 4;
 
 

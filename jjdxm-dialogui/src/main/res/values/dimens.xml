@@ -4,8 +4,10 @@
     <dimen name="dialogui_round_corner_radius">5dp</dimen>
     <dimen name="dialogui_l_round_corner_radius">10dp</dimen>
     <dimen name="dialogui_line_with">1dp</dimen>
+    <dimen name="dialogui_margin_small">8dp</dimen>
     <dimen name="dialogui_margin_smid">14dp</dimen>
     <dimen name="dialogui_margin_mid">16dp</dimen>
+    <dimen name="dialogui_height_mid">48dp</dimen>
     <dimen name="dialogui_toast_margin">64dp</dimen>
     <dimen name="dialogui_max_with">360dp</dimen>
 

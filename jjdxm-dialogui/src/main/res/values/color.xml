@@ -21,6 +21,8 @@
 
     <color name="text_black">#333333</color><!--正式发布时改成666666-->
     <color name="text_black_light" >#666666</color><!--正式发布时改成666666-->
+    <color name="color_text_black">#4c4c4c</color>
+    <color name="color_tie_bg">#efeff4</color>
 
 
 

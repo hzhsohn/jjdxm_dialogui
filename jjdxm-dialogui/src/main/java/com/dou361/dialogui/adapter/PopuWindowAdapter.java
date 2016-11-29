@@ -5,9 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
-
 
 import com.dou361.dialogui.R;
 import com.dou361.dialogui.bean.PopuBean;
@@ -82,9 +80,6 @@ public class PopuWindowAdapter extends BaseAdapter {
             holder.textView = (TextView) convertView
                     .findViewById(R.id.customui_item_text);
 
-            holder.imageView = (ImageView) convertView
-                    .findViewById(R.id.customui_delImage);
-
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -98,7 +93,6 @@ public class PopuWindowAdapter extends BaseAdapter {
 
     class ViewHolder {
         TextView textView;
-        ImageView imageView;
     }
 
 }

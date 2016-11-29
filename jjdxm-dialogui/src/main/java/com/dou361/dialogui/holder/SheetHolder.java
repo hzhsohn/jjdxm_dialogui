@@ -3,6 +3,8 @@ package com.dou361.dialogui.holder;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
@@ -14,6 +16,7 @@ import com.dou361.dialogui.adapter.TieAdapter;
 import com.dou361.dialogui.bean.BuildBean;
 import com.dou361.dialogui.listener.OnItemClickListener;
 import com.dou361.dialogui.utils.ToolUtils;
+import com.dou361.dialogui.widget.DividerGridItemDecoration;
 import com.dou361.dialogui.widget.DividerItemDecoration;
 
 /**
@@ -83,10 +86,11 @@ public class SheetHolder extends SuperHolder {
             });
         }
         if (bean.isVertical) {
-            DividerItemDecoration dd = new DividerItemDecoration(bean.mContext, ToolUtils.dip2px(bean.mContext, 8), true, Color.TRANSPARENT, true, true, false);
-//            rView.setLayoutManager(dd);
+            rView.setLayoutManager(new LinearLayoutManager(bean.mContext));
+            rView.addItemDecoration(new DividerItemDecoration(bean.mContext, ToolUtils.dip2px(bean.mContext, 8), true, Color.TRANSPARENT, true, true, false));
         } else {
-//            rView.setLayoutManager(new DividerGridItemDecoration(bean.mContext, bean.gridColumns));// 布局管理器。
+            rView.setLayoutManager(new GridLayoutManager(bean.mContext, bean.gridColumns));// 布局管理器。
+            rView.addItemDecoration(new DividerGridItemDecoration(bean.mContext, bean.gridColumns));
         }
         rView.setHasFixedSize(true);// 如果Item够简单，高度是确定的，打开FixSize将提高性能。
         rView.setItemAnimator(new DefaultItemAnimator());// 设置Item默认动画，加也行，不加也行。

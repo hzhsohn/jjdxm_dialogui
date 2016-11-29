@@ -27,7 +27,7 @@ import com.dou361.dialogui.listener.OnItemClickListener;
  * <p>
  * ========================================
  */
-public abstract class BaseViewHolder<T> extends ViewHolder implements View.OnClickListener {
+public abstract class SuperItemHolder<T> extends ViewHolder implements View.OnClickListener {
 
     /**
      * 上下文
@@ -43,7 +43,7 @@ public abstract class BaseViewHolder<T> extends ViewHolder implements View.OnCli
     protected int position;
     private OnItemClickListener mlistener;
 
-    public BaseViewHolder(Context mContext, OnItemClickListener listener, View itemView) {
+    public SuperItemHolder(Context mContext, OnItemClickListener listener, View itemView) {
         super(itemView);
         itemView.setOnClickListener(this);
         this.mContext = mContext;

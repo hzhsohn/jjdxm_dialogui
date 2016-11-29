@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 
 import com.dou361.dialogui.R;
 import com.dou361.dialogui.bean.TieBean;
-import com.dou361.dialogui.holder.BaseViewHolder;
+import com.dou361.dialogui.holder.SuperItemHolder;
 import com.dou361.dialogui.holder.TieItemHolder;
 
 import java.util.List;
@@ -39,7 +39,7 @@ public class TieAdapter extends SuperAdapter<TieBean> {
     }
 
     @Override
-    public BaseViewHolder getItemHolder(ViewGroup parent, int viewType) {
+    public SuperItemHolder getItemHolder(ViewGroup parent, int viewType) {
         return new TieItemHolder(mContext, mListener, LayoutInflater.from(mContext).
                 inflate(R.layout.dialogui_holder_item_tie, parent, false));
     }

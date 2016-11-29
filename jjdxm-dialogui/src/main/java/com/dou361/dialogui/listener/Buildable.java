@@ -366,6 +366,7 @@ public class Buildable {
         builder.setView(bean.customView);
         AlertDialog dialog = builder.create();
         bean.alertDialog = dialog;
+        dialog.getWindow().getDecorView().setPadding(0, 0, 0, 0);
     }
 
     private void buildCustomBottomAlert(BuildBean bean) {
@@ -380,20 +381,20 @@ public class Buildable {
         builder.setView(holder.rootView);
         AlertDialog dialog = builder.create();
         bean.alertDialog = dialog;
-        holder.assingDatasAndEvents(bean.mContext, bean);
-        return bean;
-    }
-
-    private void buildBottomSheet(final BuildBean bean) {
-        final BottomSheetDialog dialog = new BottomSheetDialog(bean.mContext);
-        SheetHolder sheetHolder = new SheetHolder(bean.mContext);
-        dialog.setContentView(sheetHolder.rootView);
-        sheetHolder.assingDatasAndEvents(bean.mContext, bean);
-        bean.dialog = dialog;
         if (bean.isVertical && !TextUtils.isEmpty(bean.bottomTxt)) {
             Window window = dialog.getWindow();
             window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         }
+        holder.assingDatasAndEvents(bean.mContext, bean);
+        return bean;
+    }
+
+    private void buildBottomSheet(BuildBean bean) {
+        BottomSheetDialog dialog = new BottomSheetDialog(bean.mContext);
+        SheetHolder sheetHolder = new SheetHolder(bean.mContext);
+        dialog.setContentView(sheetHolder.rootView);
+        sheetHolder.assingDatasAndEvents(bean.mContext, bean);
+        bean.dialog = dialog;
     }
 
 

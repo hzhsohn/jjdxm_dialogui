@@ -4,14 +4,15 @@ import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 
-
 import com.dou361.dialogui.R;
 import com.dou361.dialogui.adapter.PopuWindowAdapter;
 import com.dou361.dialogui.bean.PopuBean;
+import com.dou361.dialogui.listener.TdataListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +37,7 @@ import java.util.List;
  * <p>
  * ========================================
  */
-public class PopuWindowView {
+public class PopuWindowView implements AdapterView.OnItemClickListener {
 
     View viewItem = null;
     ListView pupoListView;
@@ -47,24 +48,28 @@ public class PopuWindowView {
     private TdataListener mTdataListener;
     private int maxLine = 5;
 
-    public PopuWindowView(Context mContext, int width) {
+    public PopuWindowView(Context mContext, int widthGravity) {
         this.mContext = mContext;
         LayoutInflater inflater = LayoutInflater.from(mContext);
         viewItem = inflater.inflate(R.layout.dialogui_popu_options, null);
         pupoListView = (ListView) viewItem.findViewById(R.id.customui_list);
         mPopuWindowAdapter = new PopuWindowAdapter(mContext, popuLists);
         pupoListView.setAdapter(mPopuWindowAdapter);
-        pullDownView = new PopupWindow(viewItem, width,
+        pullDownView = new PopupWindow(viewItem, widthGravity,
                 LayoutParams.WRAP_CONTENT, true);
         pullDownView.setOutsideTouchable(true);
         pullDownView.setBackgroundDrawable(new BitmapDrawable());
+        pupoListView.setOnItemClickListener(this);
     }
 
     /**
      * 设置下拉框的数据
      */
     public void initPupoData(TdataListener tdataListener) {
-        tdataListener.initPupoData(popuLists);
+        mTdataListener = tdataListener;
+        if (mTdataListener != null) {
+            mTdataListener.initPupoData(popuLists);
+        }
         if (popuLists != null && popuLists.size() > maxLine) {
             pullDownView.setHeight(dip2px(maxLine * 40));
         }
@@ -87,7 +92,7 @@ public class PopuWindowView {
      * 显示popuWindow
      */
     public void showing(View v) {
-        pullDownView.showAsDropDown(v, 0, -3);
+        pullDownView.showAsDropDown(v, 0, 0);
     }
 
     /**
@@ -97,14 +102,11 @@ public class PopuWindowView {
         pullDownView.dismiss();
     }
 
-    /**
-     * 动态设置下拉框的数据
-     */
-    public interface TdataListener {
-        /**
-         * 初始化数据
-         */
-        void initPupoData(List<PopuBean> lists);
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+        if (mTdataListener != null) {
+            mTdataListener.onItemClick(adapterView, view, position);
+        }
     }
 
     /**

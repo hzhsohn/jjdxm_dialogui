@@ -30,7 +30,7 @@ import com.dou361.dialogui.listener.OnItemClickListener;
  * <p/>
  * ========================================
  */
-public class TieItemHolder extends BaseViewHolder<TieBean> {
+public class TieItemHolder extends SuperItemHolder<TieBean> {
 
 
     LinearLayout llBg;

@@ -8,7 +8,6 @@
         android:id="@+id/ll_bg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/dialogui_selector_tie_bg"
         android:gravity="center"
         android:orientation="horizontal"
         android:paddingBottom="10dp"
@@ -18,8 +17,7 @@
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
-            android:textColor="@color/dialogui_text_color_tie"/>
+            android:text=""/>
     </LinearLayout>
 
 

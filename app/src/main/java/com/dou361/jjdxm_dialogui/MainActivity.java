@@ -7,19 +7,26 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.dou361.dialogui.DialogUIUtils;
 import com.dou361.dialogui.adapter.TieAdapter;
 import com.dou361.dialogui.bean.BuildBean;
+import com.dou361.dialogui.bean.PopuBean;
 import com.dou361.dialogui.bean.TieBean;
 import com.dou361.dialogui.listener.DialogUIDateTimeSaveListener;
 import com.dou361.dialogui.listener.DialogUIItemListener;
 import com.dou361.dialogui.listener.DialogUIListener;
+import com.dou361.dialogui.listener.TdataListener;
 import com.dou361.dialogui.widget.DateSelectorWheelView;
+import com.dou361.dialogui.widget.PopuWindowView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -28,6 +35,10 @@ public class MainActivity extends AppCompatActivity {
 
     Activity mActivity;
     Context mContext;
+    @Bind(R.id.ll_main)
+    LinearLayout llMain;
+    @Bind(R.id.btn_popu)
+    Button btnPopu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +67,24 @@ public class MainActivity extends AppCompatActivity {
                 DialogUIUtils.showToast("默认的Toast弹出方式");
                 break;
             case R.id.btn_popu:
+                final PopuWindowView popuWindowView = new PopuWindowView(mContext, LinearLayout.LayoutParams.WRAP_CONTENT);
+                popuWindowView.initPupoData(new TdataListener() {
+                    @Override
+                    public void initPupoData(List<PopuBean> lists) {
+                        for (int i = 0; i < 5; i++) {
+                            PopuBean popu = new PopuBean();
+                            popu.setTitle("item"+i);
+                            popu.setId(i);
+                            lists.add(popu);
+                        }
+                    }
 
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int position) {
+                        popuWindowView.dismiss();
+                    }
+                });
+                popuWindowView.showAtLocation(btnPopu);
                 break;
             case R.id.btn_select_ymd: {
                 DialogUIUtils.showDatePick(mActivity, Gravity.CENTER, "选择日期", System.currentTimeMillis() + 60000, DateSelectorWheelView.TYPE_YYYYMMDD, 0, new DialogUIDateTimeSaveListener() {

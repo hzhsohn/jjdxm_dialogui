@@ -5,7 +5,7 @@ import android.support.v7.widget.RecyclerView.Adapter;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.ViewGroup;
 
-import com.dou361.dialogui.holder.BaseViewHolder;
+import com.dou361.dialogui.holder.SuperItemHolder;
 import com.dou361.dialogui.listener.OnItemClickListener;
 
 import java.util.List;
@@ -43,7 +43,7 @@ public abstract class SuperAdapter<T> extends Adapter<ViewHolder> {
     /**
      * 获得holder
      */
-    private BaseViewHolder baseHolder;
+    private SuperItemHolder baseHolder;
     protected OnItemClickListener mListener;
 
     public SuperAdapter(Context mContext, List<T> mDatas) {
@@ -59,7 +59,7 @@ public abstract class SuperAdapter<T> extends Adapter<ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         if (holder != null) {
-            baseHolder = (BaseViewHolder) holder;
+            baseHolder = (SuperItemHolder) holder;
             baseHolder.setPosition(position);
             baseHolder.setData(mDatas.get(position));
         }
@@ -81,7 +81,7 @@ public abstract class SuperAdapter<T> extends Adapter<ViewHolder> {
     /**
      * 获得Holder
      */
-    public abstract BaseViewHolder getItemHolder(ViewGroup parent, int viewType);
+    public abstract SuperItemHolder getItemHolder(ViewGroup parent, int viewType);
 
     /**
      * 设置Item点击监听

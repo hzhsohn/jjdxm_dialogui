@@ -37,6 +37,7 @@ public abstract class SuperItemHolder<T> extends ViewHolder implements View.OnCl
      * 加载得到的数据
      */
     public T mDatas;
+    public int itemPositionType;
     /**
      * 只有当该holder作为item使用，并且使用带参构造函数实例化position才有意义，使用无参构造函数则position没有意义
      */
@@ -53,8 +54,9 @@ public abstract class SuperItemHolder<T> extends ViewHolder implements View.OnCl
     /**
      * 设置数据
      */
-    public void setData(T data) {
+    public void setData(T data,int itemPositionType) {
         this.mDatas = data;
+        this.itemPositionType = itemPositionType;
         refreshView();
     }
 

@@ -39,7 +39,7 @@ public abstract class SuperAdapter<T> extends Adapter<ViewHolder> {
     /**
      * 接收传递过来的数据
      */
-    private List<T> mDatas;
+    protected List<T> mDatas;
     /**
      * 获得holder
      */
@@ -61,8 +61,15 @@ public abstract class SuperAdapter<T> extends Adapter<ViewHolder> {
         if (holder != null) {
             baseHolder = (SuperItemHolder) holder;
             baseHolder.setPosition(position);
-            baseHolder.setData(mDatas.get(position));
+            baseHolder.setData(mDatas.get(position), countPosition(position));
         }
+    }
+
+    /**
+     * 1top 2midle 3bottom 4all
+     */
+    protected int countPosition(int position) {
+        return 2;
     }
 
     @Override

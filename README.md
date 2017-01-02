@@ -61,6 +61,7 @@ or Gradle:
 
 历史版本：
 
+    compile 'com.dou361.dialogui:jjdxm-dialogui:1.0.2'
 	compile 'com.dou361.dialogui:jjdxm-dialogui:1.0.1'
 	compile 'com.dou361.dialogui:jjdxm-dialogui:1.0.0'
 
@@ -71,11 +72,7 @@ jjdxm-dialogui requires at minimum Java 9 or Android 2.3.
 
 ## Proguard ##
 
-根据你的混淆器配置和使用，您可能需要在你的proguard文件内配置以下内容：
-
-	-keep class com.dou361.** {
-    *;
-	}
+类库中使用consumerProguardFiles属性，它指定了编译时，库自动引入的混淆规则。也就是说应用打包时候会自动的寻找库里的混淆文件，不需要手工配置了。
 
 
 [AndroidStudio代码混淆注意的问题][minify]
@@ -83,6 +80,13 @@ jjdxm-dialogui requires at minimum Java 9 or Android 2.3.
 ## Get Started ##
 
 ### step1 ###
+
+    compile ('com.dou361.dialogui:jjdxm-dialogui:1.0.2'){
+    // exclude group: 'com.android.support', module: 'support-v7'
+    // exclude group: 'com.android.support', module: 'design'
+    }
+
+
 如果需要使用toast类，采用单例模式的，多次调用toast后只会显示一个，需要初始化DialogUIUtils类，否则会抛异常，使用前初始化即可，代码如下
 
 	DialogUIUtils.init(appContext);

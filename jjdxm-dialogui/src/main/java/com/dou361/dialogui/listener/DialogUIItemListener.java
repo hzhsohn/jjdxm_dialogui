@@ -5,10 +5,15 @@ package com.dou361.dialogui.listener;
  */
 public abstract class DialogUIItemListener {
 
-   /**item点击事件*/
-   public abstract void onItemClick(CharSequence text, int position);
+    /**
+     * item点击事件
+     */
+    public abstract void onItemClick(CharSequence text, int position);
 
-   /**底部最后一个按钮点击事件*/
-   public void onBottomBtnClick(){}
+    /**
+     * 底部点击事件
+     */
+    public void onBottomBtnClick() {
+    }
 
 }

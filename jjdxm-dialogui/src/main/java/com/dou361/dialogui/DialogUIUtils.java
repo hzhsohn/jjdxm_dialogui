@@ -17,7 +17,9 @@ import com.dou361.dialogui.listener.DialogAssigner;
 import com.dou361.dialogui.listener.DialogUIDateTimeSaveListener;
 import com.dou361.dialogui.listener.DialogUIItemListener;
 import com.dou361.dialogui.listener.DialogUIListener;
+import com.dou361.dialogui.listener.TdataListener;
 import com.dou361.dialogui.utils.ToolUtils;
+import com.dou361.dialogui.widget.PopuWindowView;
 
 import java.util.List;
 
@@ -117,161 +119,31 @@ public class DialogUIUtils {
     }
 
     /**
-     * 弹出toast 默认可取消可点击
-     *
-     * @param context 上下文
-     * @param msg     提示文本
-     */
-    public static BuildBean showDialogTie(Context context, CharSequence msg) {
-        return showDialogTie(context, msg, true, true);
-    }
-
-    /**
-     * 弹出toast
+     * 加载框
      *
      * @param context          上下文
      * @param msg              提示文本
-     * @param cancleable       true为可以取消false为不可取消
-     * @param outsideTouchable true为可以点击空白区域false为不可点击
-     */
-    public static BuildBean showDialogTie(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable) {
-        return DialogAssigner.getInstance().assignAlert(context, "", msg, "", "", "", "", true, cancleable, outsideTouchable, null);
-    }
-
-    /**
-     * 横向加载框 默认白色背景可取消可点击
-     *
-     * @param context 上下文
-     * @param msg     提示文本
-     */
-    public static BuildBean showLoadingHorizontal(Context context, CharSequence msg) {
-        return showLoadingHorizontal(context, msg, true, true, true);
-    }
-
-    /**
-     * 横向加载框 默认可取消可点击
-     *
-     * @param context   上下文
-     * @param msg       提示文本
-     * @param isWhiteBg true为白色背景false为灰色背景
-     */
-    public static BuildBean showLoadingHorizontal(Context context, CharSequence msg, boolean isWhiteBg) {
-        return showLoadingHorizontal(context, msg, true, true, isWhiteBg);
-    }
-
-    /**
-     * 横向加载框
-     *
-     * @param context          上下文
-     * @param msg              提示文本
+     * @param isVertical       true为竖直方向false为水平方向
      * @param cancleable       true为可以取消false为不可取消
      * @param outsideTouchable true为可以点击空白区域false为不可点击
      * @param isWhiteBg        true为白色背景false为灰色背景
      */
-    public static BuildBean showLoadingHorizontal(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable, boolean isWhiteBg) {
-        return DialogAssigner.getInstance().assignLoadingHorizontal(context, msg, cancleable, outsideTouchable, isWhiteBg);
+    public static BuildBean showLoading(Context context, CharSequence msg, boolean isVertical, boolean cancleable, boolean outsideTouchable, boolean isWhiteBg) {
+        return DialogAssigner.getInstance().assignLoading(context, msg, isVertical, cancleable, outsideTouchable, isWhiteBg);
     }
 
     /**
-     * md风格横向加载框 默认白色背景可取消可点击
-     *
-     * @param context 上下文
-     * @param msg     提示文本
-     */
-    public static BuildBean showMdLoadingHorizontal(Context context, CharSequence msg) {
-        return showMdLoadingHorizontal(context, msg, true, true, true);
-    }
-
-    /**
-     * md风格横向加载框 默认可取消可点击
-     *
-     * @param context   上下文
-     * @param msg       提示文本
-     * @param isWhiteBg true为白色背景false为灰色背景
-     */
-    public static BuildBean showMdLoadingHorizontal(Context context, CharSequence msg, boolean isWhiteBg) {
-        return showMdLoadingHorizontal(context, msg, true, true, isWhiteBg);
-    }
-
-    /**
-     * md风格横向加载框
+     * md风格加载框
      *
      * @param context          上下文
      * @param msg              提示文本
+     * @param isVertical       true为竖直方向false为水平方向
      * @param cancleable       true为可以取消false为不可取消
      * @param outsideTouchable true为可以点击空白区域false为不可点击
      * @param isWhiteBg        true为白色背景false为灰色背景
      */
-    public static BuildBean showMdLoadingHorizontal(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable, boolean isWhiteBg) {
-        return DialogAssigner.getInstance().assignMdLoadingHorizontal(context, msg, cancleable, outsideTouchable, isWhiteBg);
-    }
-
-    /**
-     * 竖向加载框  默认白色背景可取消可点击
-     *
-     * @param context 上下文
-     * @param msg     提示文本
-     */
-    public static BuildBean showLoadingVertical(Context context, CharSequence msg) {
-        return showLoadingVertical(context, msg, true, true, true);
-    }
-
-    /**
-     * 竖向加载框 默认可取消可点击
-     *
-     * @param context   上下文
-     * @param msg       提示文本
-     * @param isWhiteBg true为白色背景false为灰色背景
-     */
-    public static BuildBean showLoadingVertical(Context context, CharSequence msg, boolean isWhiteBg) {
-        return showLoadingVertical(context, msg, true, true, isWhiteBg);
-    }
-
-    /**
-     * 竖向加载框
-     *
-     * @param context          上下文
-     * @param msg              提示文本
-     * @param cancleable       true为可以取消false为不可取消
-     * @param outsideTouchable true为可以点击空白区域false为不可点击
-     * @param isWhiteBg        true为白色背景false为灰色背景
-     */
-    public static BuildBean showLoadingVertical(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable, boolean isWhiteBg) {
-        return DialogAssigner.getInstance().assignLoadingVertical(context, msg, cancleable, outsideTouchable, isWhiteBg);
-    }
-
-    /**
-     * md风格竖向加载框  默认白色背景可取消可点击
-     *
-     * @param context 上下文
-     * @param msg     提示文本
-     */
-    public static BuildBean showMdLoadingVertical(Context context, CharSequence msg) {
-        return showMdLoadingVertical(context, msg, true, true, true);
-    }
-
-    /**
-     * md风格竖向加载框 默认可取消可点击
-     *
-     * @param context   上下文
-     * @param msg       提示文本
-     * @param isWhiteBg true为白色背景false为灰色背景
-     */
-    public static BuildBean showMdLoadingVertical(Context context, CharSequence msg, boolean isWhiteBg) {
-        return showMdLoadingVertical(context, msg, true, true, isWhiteBg);
-    }
-
-    /**
-     * md风格竖向加载框
-     *
-     * @param context          上下文
-     * @param msg              提示文本
-     * @param cancleable       true为可以取消false为不可取消
-     * @param outsideTouchable true为可以点击空白区域false为不可点击
-     * @param isWhiteBg        true为白色背景false为灰色背景
-     */
-    public static BuildBean showMdLoadingVertical(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable, boolean isWhiteBg) {
-        return DialogAssigner.getInstance().assignMdLoadingVertical(context, msg, cancleable, outsideTouchable, isWhiteBg);
+    public static BuildBean showMdLoading(Context context, CharSequence msg, boolean isVertical, boolean cancleable, boolean outsideTouchable, boolean isWhiteBg) {
+        return DialogAssigner.getInstance().assignMdLoading(context, msg, isVertical, cancleable, outsideTouchable, isWhiteBg);
     }
 
     /***
@@ -360,18 +232,6 @@ public class DialogUIUtils {
     }
 
     /**
-     * 提示弹出框 默认可取消可点击
-     *
-     * @param activity 所在activity
-     * @param title    标题 不传则无标题
-     * @param listener 事件监听
-     */
-    public static BuildBean showAlert(Activity activity, CharSequence title, CharSequence msg, CharSequence hint1, CharSequence hint2,
-                                      CharSequence firstTxt, CharSequence secondTxt, boolean isVertical, DialogUIListener listener) {
-        return showAlert(activity, title, msg, hint1, hint2, firstTxt, secondTxt, isVertical, true, true, listener);
-    }
-
-    /**
      * 提示弹出框
      *
      * @param activity         所在activity
@@ -385,44 +245,34 @@ public class DialogUIUtils {
         return DialogAssigner.getInstance().assignAlert(activity, title, msg, hint1, hint2, firstTxt, secondTxt, isVertical, cancleable, outsideTouchable, listener);
     }
 
-    /**
-     * 中间弹出列表 默认可取消可点击
-     *
-     * @param context  上下文
-     * @param datas    素组集合
-     * @param listener 事件监听
-     * @return
-     */
-    public static BuildBean showCenterSheet(Context context, List<TieBean> datas, DialogUIItemListener listener) {
-        return showCenterSheet(context, datas, true, true, listener);
-    }
 
     /***
      * 中间弹出列表
      *
      * @param context          上下文
      * @param datas            素组集合
+     * @param gravity
+     * @param bottomTxt        底部item文本
      * @param cancleable       true为可以取消false为不可取消
      * @param outsideTouchable true为可以点击空白区域false为不可点击
      * @param listener         事件监听
      * @return
      */
-    public static BuildBean showCenterSheet(Context context, List<TieBean> datas, boolean cancleable, boolean outsideTouchable, DialogUIItemListener listener) {
-        return DialogAssigner.getInstance().assignCenterSheet(context, datas, cancleable, outsideTouchable, listener);
+    public static BuildBean showSheet(Context context, List<TieBean> datas, CharSequence bottomTxt, int gravity, boolean cancleable, boolean outsideTouchable, DialogUIItemListener listener) {
+        return DialogAssigner.getInstance().assignSheet(context, datas, bottomTxt, gravity, cancleable, outsideTouchable, listener);
     }
 
     /**
      * md风格竖向底部弹出列表 默认可取消可点击
      *
-     * @param context   上下文
-     * @param title     标题
-     * @param datas     集合需要BottomSheetBean对象
-     * @param bottomTxt 底部item文本
-     * @param listener  事件监听
+     * @param context  上下文
+     * @param title    标题
+     * @param datas    集合需要BottomSheetBean对象
+     * @param listener 事件监听
      * @return
      */
-    public static BuildBean showMdBottomSheet(Context context, boolean isVertical, CharSequence title, List<TieBean> datas, CharSequence bottomTxt, int columnsNum, DialogUIItemListener listener) {
-        return showMdBottomSheet(context, isVertical, title, datas, bottomTxt, columnsNum, true, true, listener);
+    public static BuildBean showMdBottomSheet(Context context, boolean isVertical, CharSequence title, List<TieBean> datas, int columnsNum, DialogUIItemListener listener) {
+        return showMdBottomSheet(context, isVertical, title, datas, columnsNum, true, true, listener);
     }
 
     /***
@@ -431,14 +281,13 @@ public class DialogUIUtils {
      * @param context          上下文
      * @param title            标题
      * @param datas            集合需要BottomSheetBean对象
-     * @param bottomTxt        底部item文本
      * @param cancleable       true为可以取消false为不可取消
      * @param outsideTouchable true为可以点击空白区域false为不可点击
      * @param listener         事件监听
      * @return
      */
-    public static BuildBean showMdBottomSheet(Context context, boolean isVertical, CharSequence title, List<TieBean> datas, CharSequence bottomTxt, int columnsNum, boolean cancleable, boolean outsideTouchable, DialogUIItemListener listener) {
-        return DialogAssigner.getInstance().assignMdBottomSheet(context, isVertical, title, datas, bottomTxt, columnsNum, cancleable, outsideTouchable, listener);
+    public static BuildBean showMdBottomSheet(Context context, boolean isVertical, CharSequence title, List<TieBean> datas, int columnsNum, boolean cancleable, boolean outsideTouchable, DialogUIItemListener listener) {
+        return DialogAssigner.getInstance().assignMdBottomSheet(context, isVertical, title, datas, columnsNum, cancleable, outsideTouchable, listener);
     }
 
     /**
@@ -641,6 +490,43 @@ public class DialogUIUtils {
             mToast.show();
         }
 
+    }
+
+    /**
+     * 只定义一个mBuildBean
+     */
+    private static BuildBean mBuildBean;
+
+    /**
+     * 对mBuildBean的简易封装。线程不安全，不可以在非UI线程调用。
+     */
+    public static void showTie(Context context) {
+        showTie(context, "加载中...");
+    }
+
+    /**
+     * 对mBuildBean的简易封装。线程不安全，不可以在非UI线程调用。
+     */
+    public static void showTie(Context context, String str) {
+        if (mBuildBean != null) {
+            dismiss(mBuildBean);
+        }
+        mBuildBean = showLoading(context, str, false, true, false, true);
+        mBuildBean.show();
+    }
+
+    /**
+     * 对mBuildBean的简易封装。线程不安全，不可以在非UI线程调用。
+     */
+    public static void dismssTie() {
+        dismiss(mBuildBean);
+    }
+
+    public static void showPopuWindow(Context context, int widthGravity,int maxLine, View view, TdataListener tdataListener) {
+        PopuWindowView popuWindowView = new PopuWindowView(context, widthGravity);
+        popuWindowView.setMaxLines(maxLine);
+        popuWindowView.initPupoData(tdataListener);
+        popuWindowView.showing(view);
     }
 
 

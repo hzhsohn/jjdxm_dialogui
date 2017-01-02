@@ -13,7 +13,6 @@
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="3"
-        android:paddingBottom="12dp"
         android:paddingLeft="40dp"
         android:paddingRight="40dp"
         android:paddingTop="12dp"
@@ -23,70 +22,61 @@
         android:textStyle="bold"/>
 
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:overScrollMode="never"
-        android:scrollbars="none">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="12dp">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/dialogui_tv_msg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:gravity="center"
+            android:minHeight="60dp"
+            android:paddingBottom="15dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:paddingTop="5dp"
+            android:text=""
+            android:textColor="@color/text_msg_33"
+            android:textSize="@dimen/dialogui_msg_txt_size"/>
 
-            <TextView
-                android:id="@+id/dialogui_tv_msg"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:minHeight="60dp"
-                android:paddingBottom="15dp"
-                android:paddingLeft="30dp"
-                android:paddingRight="30dp"
-                android:paddingTop="5dp"
-                android:text=""
-                android:textColor="@color/text_msg_33"
-                android:textSize="@dimen/dialogui_msg_txt_size"/>
+        <EditText
+            android:id="@+id/et_1"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/dialogui_shape_et_bg"
+            android:cursorVisible="true"
+            android:maxLines="1"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:textColor="@color/text_input_44"
+            android:textCursorDrawable="@drawable/dialogui_shape_et_cursor"
+            android:textSize="@dimen/dialogui_input_txt_size"/>
 
-            <EditText
-                android:id="@+id/et_1"
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:layout_marginBottom="15dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/dialogui_shape_et_bg"
-                android:cursorVisible="true"
-                android:maxLines="1"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:textColor="@color/text_input_44"
-                android:textCursorDrawable="@drawable/dialogui_shape_et_cursor"
-                android:textSize="@dimen/dialogui_input_txt_size"/>
-
-            <EditText
-                android:id="@+id/et_2"
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:layout_marginBottom="15dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/dialogui_shape_et_bg"
-                android:cursorVisible="true"
-                android:maxLines="1"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:textColor="@color/text_input_44"
-                android:textCursorDrawable="@drawable/dialogui_shape_et_cursor"
-                android:textSize="@dimen/dialogui_input_txt_size"/>
+        <EditText
+            android:id="@+id/et_2"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/dialogui_shape_et_bg"
+            android:cursorVisible="true"
+            android:maxLines="1"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:textColor="@color/text_input_44"
+            android:textCursorDrawable="@drawable/dialogui_shape_et_cursor"
+            android:textSize="@dimen/dialogui_input_txt_size"/>
 
 
-        </LinearLayout>
-
-
-    </ScrollView>
+    </LinearLayout>
 
     <View
         android:id="@+id/line"
@@ -107,7 +97,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:background="@drawable/dialogui_selector_btn_left_bottom"
+            android:background="@drawable/dialogui_selector_left_bottom"
             android:gravity="center"
             android:padding="5dp"
             android:text="1"
@@ -126,7 +116,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:background="@drawable/dialogui_selector_bg"
+            android:background="@drawable/dialogui_selector_all_no"
             android:gravity="center"
             android:minHeight="48dp"
             android:padding="5dp"
@@ -146,7 +136,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:background="@drawable/dialogui_selector_btn_right_bottom"
+            android:background="@drawable/dialogui_selector_right_bottom"
             android:gravity="center"
             android:minHeight="48dp"
             android:padding="5dp"
@@ -170,7 +160,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@drawable/dialogui_selector_bg"
+            android:background="@drawable/dialogui_selector_all_no"
             android:gravity="center"
             android:minHeight="48dp"
             android:padding="5dp"
@@ -190,7 +180,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@drawable/dialogui_selector_bg"
+            android:background="@drawable/dialogui_selector_all_no"
             android:gravity="center"
             android:minHeight="48dp"
 
@@ -210,7 +200,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@drawable/dialogui_selector_btn_all_bottom"
+            android:background="@drawable/dialogui_selector_all_bottom"
             android:gravity="center"
             android:minHeight="48dp"
             android:padding="5dp"

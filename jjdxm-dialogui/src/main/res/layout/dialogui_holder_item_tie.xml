@@ -5,7 +5,7 @@
               android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/ll_bg"
+        android:id="@+id/ll_tie"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -17,6 +17,7 @@
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/color_text_black"
             android:text=""/>
     </LinearLayout>
 

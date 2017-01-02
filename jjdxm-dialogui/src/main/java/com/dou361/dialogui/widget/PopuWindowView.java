@@ -105,6 +105,7 @@ public class PopuWindowView implements AdapterView.OnItemClickListener {
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
         if (mTdataListener != null) {
+            dismiss();
             mTdataListener.onItemClick(adapterView, view, position);
         }
     }

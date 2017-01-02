@@ -26,6 +26,8 @@
 
 
 
+    <color name="color_tie_normal">#ffffff</color>
+    <color name="color_tie_select">#efeff4</color>
     <color name="dialogui_btn_normal">#ffffff</color>
     <color name="dialogui_btn_pressed">#eeeeee</color>
     <color name="datepick_surance_blue">#3598da</color>

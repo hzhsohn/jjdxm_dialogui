@@ -24,7 +24,7 @@ import com.dou361.dialogui.R;
  * <p/>
  * ========================================
  */
-public class CommonConfig {
+public class DialogConfig {
 
     @ColorRes
     public static int iosBtnColor = R.color.ios_btntext_blue;
@@ -45,18 +45,16 @@ public class CommonConfig {
     public static CharSequence dialogui_bottomTxt = "取消";
 
 
-    public static final int TYPE_LOADING_HORIZONTAL = 1;
-    public static final int TYPE_LOADING_VERTICAL = 2;
+    public static final int TYPE_LOADING = 1;
+    public static final int TYPE_MD_LOADING = 2;
     public static final int TYPE_MD_ALERT = 3;
     public static final int TYPE_MD_MULTI_CHOOSE = 4;
     public static final int TYPE_SINGLE_CHOOSE = 5;
     public static final int TYPE_ALERT = 6;
-    public static final int TYPE_CENTER_SHEET = 10;
+    public static final int TYPE_SHEET = 10;
     public static final int TYPE_BOTTOM_SHEET = 14;
     public static final int TYPE_CUSTOM_ALERT = 15;
     public static final int TYPE_CUSTOM_BOTTOM_ALERT = 16;
-    public static final int TYPE_MD_LOADING_HORIZONTAL = 17;
-    public static final int TYPE_MD_LOADING_VERTICAL = 18;
     public static final int TYPE_DATEPICK = 19;
 
 

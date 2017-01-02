@@ -42,10 +42,10 @@ import android.view.animation.Interpolator;
 import android.widget.Scroller;
 
 import com.dou361.dialogui.R;
-import com.dou361.dialogui.utils.ToolUtils;
 import com.dou361.dialogui.adapter.WheelAdapter;
 import com.dou361.dialogui.listener.OnWheelChangedListener;
 import com.dou361.dialogui.listener.OnWheelScrollListener;
+import com.dou361.dialogui.utils.ToolUtils;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -225,7 +225,7 @@ public class WheelView extends View {
     /**
      * Initializes class data
      *
-     * @param context the mContext
+     * @param context the context
      */
     private void initData(Context context) {
         mContext = context;

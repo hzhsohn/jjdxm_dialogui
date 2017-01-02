@@ -23,7 +23,7 @@ import com.dou361.dialogui.listener.OnItemClickListener;
  * <p/>
  * 创建日期：2016/10/5
  * <p/>
- * 描 述：直播间消息的item
+ * 描 述：消息的item
  * <p/>
  * <p/>
  * 修订历史：
@@ -33,19 +33,30 @@ import com.dou361.dialogui.listener.OnItemClickListener;
 public class TieItemHolder extends SuperItemHolder<TieBean> {
 
 
-    LinearLayout llBg;
+    LinearLayout llTie;
     TextView tvTitle;
 
     public TieItemHolder(Context mContext, OnItemClickListener listener, View itemView) {
         super(mContext, listener, itemView);
-        llBg = (LinearLayout) itemView.findViewById(R.id.ll_bg);
         tvTitle = (TextView) itemView.findViewById(R.id.tv_title);
+        llTie = (LinearLayout) itemView.findViewById(R.id.ll_tie);
     }
 
     @Override
     public void refreshView() {
+        /**
+         * 1top 2midle 3bottom 4all
+         */
+        if (itemPositionType == 1) {
+            llTie.setBackgroundResource(R.drawable.dialogui_selector_all_top);
+        } else if (itemPositionType == 3) {
+            llTie.setBackgroundResource(R.drawable.dialogui_selector_all_bottom);
+        } else if (itemPositionType == 4) {
+            llTie.setBackgroundResource(R.drawable.dialogui_selector_all);
+        } else {
+            llTie.setBackgroundResource(R.drawable.dialogui_selector_all_no);
+        }
         TieBean data = getData();
-        llBg.setSelected(data.isSelect());
         tvTitle.setText("" + data.getTitle());
     }
 }

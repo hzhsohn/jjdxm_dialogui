@@ -18,7 +18,7 @@ import android.widget.TextView;
 import com.dou361.dialogui.DialogUIUtils;
 import com.dou361.dialogui.R;
 import com.dou361.dialogui.bean.BuildBean;
-import com.dou361.dialogui.config.CommonConfig;
+import com.dou361.dialogui.config.DialogConfig;
 import com.dou361.dialogui.holder.AlertDialogHolder;
 import com.dou361.dialogui.holder.SheetHolder;
 import com.dou361.dialogui.utils.ToolUtils;
@@ -51,43 +51,37 @@ public class Buildable {
     protected BuildBean buildByType(BuildBean bean) {
         ToolUtils.fixContext(bean);
         switch (bean.type) {
-            case CommonConfig.TYPE_DATEPICK:
+            case DialogConfig.TYPE_DATEPICK:
                 buildDatePick(bean);
                 break;
-            case CommonConfig.TYPE_LOADING_HORIZONTAL:
-                buildLoadingHorizontal(bean);
+            case DialogConfig.TYPE_LOADING:
+                buildLoading(bean);
                 break;
-            case CommonConfig.TYPE_LOADING_VERTICAL:
-                buildLoadingVertical(bean);
+            case DialogConfig.TYPE_MD_LOADING:
+                buildMdLoading(bean);
                 break;
-            case CommonConfig.TYPE_MD_LOADING_HORIZONTAL:
-                buildMdLoadingHorizontal(bean);
-                break;
-            case CommonConfig.TYPE_MD_LOADING_VERTICAL:
-                buildMdLoadingVertical(bean);
-                break;
-            case CommonConfig.TYPE_MD_ALERT:
+            case DialogConfig.TYPE_MD_ALERT:
                 buildMdAlert(bean);
                 break;
-            case CommonConfig.TYPE_SINGLE_CHOOSE:
+            case DialogConfig.TYPE_SINGLE_CHOOSE:
                 buildSingleChoose(bean);
                 break;
-            case CommonConfig.TYPE_MD_MULTI_CHOOSE:
+            case DialogConfig.TYPE_MD_MULTI_CHOOSE:
                 buildMdMultiChoose(bean);
                 break;
-            case CommonConfig.TYPE_ALERT:
+            case DialogConfig.TYPE_ALERT:
                 buildAlert(bean);
                 break;
-            case CommonConfig.TYPE_CENTER_SHEET:
-                buildCenterSheet(bean);
+            case DialogConfig.TYPE_SHEET:
+                buildSheet(bean);
                 break;
-            case CommonConfig.TYPE_CUSTOM_ALERT:
+            case DialogConfig.TYPE_CUSTOM_ALERT:
                 buildCustomAlert(bean);
                 break;
-            case CommonConfig.TYPE_CUSTOM_BOTTOM_ALERT:
+            case DialogConfig.TYPE_CUSTOM_BOTTOM_ALERT:
                 buildCustomBottomAlert(bean);
                 break;
-            case CommonConfig.TYPE_BOTTOM_SHEET:
+            case DialogConfig.TYPE_BOTTOM_SHEET:
                 buildBottomSheet(bean);
                 break;
             default:
@@ -165,9 +159,14 @@ public class Buildable {
     }
 
 
-    protected BuildBean buildMdLoadingVertical(BuildBean bean) {
+    protected BuildBean buildMdLoading(BuildBean bean) {
         AlertDialog.Builder builder = new AlertDialog.Builder(bean.mContext);
-        View root = View.inflate(bean.mContext, R.layout.dialogui_loading_vertical, null);
+        View root;
+        if (bean.isVertical) {
+            root = View.inflate(bean.mContext, R.layout.dialogui_loading_vertical, null);
+        } else {
+            root = View.inflate(bean.mContext, R.layout.dialogui_loading_horizontal, null);
+        }
         View llBg = (View) root.findViewById(R.id.dialogui_ll_bg);
         ProgressBar pbBg = (ProgressBar) root.findViewById(R.id.pb_bg);
         TextView tvMsg = (TextView) root.findViewById(R.id.dialogui_tv_msg);
@@ -187,35 +186,16 @@ public class Buildable {
         return bean;
     }
 
-
-    protected BuildBean buildMdLoadingHorizontal(BuildBean bean) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(bean.mContext);
-        View root = View.inflate(bean.mContext, R.layout.dialogui_loading_horizontal, null);
-        View llBg = (View) root.findViewById(R.id.dialogui_ll_bg);
-        ProgressBar pbBg = (ProgressBar) root.findViewById(R.id.pb_bg);
-        TextView tvMsg = (TextView) root.findViewById(R.id.dialogui_tv_msg);
-        tvMsg.setText(bean.msg);
-        if (bean.isWhiteBg) {
-            llBg.setBackgroundResource(R.drawable.dialogui_shape_wihte_round_corner);
-            pbBg.setIndeterminateDrawable(bean.mContext.getResources().getDrawable(R.drawable.dialogui_shape_progress));
-            tvMsg.setTextColor(bean.mContext.getResources().getColor(R.color.text_black));
-        } else {
-            llBg.setBackgroundResource(R.drawable.dialogui_shape_gray_round_corner);
-            pbBg.setIndeterminateDrawable(bean.mContext.getResources().getDrawable(R.drawable.dialogui_shape_progress_light));
-            tvMsg.setTextColor(Color.WHITE);
-        }
-        builder.setView(root);
-        AlertDialog dialog = builder.create();
-        bean.alertDialog = dialog;
-        return bean;
-    }
-
-    protected BuildBean buildLoadingVertical(BuildBean bean) {
+    protected BuildBean buildLoading(BuildBean bean) {
         Dialog dialog = new Dialog(bean.mContext);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         bean.dialog = dialog;
-
-        View root = View.inflate(bean.mContext, R.layout.dialogui_loading_vertical, null);
+        View root;
+        if (bean.isVertical) {
+            root = View.inflate(bean.mContext, R.layout.dialogui_loading_vertical, null);
+        } else {
+            root = View.inflate(bean.mContext, R.layout.dialogui_loading_horizontal, null);
+        }
         View llBg = (View) root.findViewById(R.id.dialogui_ll_bg);
         ProgressBar pbBg = (ProgressBar) root.findViewById(R.id.pb_bg);
         TextView tvMsg = (TextView) root.findViewById(R.id.dialogui_tv_msg);
@@ -227,29 +207,6 @@ public class Buildable {
         } else {
             llBg.setBackgroundResource(R.drawable.dialogui_shape_gray_round_corner);
             pbBg.setIndeterminateDrawable(bean.mContext.getResources().getDrawable(R.drawable.dialogui_rotate_mum_light));
-            tvMsg.setTextColor(Color.WHITE);
-        }
-        bean.dialog.setContentView(root);
-        return bean;
-    }
-
-    protected BuildBean buildLoadingHorizontal(BuildBean bean) {
-        Dialog dialog = new Dialog(bean.mContext);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        bean.dialog = dialog;
-
-        View root = View.inflate(bean.mContext, R.layout.dialogui_loading_horizontal, null);
-        View llBg = (View) root.findViewById(R.id.dialogui_ll_bg);
-        ProgressBar pbBg = (ProgressBar) root.findViewById(R.id.pb_bg);
-        TextView tvMsg = (TextView) root.findViewById(R.id.dialogui_tv_msg);
-        tvMsg.setText(bean.msg);
-        if (bean.isWhiteBg) {
-            llBg.setBackgroundResource(R.drawable.dialogui_shape_wihte_round_corner);
-            pbBg.setIndeterminateDrawable(bean.mContext.getResources().getDrawable(R.drawable.dialogui_shape_progress));
-            tvMsg.setTextColor(bean.mContext.getResources().getColor(R.color.text_black));
-        } else {
-            llBg.setBackgroundResource(R.drawable.dialogui_shape_gray_round_corner);
-            pbBg.setIndeterminateDrawable(bean.mContext.getResources().getDrawable(R.drawable.dialogui_shape_progress_light));
             tvMsg.setTextColor(Color.WHITE);
         }
         bean.dialog.setContentView(root);
@@ -375,9 +332,9 @@ public class Buildable {
         bean.dialog = dialog;
     }
 
-    protected BuildBean buildCenterSheet(BuildBean bean) {
+    protected BuildBean buildSheet(BuildBean bean) {
         AlertDialog.Builder builder = new AlertDialog.Builder(bean.mContext);
-        SheetHolder holder = new SheetHolder(bean.mContext);
+        SheetHolder holder = new SheetHolder(bean.mContext, true);
         builder.setView(holder.rootView);
         AlertDialog dialog = builder.create();
         bean.alertDialog = dialog;
@@ -391,7 +348,7 @@ public class Buildable {
 
     private void buildBottomSheet(BuildBean bean) {
         BottomSheetDialog dialog = new BottomSheetDialog(bean.mContext);
-        SheetHolder sheetHolder = new SheetHolder(bean.mContext);
+        SheetHolder sheetHolder = new SheetHolder(bean.mContext, false);
         dialog.setContentView(sheetHolder.rootView);
         sheetHolder.assingDatasAndEvents(bean.mContext, bean);
         bean.dialog = dialog;

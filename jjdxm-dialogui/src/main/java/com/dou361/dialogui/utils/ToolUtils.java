@@ -15,7 +15,7 @@ import android.widget.Button;
 
 import com.dou361.dialogui.DialogUIUtils;
 import com.dou361.dialogui.bean.BuildBean;
-import com.dou361.dialogui.config.CommonConfig;
+import com.dou361.dialogui.config.DialogConfig;
 
 /**
  * Created by Administrator on 2016/10/9 0009.
@@ -30,7 +30,9 @@ public class ToolUtils {
      */
     public static void showDialog(Dialog dialog) {
         try {
-            dialog.show();
+            if (dialog != null) {
+                dialog.show();
+            }
         } catch (Exception e) {
         }
     }
@@ -110,7 +112,7 @@ public class ToolUtils {
         // 以下这两句是为了保证按钮可以水平满屏
         int width = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getWidth();
         int height = (int) (((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getHeight() * 0.9);
-        if (bean.type != CommonConfig.TYPE_MD_LOADING_VERTICAL) {
+        if (bean.type != DialogConfig.TYPE_MD_LOADING) {
             wl.width = (int) (width * 0.94);  // todo keycode to keep gap
         } else {
             wl.width = ViewGroup.LayoutParams.WRAP_CONTENT;

@@ -8,7 +8,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.View;
 
 import com.dou361.dialogui.adapter.SuperAdapter;
-import com.dou361.dialogui.config.CommonConfig;
+import com.dou361.dialogui.config.DialogConfig;
 import com.dou361.dialogui.listener.Buildable;
 import com.dou361.dialogui.listener.DialogUIDateTimeSaveListener;
 import com.dou361.dialogui.listener.DialogUIItemListener;
@@ -62,10 +62,10 @@ public class BuildBean extends Buildable implements Styleable {
 
     public CharSequence title;
     public CharSequence msg;
-    public CharSequence text1 = CommonConfig.dialogui_btnTxt1;
-    public CharSequence text2 = CommonConfig.dialogui_btnTxt2;
+    public CharSequence text1 = DialogConfig.dialogui_btnTxt1;
+    public CharSequence text2 = DialogConfig.dialogui_btnTxt2;
     public CharSequence text3;
-    public CharSequence bottomTxt = CommonConfig.dialogui_bottomTxt;
+    public CharSequence bottomTxt = DialogConfig.dialogui_bottomTxt;
 
     public CharSequence hint1;
     public CharSequence hint2;
@@ -110,21 +110,21 @@ public class BuildBean extends Buildable implements Styleable {
 
     //三个以下按钮,颜色按此顺序
     @ColorRes
-    public int btn1Color = CommonConfig.iosBtnColor;
+    public int btn1Color = DialogConfig.iosBtnColor;
     @ColorRes
-    public int btn2Color = CommonConfig.iosBtnColor;
+    public int btn2Color = DialogConfig.iosBtnColor;
     @ColorRes
-    public int btn3Color = CommonConfig.iosBtnColor;
+    public int btn3Color = DialogConfig.iosBtnColor;
 
 
     @ColorRes
-    public int titleTxtColor = CommonConfig.titleTxtColor;
+    public int titleTxtColor = DialogConfig.titleTxtColor;
     @ColorRes
-    public int msgTxtColor = CommonConfig.msgTxtColor;
+    public int msgTxtColor = DialogConfig.msgTxtColor;
     @ColorRes
-    public int lvItemTxtColor = CommonConfig.lvItemTxtColor;
+    public int lvItemTxtColor = DialogConfig.lvItemTxtColor;
     @ColorRes
-    public int inputTxtColor = CommonConfig.inputTxtColor;
+    public int inputTxtColor = DialogConfig.inputTxtColor;
 
     public Map<Integer, Integer> colorOfPosition;//listview 的item的特殊颜色:ColorRes
 

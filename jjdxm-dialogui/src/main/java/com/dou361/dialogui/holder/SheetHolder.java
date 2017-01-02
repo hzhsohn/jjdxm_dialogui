@@ -1,13 +1,13 @@
 package com.dou361.dialogui.holder;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.dou361.dialogui.DialogUIUtils;
@@ -15,9 +15,7 @@ import com.dou361.dialogui.R;
 import com.dou361.dialogui.adapter.TieAdapter;
 import com.dou361.dialogui.bean.BuildBean;
 import com.dou361.dialogui.listener.OnItemClickListener;
-import com.dou361.dialogui.utils.ToolUtils;
-import com.dou361.dialogui.widget.DividerGridItemDecoration;
-import com.dou361.dialogui.widget.DividerItemDecoration;
+import com.dou361.dialogui.widget.DialogUIDividerItemDecoration;
 
 /**
  * ========================================
@@ -43,18 +41,19 @@ public class SheetHolder extends SuperHolder {
 
     private TextView tvTitle;
     private RecyclerView rView;
-    private TextView tvBottom;
+    private Button btnBottom;
+    private boolean isItemType;
 
-    public SheetHolder(Context context) {
+    public SheetHolder(Context context, boolean isItemType) {
         super(context);
+        this.isItemType = isItemType;
     }
 
     @Override
     protected void findViews() {
         tvTitle = (TextView) rootView.findViewById(R.id.dialogui_tv_title);
         rView = (RecyclerView) rootView.findViewById(R.id.rlv);
-        tvBottom = (TextView) rootView.findViewById(R.id.dialogui_tv_bottom);
-
+        btnBottom = (Button) rootView.findViewById(R.id.btn_bottom);
 
     }
 
@@ -65,18 +64,12 @@ public class SheetHolder extends SuperHolder {
 
     @Override
     public void assingDatasAndEvents(final Context context, final BuildBean bean) {
-        if (TextUtils.isEmpty(bean.title)) {
-            tvTitle.setVisibility(View.GONE);
-        } else {
-            tvTitle.setVisibility(View.VISIBLE);
-            tvTitle.setText(bean.title);
-        }
         if (TextUtils.isEmpty(bean.bottomTxt)) {
-            tvBottom.setVisibility(View.GONE);
+            btnBottom.setVisibility(View.GONE);
         } else {
-            tvBottom.setVisibility(View.VISIBLE);
-            tvBottom.setText(bean.bottomTxt);
-            tvBottom.setOnClickListener(new View.OnClickListener() {
+            btnBottom.setVisibility(View.VISIBLE);
+            btnBottom.setText(bean.bottomTxt);
+            btnBottom.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     DialogUIUtils.dismiss(bean.dialog, bean.alertDialog);
@@ -85,17 +78,22 @@ public class SheetHolder extends SuperHolder {
                 }
             });
         }
+        if (TextUtils.isEmpty(bean.title)) {
+            tvTitle.setVisibility(View.GONE);
+        } else {
+            tvTitle.setVisibility(View.VISIBLE);
+            tvTitle.setText(bean.title);
+        }
         if (bean.isVertical) {
             rView.setLayoutManager(new LinearLayoutManager(bean.mContext));
-            rView.addItemDecoration(new DividerItemDecoration(bean.mContext, ToolUtils.dip2px(bean.mContext, 8), true, Color.TRANSPARENT, true, true, false));
+            rView.addItemDecoration(new DialogUIDividerItemDecoration(bean.mContext));
         } else {
             rView.setLayoutManager(new GridLayoutManager(bean.mContext, bean.gridColumns));// 布局管理器。
-            rView.addItemDecoration(new DividerGridItemDecoration(bean.mContext, bean.gridColumns));
         }
         rView.setHasFixedSize(true);// 如果Item够简单，高度是确定的，打开FixSize将提高性能。
         rView.setItemAnimator(new DefaultItemAnimator());// 设置Item默认动画，加也行，不加也行。
         if (bean.mAdapter == null) {
-            TieAdapter adapter = new TieAdapter(bean.mContext, bean.mLists);
+            TieAdapter adapter = new TieAdapter(bean.mContext, bean.mLists, isItemType);
             bean.mAdapter = adapter;
         }
         rView.setAdapter(bean.mAdapter);

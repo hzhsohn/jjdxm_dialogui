@@ -7,7 +7,7 @@ import android.view.View;
 
 import com.dou361.dialogui.bean.BuildBean;
 import com.dou361.dialogui.bean.TieBean;
-import com.dou361.dialogui.config.CommonConfig;
+import com.dou361.dialogui.config.DialogConfig;
 
 import java.util.List;
 
@@ -38,7 +38,7 @@ public class DialogAssigner implements Assignable {
         bean.gravity = gravity;
         bean.cancelable = true;
         bean.outsideTouchable = true;
-        bean.type = CommonConfig.TYPE_DATEPICK;
+        bean.type = DialogConfig.TYPE_DATEPICK;
         bean.dateTimeListener = listener;
         bean.dateType = dateType;
         bean.date = date;
@@ -47,54 +47,30 @@ public class DialogAssigner implements Assignable {
     }
 
     @Override
-    public BuildBean assignLoadingHorizontal(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable, boolean isWhiteBg) {
+    public BuildBean assignLoading(Context context, CharSequence msg,boolean isVertical, boolean cancleable, boolean outsideTouchable, boolean isWhiteBg) {
         BuildBean bean = new BuildBean();
         bean.mContext = context;
         bean.msg = msg;
+        bean.isVertical = isVertical;
         bean.isWhiteBg = isWhiteBg;
         bean.gravity = Gravity.CENTER;
         bean.cancelable = cancleable;
         bean.outsideTouchable = outsideTouchable;
-        bean.type = CommonConfig.TYPE_LOADING_HORIZONTAL;
+        bean.type = DialogConfig.TYPE_LOADING;
         return bean;
     }
 
     @Override
-    public BuildBean assignLoadingVertical(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable, boolean isWhiteBg) {
+    public BuildBean assignMdLoading(Context context, CharSequence msg,boolean isVertical, boolean cancleable, boolean outsideTouchable, boolean isWhiteBg) {
         BuildBean bean = new BuildBean();
         bean.mContext = context;
         bean.msg = msg;
+        bean.isVertical = isVertical;
         bean.isWhiteBg = isWhiteBg;
         bean.gravity = Gravity.CENTER;
         bean.cancelable = cancleable;
         bean.outsideTouchable = outsideTouchable;
-        bean.type = CommonConfig.TYPE_LOADING_VERTICAL;
-        return bean;
-    }
-
-    @Override
-    public BuildBean assignMdLoadingHorizontal(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable, boolean isWhiteBg) {
-        BuildBean bean = new BuildBean();
-        bean.mContext = context;
-        bean.msg = msg;
-        bean.isWhiteBg = isWhiteBg;
-        bean.gravity = Gravity.CENTER;
-        bean.cancelable = cancleable;
-        bean.outsideTouchable = outsideTouchable;
-        bean.type = CommonConfig.TYPE_MD_LOADING_HORIZONTAL;
-        return bean;
-    }
-
-    @Override
-    public BuildBean assignMdLoadingVertical(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable, boolean isWhiteBg) {
-        BuildBean bean = new BuildBean();
-        bean.mContext = context;
-        bean.msg = msg;
-        bean.isWhiteBg = isWhiteBg;
-        bean.gravity = Gravity.CENTER;
-        bean.cancelable = cancleable;
-        bean.outsideTouchable = outsideTouchable;
-        bean.type = CommonConfig.TYPE_MD_LOADING_VERTICAL;
+        bean.type = DialogConfig.TYPE_MD_LOADING;
         return bean;
     }
 
@@ -108,10 +84,10 @@ public class DialogAssigner implements Assignable {
         bean.cancelable = cancleable;
         bean.outsideTouchable = outsideTouchable;
         bean.listener = listener;
-        bean.type = CommonConfig.TYPE_MD_ALERT;
-        bean.btn1Color = CommonConfig.mdBtnColor;
-        bean.btn2Color = CommonConfig.mdBtnColor;
-        bean.btn3Color = CommonConfig.mdBtnColor;
+        bean.type = DialogConfig.TYPE_MD_ALERT;
+        bean.btn1Color = DialogConfig.mdBtnColor;
+        bean.btn2Color = DialogConfig.mdBtnColor;
+        bean.btn3Color = DialogConfig.mdBtnColor;
         return bean;
     }
 
@@ -125,11 +101,11 @@ public class DialogAssigner implements Assignable {
         bean.outsideTouchable = outsideTouchable;
         bean.itemListener = listener;
         bean.wordsMd = words;
-        bean.type = CommonConfig.TYPE_SINGLE_CHOOSE;
+        bean.type = DialogConfig.TYPE_SINGLE_CHOOSE;
         bean.defaultChosen = defaultChosen;
-        bean.btn1Color = CommonConfig.mdBtnColor;
-        bean.btn2Color = CommonConfig.mdBtnColor;
-        bean.btn3Color = CommonConfig.mdBtnColor;
+        bean.btn1Color = DialogConfig.mdBtnColor;
+        bean.btn2Color = DialogConfig.mdBtnColor;
+        bean.btn3Color = DialogConfig.mdBtnColor;
         return bean;
     }
 
@@ -145,10 +121,10 @@ public class DialogAssigner implements Assignable {
         bean.listener = btnListener;
         bean.wordsMd = words;
         bean.checkedItems = checkedItems;
-        bean.type = CommonConfig.TYPE_MD_MULTI_CHOOSE;
-        bean.btn1Color = CommonConfig.mdBtnColor;
-        bean.btn2Color = CommonConfig.mdBtnColor;
-        bean.btn3Color = CommonConfig.mdBtnColor;
+        bean.type = DialogConfig.TYPE_MD_MULTI_CHOOSE;
+        bean.btn1Color = DialogConfig.mdBtnColor;
+        bean.btn2Color = DialogConfig.mdBtnColor;
+        bean.btn3Color = DialogConfig.mdBtnColor;
         return bean;
     }
 
@@ -168,7 +144,7 @@ public class DialogAssigner implements Assignable {
         bean.cancelable = cancleable;
         bean.outsideTouchable = outsideTouchable;
         bean.listener = listener;
-        bean.type = CommonConfig.TYPE_ALERT;
+        bean.type = DialogConfig.TYPE_ALERT;
         return bean;
     }
 
@@ -181,7 +157,7 @@ public class DialogAssigner implements Assignable {
         bean.gravity = gravity;
         bean.cancelable = cancleable;
         bean.outsideTouchable = outsideTouchable;
-        bean.type = CommonConfig.TYPE_CUSTOM_ALERT;
+        bean.type = DialogConfig.TYPE_CUSTOM_ALERT;
         return bean;
     }
 
@@ -193,40 +169,41 @@ public class DialogAssigner implements Assignable {
         bean.gravity = Gravity.BOTTOM;
         bean.cancelable = cancleable;
         bean.outsideTouchable = outsideTouchable;
-        bean.type = CommonConfig.TYPE_CUSTOM_BOTTOM_ALERT;
+        bean.type = DialogConfig.TYPE_CUSTOM_BOTTOM_ALERT;
         return bean;
     }
 
 
     @Override
-    public BuildBean assignCenterSheet(Context context, List<TieBean> datas, boolean cancleable, boolean outsideTouchable, DialogUIItemListener listener) {
+    public BuildBean assignSheet(Context context, List<TieBean> datas,CharSequence bottomTxt,int gravity, boolean cancleable, boolean outsideTouchable, DialogUIItemListener listener) {
         BuildBean bean = new BuildBean();
         bean.mContext = context;
         bean.itemListener = listener;
         bean.mLists = datas;
-        bean.gravity = Gravity.CENTER;
+        bean.bottomTxt = bottomTxt;
+        bean.gravity = gravity;
         bean.isVertical = true;
         bean.cancelable = cancleable;
         bean.outsideTouchable = outsideTouchable;
-        bean.type = CommonConfig.TYPE_CENTER_SHEET;
+        bean.type = DialogConfig.TYPE_SHEET;
 
         return bean;
     }
 
     @Override
-    public BuildBean assignMdBottomSheet(Context context,boolean isVertical, CharSequence title, List<TieBean> datas, CharSequence bottomTxt, int columnsNum, boolean cancleable, boolean outsideTouchable, DialogUIItemListener listener) {
+    public BuildBean assignMdBottomSheet(Context context,boolean isVertical, CharSequence title, List<TieBean> datas, int columnsNum, boolean cancleable, boolean outsideTouchable, DialogUIItemListener listener) {
         BuildBean bean = new BuildBean();
         bean.mContext = context;
         bean.title = title;
         bean.isVertical = isVertical;
         bean.mLists = datas;
-        bean.bottomTxt = bottomTxt;
+        bean.bottomTxt = "";
         bean.gravity = Gravity.BOTTOM;
         bean.cancelable = cancleable;
         bean.outsideTouchable = outsideTouchable;
         bean.itemListener = listener;
         bean.gridColumns = columnsNum;
-        bean.type = CommonConfig.TYPE_BOTTOM_SHEET;
+        bean.type = DialogConfig.TYPE_BOTTOM_SHEET;
         return bean;
     }
 

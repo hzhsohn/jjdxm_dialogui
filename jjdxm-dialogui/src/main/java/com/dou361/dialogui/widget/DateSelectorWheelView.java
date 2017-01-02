@@ -139,6 +139,7 @@ public class DateSelectorWheelView extends RelativeLayout implements
         tvSubTitle = (TextView) findViewById(R.id.tv_date_time_subtitle);
         tvYear = (TextView) findViewById(R.id.tv_date_time_year);
         tvMonth = (TextView) findViewById(R.id.tv_date_time_month);
+        tvDay = (TextView) findViewById(R.id.tv_date_time_day);
         tvHour = (TextView) findViewById(R.id.tv_date_time_hour);
         tvMinute = (TextView) findViewById(R.id.tv_date_time_minute);
         tvSecond = (TextView) findViewById(R.id.tv_date_time_second);
@@ -147,7 +148,6 @@ public class DateSelectorWheelView extends RelativeLayout implements
         tv_line1 = (TextView) findViewById(R.id.tv_date_time_line1);
         tv_line2 = (TextView) findViewById(R.id.tv_date_time_line2);
 
-        tvDay = (TextView) findViewById(R.id.tv_date_time_day);
         wvYear = (WheelView) findViewById(R.id.wv_date_of_year);
         wvMonth = (WheelView) findViewById(R.id.wv_date_of_month);
         wvDay = (WheelView) findViewById(R.id.wv_date_of_day);
@@ -535,7 +535,7 @@ public class DateSelectorWheelView extends RelativeLayout implements
             } else if (isBigMonth(currentMonth)) {
                 wvDay.setAdapter(bigDaysAdapter);
             } else {
-                wvDay.setAdapter(smallDaysAdapter);
+                wvDay.setAdapter(normalDaysAdapter);
             }
         } else if (wheel.getId() == wvMonth.getId()) {
             trim = (wvMonth.getCurrentItemValue())
@@ -562,7 +562,7 @@ public class DateSelectorWheelView extends RelativeLayout implements
                     }
                     break;
                 default:
-                    wvDay.setAdapter(smallDaysAdapter);
+                    wvDay.setAdapter(normalDaysAdapter);
                     break;
             }
         } else if (wheel.getId() == wvDay.getId()) {
@@ -616,6 +616,9 @@ public class DateSelectorWheelView extends RelativeLayout implements
         int position = 0;
         String today = getToday();
         String year = today.substring(0, 4);
+        if (tvYear != null) {
+            tvYear.setText(year);
+        }
         year = year + " 年";
         for (int i = 0; i < years.length; i++) {
             if (year.equals(years[i])) {
@@ -636,6 +639,9 @@ public class DateSelectorWheelView extends RelativeLayout implements
         int position = 0;
         String today = getToday();
         String month = today.substring(5, 7);
+        if (tvMonth != null) {
+            tvMonth.setText(month);
+        }
         month = month + " 月";
         for (int i = 0; i < months.length; i++) {
             if (month.equals(months[i])) {
@@ -656,6 +662,9 @@ public class DateSelectorWheelView extends RelativeLayout implements
         int position = 0;
         String today = getToday();
         String day = today.substring(8, 10);
+        if (tvDay != null) {
+            tvDay.setText(day);
+        }
         day = day + " 日";
         for (int i = 0; i < bigDays.length; i++) {
             if (day.equals(bigDays[i])) {
@@ -670,6 +679,9 @@ public class DateSelectorWheelView extends RelativeLayout implements
         int position = 0;
         String today = getToday();
         String hour = today.substring(12, 14);
+        if (tvHour != null) {
+            tvHour.setText(hour);
+        }
         hour = hour + " 时";
         for (int i = 0; i < hours.length; i++) {
             if (hour.equals(hours[i])) {
@@ -684,6 +696,9 @@ public class DateSelectorWheelView extends RelativeLayout implements
         int position = 0;
         String today = getToday();
         String minute = today.substring(15, 17);
+        if (tvMinute != null) {
+            tvMinute.setText(minute);
+        }
         minute = minute + " 分";
         for (int i = 0; i < minutes.length; i++) {
             if (minute.equals(minutes[i])) {
@@ -698,6 +713,9 @@ public class DateSelectorWheelView extends RelativeLayout implements
         int position = 0;
         String today = getToday();
         String second = today.substring(18, 20);
+        if (tvSecond != null) {
+            tvSecond.setText(second);
+        }
         second = second + " 秒";
         for (int i = 0; i < seconds.length; i++) {
             if (second.equals(seconds[i])) {

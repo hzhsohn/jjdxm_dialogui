@@ -161,11 +161,11 @@ public class AlertDialogHolder extends SuperHolder {
             if (bean.isVertical) {
                 btn3Vertical.setVisibility(View.GONE);
                 lineBtn3Vertical.setVisibility(View.GONE);
-                btn2Vertical.setBackgroundResource(R.drawable.dialogui_selector_btn_all_bottom);
+                btn2Vertical.setBackgroundResource(R.drawable.dialogui_selector_all_bottom);
             } else {
                 btn3.setVisibility(View.GONE);
                 lineBtn3.setVisibility(View.GONE);
-                btn2.setBackgroundResource(R.drawable.dialogui_selector_btn_right_bottom);
+                btn2.setBackgroundResource(R.drawable.dialogui_selector_right_bottom);
             }
 
         } else {
@@ -186,11 +186,11 @@ public class AlertDialogHolder extends SuperHolder {
             if (bean.isVertical) {
                 btn2Vertical.setVisibility(View.GONE);
                 lineBtn2Vertical.setVisibility(View.GONE);
-                btn1Vertical.setBackgroundResource(R.drawable.dialogui_selector_btn_all_bottom);
+                btn1Vertical.setBackgroundResource(R.drawable.dialogui_selector_all_bottom);
             } else {
                 btn2.setVisibility(View.GONE);
                 lineBtn2.setVisibility(View.GONE);
-                btn1.setBackgroundResource(R.drawable.dialogui_selector_btn_right_bottom);
+                btn1.setBackgroundResource(R.drawable.dialogui_selector_right_bottom);
             }
         } else {
             if (bean.isVertical) {

@@ -37,24 +37,14 @@ public interface Assignable {
     BuildBean assignDatePick(Context context, int gravity, String dateTitle, long date, int dateType, int tag, DialogUIDateTimeSaveListener listener);
 
     /**
-     * 横向加载框
+     * 加载框
      */
-    BuildBean assignLoadingHorizontal(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable, boolean isWhiteBg);
+    BuildBean assignLoading(Context context, CharSequence msg,boolean isVertical, boolean cancleable, boolean outsideTouchable, boolean isWhiteBg);
 
-    /**
-     * 竖向加载框
+     /**
+     * Md加载框
      */
-    BuildBean assignLoadingVertical(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable, boolean isWhiteBg);
-
-    /**
-     * 横向加载框
-     */
-    BuildBean assignMdLoadingHorizontal(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable, boolean isWhiteBg);
-
-    /**
-     * 竖向加载框
-     */
-    BuildBean assignMdLoadingVertical(Context context, CharSequence msg, boolean cancleable, boolean outsideTouchable, boolean isWhiteBg);
+    BuildBean assignMdLoading(Context context, CharSequence msg,boolean isVertical, boolean cancleable, boolean outsideTouchable, boolean isWhiteBg);
 
     /**
      * md风格弹出框
@@ -82,12 +72,12 @@ public interface Assignable {
     /**
      * 中间弹出列表
      */
-    BuildBean assignCenterSheet(Context context, List<TieBean> datas, boolean cancleable, boolean outsideTouchable, final DialogUIItemListener listener);
+    BuildBean assignSheet(Context context, List<TieBean> datas, CharSequence bottomTxt, int gravity, boolean cancleable, boolean outsideTouchable, final DialogUIItemListener listener);
 
     /**
      * md风格弹出列表
      */
-    BuildBean assignMdBottomSheet(Context context, boolean isVertical, CharSequence title, List<TieBean> datas, CharSequence bottomTxt, int columnsNum, boolean cancleable, boolean outsideTouchable, DialogUIItemListener listener);
+    BuildBean assignMdBottomSheet(Context context, boolean isVertical, CharSequence title, List<TieBean> datas,int columnsNum, boolean cancleable, boolean outsideTouchable, DialogUIItemListener listener);
 
     /**
      * 自定义弹出框

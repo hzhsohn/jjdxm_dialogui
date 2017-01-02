@@ -19,19 +19,22 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rlv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:background="@drawable/dialogui_shape_wihte_round_corner"
+        android:overScrollFooter="@android:color/transparent"
+        android:overScrollHeader="@android:color/transparent"
+        android:overScrollMode="never"
+        android:scrollbars="none"/>
 
-    <TextView
-        android:id="@+id/dialogui_tv_bottom"
+    <Button
+        android:id="@+id/btn_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/dialogui_selector_all"
         android:text="取消"
-        android:textColor="@color/dialogui_text_color_tie"
-        android:textSize="@dimen/dialogui_btn_txt_size"
-        android:visibility="visible"/>
-
+        android:textColor="@color/ios_btntext_blue"
+        android:textSize="@dimen/dialogui_btn_txt_size"/>
 
 </LinearLayout>

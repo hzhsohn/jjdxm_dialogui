@@ -1,5 +1,7 @@
 package com.dou361.dialogui.bean;
 
+import java.io.Serializable;
+
 /**
  * ========================================
  * <p/>
@@ -20,7 +22,7 @@ package com.dou361.dialogui.bean;
  * <p/>
  * ========================================
  */
-public class TieBean {
+public class TieBean implements Serializable {
 
     private int id;
     private String title;

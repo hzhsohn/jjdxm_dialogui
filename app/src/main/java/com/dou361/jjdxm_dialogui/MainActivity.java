@@ -3,7 +3,9 @@ package com.dou361.jjdxm_dialogui;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
@@ -51,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
     String msg = "别总是来日方长，这世上挥手之间的都是人走茶凉。";
 
-    @OnClick({R.id.btn_custom_alert, R.id.btn_custom_bottom_alert, R.id.btn_loading, R.id.btn_md_loading, R.id.btn_md_alert, R.id.btn_tie_alert,
+    @OnClick({R.id.btn_custom_alert, R.id.btn_custom_bottom_alert, R.id.btn_system_alert, R.id.btn_loading, R.id.btn_md_loading, R.id.btn_md_alert, R.id.btn_tie_alert,
             R.id.btn_bottom_sheet_cancel, R.id.btn_center_sheet, R.id.btn_alert_input,
             R.id.btn_alert_multichoose, R.id.btn_alert_singlechoose, R.id.btn_md_bottom_vertical, R.id.btn_md_bottom_horizontal,
             R.id.btn_toast_top, R.id.btn_toast_center, R.id.btn_toast,
@@ -59,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_popu:
-                DialogUIUtils.showPopuWindow(mContext, LinearLayout.LayoutParams.MATCH_PARENT, 4,btnPopu, new TdataListener() {
+                DialogUIUtils.showPopuWindow(mContext, LinearLayout.LayoutParams.MATCH_PARENT, 4, btnPopu, new TdataListener() {
                     @Override
                     public void initPupoData(List<PopuBean> lists) {
                         for (int i = 0; i < 5; i++) {
@@ -88,6 +90,26 @@ public class MainActivity extends AppCompatActivity {
             case R.id.btn_custom_bottom_alert:
                 View rootViewB = View.inflate(mActivity, R.layout.custom_dialog_bottom_layout, null);
                 DialogUIUtils.showCustomBottomAlert(this, rootViewB).show();
+                break;
+            case R.id.btn_system_alert:
+                new AlertDialog
+                        .Builder(mActivity)
+                        .setTitle("标题")
+                        .setMessage("这是内容")
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        })
+                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        })
+                        .create()
+                        .show();
                 break;
             case R.id.btn_loading:
                 DialogUIUtils.showLoading(this, "加载中...", false, true, true, true).show();

@@ -61,6 +61,7 @@ or Gradle:
 
 历史版本：
 
+    compile 'com.dou361.dialogui:jjdxm-dialogui:1.0.3'
     compile 'com.dou361.dialogui:jjdxm-dialogui:1.0.2'
 	compile 'com.dou361.dialogui:jjdxm-dialogui:1.0.1'
 	compile 'com.dou361.dialogui:jjdxm-dialogui:1.0.0'
@@ -81,7 +82,7 @@ jjdxm-dialogui requires at minimum Java 9 or Android 2.3.
 
 ### step1 ###
 
-    compile ('com.dou361.dialogui:jjdxm-dialogui:1.0.2'){
+    compile ('com.dou361.dialogui:jjdxm-dialogui:1.0.3'){
     // exclude group: 'com.android.support', module: 'support-v7'
     // exclude group: 'com.android.support', module: 'design'
     }

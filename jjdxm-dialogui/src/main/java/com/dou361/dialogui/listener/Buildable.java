@@ -323,7 +323,6 @@ public class Buildable {
         builder.setView(bean.customView);
         AlertDialog dialog = builder.create();
         bean.alertDialog = dialog;
-        dialog.getWindow().getDecorView().setPadding(0, 0, 0, 0);
     }
 
     private void buildCustomBottomAlert(BuildBean bean) {

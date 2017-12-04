@@ -1,4 +1,4 @@
-package com.dou361.jjdxm_dialogui;
+package android.zh.jjdxm_dialogui_master;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -27,18 +27,15 @@ import com.dou361.dialogui.widget.DateSelectorWheelView;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
+import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
-
     Activity mActivity;
     Context mContext;
-    @Bind(R.id.ll_main)
-    LinearLayout llMain;
-    @Bind(R.id.btn_popu)
     Button btnPopu;
 
     @Override
@@ -46,18 +43,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        btnPopu=(Button)findViewById(R.id.btn_popu);
+
         mActivity = this;
-        mContext = getApplication();
+        mContext = this.getBaseContext();
         DialogUIUtils.init(mContext);
     }
 
     String msg = "别总是来日方长，这世上挥手之间的都是人走茶凉。";
 
-    @OnClick({R.id.btn_custom_alert, R.id.btn_custom_bottom_alert, R.id.btn_system_alert, R.id.btn_loading, R.id.btn_md_loading, R.id.btn_md_alert, R.id.btn_tie_alert,
-            R.id.btn_bottom_sheet_cancel, R.id.btn_center_sheet, R.id.btn_alert_input,
-            R.id.btn_alert_multichoose, R.id.btn_alert_singlechoose, R.id.btn_md_bottom_vertical, R.id.btn_md_bottom_horizontal,
-            R.id.btn_toast_top, R.id.btn_toast_center, R.id.btn_toast,
-            R.id.btn_select_ymd, R.id.btn_select_ymdhm, R.id.btn_select_ymdhms, R.id.btn_popu})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_popu:

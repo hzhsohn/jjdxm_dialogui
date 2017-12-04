@@ -1,46 +1,17 @@
 apply plugin: 'com.android.application'
 
-Properties props = new Properties();
-props.load(new FileInputStream(file(rootProject.file("signing.properties"))))
-
 android {
-
-    signingConfigs {
-        release {
-            keyAlias props['signing.alias']
-            keyPassword props['signing.password']
-            storeFile file(rootProject.file("debug.keystore"))
-            storePassword props['signing.password']
-        }
-
-        debug {
-            keyAlias props['signing.jjdxm_alias']
-            keyPassword props['signing.jjdxm_password']
-            storeFile file(rootProject.file("debug.keystore"))
-            storePassword props['signing.jjdxm_password']
-        }
-    }
-
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
-
+    compileSdkVersion 26
     defaultConfig {
-        applicationId "com.dou361.jjdxm_dialogui"
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode rootProject.ext.versionCode
-        versionName rootProject.ext.versionName
+        applicationId "android.zh.jjdxm_dialogui_master"
+        minSdkVersion 14
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
-
-        debug {
-            signingConfig signingConfigs.debug
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-
         release {
-            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -48,9 +19,13 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    testCompile 'junit:junit:4.12'
-    compile 'com.jakewharton:butterknife:7.0.1'
-    compile rootProject.ext.jjdxm_recyclerview
-    compile project(':jjdxm-dialogui')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    implementation project(':jjdxm-dialogui')
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+
+    compile 'com.jakewharton:butterknife:8.7.0'
 }

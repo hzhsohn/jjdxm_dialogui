@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/jjdxm-dialogui/jjdxm-dialogui.iml" filepath="$PROJECT_DIR$/jjdxm-dialogui/jjdxm-dialogui.iml" />
-      <module fileurl="file://$PROJECT_DIR$/jjdxm_dialogui.iml" filepath="$PROJECT_DIR$/jjdxm_dialogui.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jjdxm_dialoguimaster.iml" filepath="$PROJECT_DIR$/jjdxm_dialoguimaster.iml" />
     </modules>
   </component>
 </project>
